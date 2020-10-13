@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="open_purchase_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="header">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="watermark"
+                                         style="opacity:20;size:auto;font-size:3em;height:100%;width:100%;right:350px;border:0;">
+                                        <img src='company.logo'
+                                             style="margin-right:-20px;margin-bottom: 2450px; margin-top: 350px;max-height: 1000px;max-width: 1000px;width: 20000px;height: 20000px;"/>
+
+                                    </div>
+
+                                </div>
+
+                                <div>
+
+                                    <img src='company.logo'
+                                         style="width: 100%;height: auto;"/>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="page">
+                            <div class="col-xs-12">
+                                <center style="font-size:30px;font-weight:bold;left:150px;color :#a51b0b ;text-align:center;">
+                                    الارسالية
+                                </center>
+                            </div>
+
+
+                            <table class="table table-condensed table table-striped"
+                                   style="font-size:15px;font-family:Scheherazade;border: 1px solid black;">
+                                <tr style="border-collapse: collapse;border: 0.5px solid black; ">
+                                    <th class="text-center" style="background-color:  #EADBDB ;">رقم الارسالية</th>
+                                    <th class="text-center" style="background-color:  #EADBDB ;">اسم الارسالية</th>
+                                    <th class="text-center" style="background-color: #EADBDB;">تاريخ الانشاء</th>
+                                    <th class="text-center" style="background-color: #EADBDB;">تاريخ الاغلاق</th>
+
+                                </tr>
+                                <tr style="font-size:15px;border-collapse: collapse;border: 0.5px solid black;">
+                                    <td class="text-center">
+                                        <span t-field="o.order_number"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="o.name"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="o.date"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="o.date_close"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table table-condensed table table-striped"
+                                   style="font-size:15px;font-family:Scheherazade;border: 1px solid black;">
+
+                                <tr style="font-size:15px;border-collapse: collapse;border: 1px solid black; ">
+                                    <th class="text-center" style="background-color: #EADBDB;">نوع الشراء</th>
+                                    <th class="text-center" style="background-color: #EADBDB;">النسبة (%)</th>
+                                    <th class="text-center" style="background-color: #EADBDB;">قيمة العمولة</th>
+                                    <th class="text-center" style="background-color: #EADBDB;">مجموع المبيعات</th>
+                                    <th class="text-center" style="background-color: #EADBDB;">مجموع المصاريف</th>
+                                    <th class="text-center" style="background-color: #EADBDB ;">حالة الارسالية</th>
+                                </tr>
+                                <tr style="font-size:15px;border-collapse: collapse;border: 0.5px solid black;">
+                                    <td class="text-center">
+                                        <span t-field="o.type"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <p t-field="o.comm"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <p t-field="o.amount_comm"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <p t-field="o.amount_sales"/>
+
+                                    </td>
+                                    <td class="text-center">
+                                        <p t-field="o.amount_outlay"/>
+
+                                    </td>
+                                    <td class="text-center">
+                                        <p t-field="o.state"/>
+
+                                    </td>
+
+
+                                </tr>
+                            </table>
+                            <center>
+                                <h3>
+                                    المشتريات
+                                </h3>
+                            </center>
+                            <table class="table table-condensed table table-striped"
+                                   style="font-size:15px;font-family:arial;border: 1px solid black;">
+                                <tr style="border-collapse: collapse;border: 0.5px solid black; ">
+                                    <th class="text-center" style="background-color: #EADBDB;">المنتج</th>
+                                    <th class="text-center" style="background-color: #EADBDB;">الكمية الفعلية</th>
+                                    <th class="text-center" style="background-color: #EADBDB;">الكمية التالفة (النافق) </th>
+                                    <th class="text-center" style="background-color: #EADBDB;"> سعر الشراء</th>
+                                    <th class="text-center" style="background-color: #EADBDB;">كمية المبيعات</th>
+                                    <th class="text-center" style="background-color: #EADBDB;">قيمة المبيعات</th>
+                                    <th class="text-center" style="background-color: #EADBDB;">قيمة الربح</th>
+                                    <th class="text-center" style="background-color: #EADBDB;">قيمة الخسارة</th>
+                                </tr>
+
+                                <tr t-foreach="o.open_purchase_line_ids" t-as="l"
+                                    style="border-collapse: collapse;border: 0.5px solid black;">
+                                    <td class="text-center">
+                                        <span t-field="l.product_id"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="l.qty_not"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="l.qty_talef"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="l.price_unit_purchase"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="l.qty_sales"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="l.price_all_sales"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="l.amount_win"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="l.amount_not_win"/>
+                                    </td>
+                                </tr>
+
+
+                            </table>
+
+                            <center>
+                                <h3>
+                                    المصاريف
+                                </h3>
+                            </center>
+                            <table class="table table-condensed table table-striped"
+                                   style="font-size:15px;font-family:Scheherazade;border: 1px solid black;">
+
+                                <tr style="font-size:15px;border-collapse: collapse;border: 1px solid black; ">
+                                    <th class="text-center" style="background-color: #EADBDB;">المصروف</th>
+                                    <th class="text-center" style="background-color: #EADBDB;">الكمية</th>
+                                    <th class="text-center" style="background-color: #EADBDB;">القيمة</th>
+                                    <th class="text-center" style="background-color: #EADBDB;">المجموع الفرعي</th>
+                                </tr>
+                                <t t-foreach="o.invoice_ids" t-as="l">
+
+                                    <tr t-foreach="l.invoice_line_ids" t-as="w"
+                                        style="border-collapse: collapse;border: 0.5px solid black;">
+                                        <td class="text-center">
+                                            <span t-field="w.product_id"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <p t-field="w.quantity"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <p t-field="w.price_unit"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <p t-field="w.price_subtotal"/>
+
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+
+                            <center>
+                                <h3>
+                                    معلومات الحوالة
+                                </h3>
+                            </center>
+                            <div class="col-xs-12">
+                                <table class="table table-condensed table table-striped"
+                                       style="font-size:15px;font-family:arial;">
+                                    <tr>
+                                        <th class="text-center">اسم البنك</th>
+                                        <th class="text-center">قيمة الحوالة</th>
+                                        <th class="text-center">رقم الحوالة</th>
+                                        <th class="text-center">التاريخ</th>
+                                    </tr>
+                                    <tr style="border-collapse: collapse;border: 0.5px solid black;">
+                                        <td class="text-center">
+                                            <span t-field="o.bank_id.name"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <p t-field="o.amount_convert"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <p t-field="o.number_convert"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <p t-field="o.date_convert"/>
+
+                                        </td>
+                                    </tr>
+
+
+
+                                </table>
+                                <hr size="20" style="border-width:4" width="100%"/>
+
+                            </div>
+                            <div class="col-xs-12">
+                                <table class="table table-condensed table table-striped"
+                                       style="font-size:15px;font-family:arial;">
+                                    <tr>
+                                        <th class="text-center">الموظف</th>
+                                        <th class="text-center">المحاسب</th>
+                                        <th class="text-center">امين الصندوق</th>
+                                        <th class="text-center">المستلم</th>
+
+
+                                    </tr>
+
+                                    <tr t-as="l">
+                                        <td class="text-center">
+                                            التوقيع
+                                        </td>
+
+                                    </tr>
+                                    <tr t-as="l">
+                                        <td class="text-center">
+                                            التاريخ
+                                        </td>
+
+                                    </tr>
+
+
+                                </table>
+                                <hr size="20" style="border-width:4" width="100%"/>
+
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <report
+                id="open_purchase"
+                model="open.purchase"
+                string="طباعة الارسالية"
+                report_type="qweb-pdf"
+                name="open_purchase.open_purchase_report"
+                file="open_purchase.open_purchase_report"
+        />
+    </data>
+</odoo>

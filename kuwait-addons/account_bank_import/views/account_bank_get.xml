@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="accountbankget_form" model="ir.ui.view">
+            <field name="name">account.bank.get.form</field>
+            <field name="model">account.bank.get</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="account_payment_ids" domain="[('payment_type','=','inbound'),('partner_type','=','customer'),('account_add_custody_ids','=',False)]"/>
+                        <footer>
+                            <button string="Ok" name="ok_function" type="object" class="oe_highlight"/>
+                            or
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

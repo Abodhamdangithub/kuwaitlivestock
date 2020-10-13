@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+        <record id="action_account_bank_statement_open" model="ir.actions.act_window">
+            <field name="name">Account Bank Statement</field>
+            <field name="res_model">account.bank.statement</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="menu_account_bank_statement_open" parent="account.account_account_menu" string="Account BAnk S"
+                action="action_account_bank_statement_open" sequence="4" />
+</odoo>

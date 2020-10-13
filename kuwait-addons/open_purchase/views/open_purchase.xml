@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="open_purchase_view_form" model="ir.ui.view">
+            <field name="name">open.purchase.inherit</field>
+            <field name="model">open.purchase</field>
+            <field name="arch" type="xml">
+                <form string="الارساليات">
+                    <header>
+                        <button name="close_this" type="object"
+                                string="اغلاق"
+                                attrs="{'invisible': [('state', '=', 'closed')]}"/>
+                        <button name="open_this" type="object"
+                                string="فتح"
+                                attrs="{'invisible': ['|',('state', '=', 'draft'),('have_moved', '=', True)]}"/>
+                        <button name="create_entry" type="object"
+                                string="انشاء قيود محاسبية"
+                                attrs="{'invisible': ['|',('state', '=', 'draft'),('have_moved', '=', True)]}"/>
+                        <button name="cancel_create_entry" type="object"
+                                string="الغاء القيود محاسبية"
+                                attrs="{'invisible': ['|',('have_moved', '!=', True),('type', '=', 'normal')]}"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+<!--
+                        <widget name="web_ribbon" title="Canceled" bg_color="bg-danger" />
+-->
+                        <group>
+                            <group>
+                                <field name="order_number" readonly="1" style="width: 50%"/>
+                                <field name="name" attrs="{'readonly': [('state', '=', 'closed')]}" style="width: 33%"/>
+                                <field name="purchase_id" readonly="1"/>
+                                <field name="type" attrs="{'readonly': [('state', '=', 'closed')]}" style="width: 33%"/>
+                                <field name="journal_id" domain="[('type','in',['cash','bank'])]" attrs="{'readonly': [('state', '!=', 'closed'),('have_moved', '=', False)],'required': [('state', '=', 'closed'),('have_moved', '=', False),('type', '!=', 'normal')],'invisible': ['|',('state', '=', 'draft'),('type', '=', 'normal')]}" style="width: 33%"/>
+                                <field name="account_id"  attrs="{'readonly': [('state', '!=', 'closed'),('have_moved', '=', False)],'required': [('state', '=', 'closed'),('have_moved', '=', False),('type', '=', 'sharing')],'invisible': ['|',('state', '=', 'draft'),('type', '!=', 'sharing')]}" style="width: 33%"/>
+                                <field name="have_moved" readonly="1" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="date" readonly="1" style="width: 33%"/>
+                                <field name="date_close" readonly="1" style="width: 33%"/>
+                                <field name="comm"
+                                       attrs="{'readonly': [('state', '=', 'closed')],'invisible': [('type', '!=', 'comm')],'required': [('type', '=', 'comm')]}"
+                                       style="width: 33%"/>
+                                <field name="amount_sales" style="width: 33%"/>
+                                <field name="amount_comm" attrs="{'invisible': [('type', '!=', 'comm')]}"
+                                       style="width: 33%"/>
+                                <field name="amount_outlay" style="width: 33%"/>
+                                <field name="amount_supplier" style="width: 33%" attrs="{'invisible': [('amount_supplier', '=', 0.0)]}"/>
+
+
+                                <field name="amount_win" style="width: 33%" />
+                                <field name="amount_lose" style="width: 33%" />
+                            </group>
+                            <group string="معلومات الحوالة">
+                                <field name="bank_id"  style="width: 33%"/>
+                                <field name="amount_convert"  style="width: 33%"/>
+                                <field name="number_convert"  style="width: 33%"/>
+                                <field name="date_convert"  style="width: 33%"/>
+
+
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Lines">
+                                <field name="open_purchase_line_ids" attrs="{'readonly': [('state', '=', 'closed')]}">
+                                    <tree editable="buttom">
+                                        <field name="open_purchase_id" invisible="1"/>
+                                        <field name="product_id" readonly="1"/>
+                                        <field name="qty_not" readonly="1"/>
+                                        <button name="action_stock_scrap" string="String you want" type="object"
+                                                icon="terp-product" class="oe_hilight"/>
+                                        <field name="qty_talef" readonly="1"/>
+                                        <field name="qty"/>
+                                        <field name="price_unit_purchase_orginal" invisible="1"/>
+                                        <field name="price_unit_purchase"/>
+<!--
+                                        <field name="price_unit"/>
+-->
+                                        <field name="sale_order_line_ids" invisible="1"/>
+                                        <field name="qty_sales"/>
+                                        <field name="price_all_sales"/>
+                                        <field name="qty_available"/>
+                                        <field name="state" invisible="1"/>
+                                        <field name="amount_win" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                        <field name="amount_not_win" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="فواتير المصاريف">
+                                <field name="invoice_ids" readonly="1">
+                                </field>
+                            </page>
+                            <page string="القيود" attrs="{'invisible': [('have_moved', '=', False)]}">
+                                <field name="account_move_id"></field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="open_purchase_view_tree" model="ir.ui.view">
+            <field name="name">open.purchase.tree.inherit</field>
+            <field name="model">open.purchase</field>
+            <field name="arch" type="xml">
+                <tree string="الارساليات">
+                    <field name="name"/>
+                    <field name="purchase_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="open_purchase_action" model="ir.actions.act_window">
+            <field name="name">الارساليات</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">open.purchase</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!--
+                <menuitem id="open_purchase_menu" action="open_purchase_action" name="الارساليات"
+                          parent="purchase.menu_procurement_management"/>
+        -->
+    </data>
+
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="product_items" inherit_id="website_sale.products_item">
+        <xpath expr="//div[hasclass('oe_product_image')]" position="before">
+            <span style="background-color:#e2e2e4">Quality. <b><t t-esc="str(product.qty_available)"/></b></span>
+        </xpath>
+    </template>
+
+    <template id="product_item" inherit_id="website_sale.product">
+        <xpath expr="//div[@id='product_details']/h1" position="after">
+            <h4>Quality <b><t t-esc="str(product.qty_available)"/></b></h4>
+        </xpath>
+    </template>
+
+</odoo>

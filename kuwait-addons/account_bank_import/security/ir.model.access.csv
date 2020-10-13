@@ -1,0 +1,4 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+account_bank_import1,account_bank_import2,model_account_bank_import,group_account_bank_impory_user,1,1,1,1
+account_add_custody1,account_add_custody2,model_account_add_custody,group_account_bank_impory_user,1,1,1,1
+account_bank_get1,account_bank_get12,model_account_bank_get,group_account_bank_impory_user,1,1,1,1

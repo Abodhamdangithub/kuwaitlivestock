@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="moving_form_view_form" model="ir.ui.view">
+            <field name="name">moving.form.inherit</field>
+            <field name="model">moving.form</field>
+            <field name="arch" type="xml">
+                <form string="الحركات الخارجية" create='false'>
+                    <header>
+                        <button name="close_this" type="object"
+                                string="اغلاق"
+                                attrs="{'invisible': [('state', '=', 'closed')]}"/>
+                        <button name="open_this" type="object"
+                                string="فتح"
+                                attrs="{'invisible': [('state', '=', 'draft')]}"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" readonly="1"/>
+                                <field name="fleet_vehicle_id" readonly="1"/>
+                                <field name="driver_id" readonly="1"/>
+                                <field name="journal_id" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                <field name="account_id" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                <field name="amount_full" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                <field name="amount_company" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                <field name="amount_driver" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                            </group>
+                            <group>
+                                <field name="date" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                <field name="from_date" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                <field name="to_date" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                <field name="from_addrress" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                <field name="to_addrress" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="ملاحظات" >
+                                <field name="note"></field>
+                            </page>
+                            <page string="القيود" attrs="{'invisible': [('state', '=', 'draft')]}">
+                                <field name="account_move_id"></field>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="moving_form_view_tree" model="ir.ui.view">
+            <field name="name">moving.form.tree.inherit</field>
+            <field name="model">moving.form</field>
+            <field name="arch" type="xml">
+                <tree string="الحركات الخارجية" create='false'>
+                    <field name="fleet_vehicle_id"/>
+                    <field name="amount_full"/>
+                    <field name="amount_company"/>
+                    <field name="amount_driver"/>
+                    <field name="driver_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="moving_form_action" model="ir.actions.act_window">
+            <field name="name">الحركات الخارجية</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">moving.form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+    </data>
+
+</odoo>

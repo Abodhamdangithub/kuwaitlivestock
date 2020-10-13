@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="account.menu_finance" name="Accounting"/>
+
+    <record id="purchase_order_open_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_rfq_send']" position="after">
+                <button name="create_open_purchase" string="انشاء الارسالية" class="oe_highlight" type="object"
+                        attrs="{'invisible': [ '|',('open_purchase_ids', '!=', False),('state', '=', 'draft')]}"/>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button type="object" name="action_view_open_purchase" class="oe_stat_button" icon="fa-truck"
+                        attrs="{'invisible': [ ('open_purchase_ids', '=', False)]}">
+                    <field name="open_purchase_count" widget="statinfo" string="الارساليات"/>
+                    <field name="open_purchase_ids" invisible="1"/>
+                </button>
+            </xpath>
+            <notebook position="inside">
+                <page string="الارساليات">
+                    <sheet>
+                        <group>
+                            <field name="open_purchase_ids"/>
+                        </group>
+
+                    </sheet>
+                </page>
+
+            </notebook>
+        </field>
+    </record>
+
+</odoo>

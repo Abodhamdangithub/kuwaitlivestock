@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+open_purchase1,open_purchase12,model_open_purchase,group_open_purchase_user,1,1,1,1
+open_purchase_line1,open_purchase_line12,model_open_purchase_line,group_open_purchase_user,1,1,1,1
+wizard_set_open_purchase_line1,wizard_set_open_purchase12,model_wizard_set_open_purchase,group_open_purchase_user,1,1,1,1
+moving_form2,moving_form22,model_moving_form,group_open_purchase_user,1,1,1,1
+

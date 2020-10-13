@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <menuitem id="account_bank_base_menu" name="البنك" parent="account.menu_finance_entries"/>
+
+    <record id="account_bank_import_tree" model="ir.ui.view">
+        <field name="name">account.bank.import.tree</field>
+        <field name="model">account.bank.import</field>
+        <field name="arch" type="xml">
+            <tree string="BanK">
+                <field name="name"/>
+                <field name="journal_id"/>
+                <field name="date"/>
+                <field name="state"/>
+
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="account_bank_import_form" model="ir.ui.view">
+        <field name="name">account.bank.import.form</field>
+        <field name="model">account.bank.import</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="open_done" string="فتح" class="oe_highlight" type="object"
+                            states="draft"/>
+                    <button name="closed_done" string="اغلاق" class="oe_highlight" type="object"
+                            states="open"/>
+                    <button name="go_draft" string="الرجوع الى مسودة" class="oe_highlight" type="object"
+                            states="open"/>
+                    <field name="state" widget="statusbar" statusbar_colors='{"draft":"blue"}'/>
+
+                </header>
+                <sheet>
+                    <div class="oe_right oe_button_box" name="import_buttons">
+                        <button class="oe_inline oe_stat_button" name="accountbankget_action" string="استيراد"
+                                type="object" attrs="{'invisible': [('state', '=', 'done')]}"
+                                widget="statinfo"
+                                icon="fa-pencil-square-o"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="journal_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="employee_id" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="السطور">
+                            <field name="account_add_custody_ids" attrs="{'readonly': [('state', '=', 'closed')]}">
+                                <tree editable="buttom">
+                                    <field name="name"/>
+                                    <field name="amount"/>
+                                    <field name="account_id"/>
+                                    <field name="account_bank_import_id" invisible="1"/>
+                                    <field name="move_id" readonly="1"/>
+                                    <field name="account_payment_id" invisible="1"/>
+                                </tree>
+                            </field>
+
+                        </page>
+                    </notebook>
+
+
+                </sheet>
+            </form>
+
+        </field>
+    </record>
+
+
+    <record id="account_bank_import_action" model="ir.actions.act_window">
+        <field name="name">Bank In</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.bank.import</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="account_bank_import_menu" name="ايداعات البنكية" parent="account_bank_import.account_bank_base_menu"
+              action="account_bank_import_action"/>
+
+
+</odoo>

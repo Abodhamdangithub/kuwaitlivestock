@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+        <menuitem id="promissory_root" name="الكمبيالات"  parent = "account.menu_finance"/>
+
+        <menuitem id="promissory_sub" name="الكمبيالات" parent="promissory_root" />
+
+        <record id="promissory_module_tree_view" model="ir.ui.view">
+            <field name="name">promissory.tree</field>
+            <field name="model">promissory</field>
+            <field name="arch" type="xml">
+                <tree >
+                    <field name="name_partner_id"/>
+                    <field name="amount" sum="Total"/>
+                    <field name="edit_date"/>
+                    <field name="get_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="promissory_module_form_view" model="ir.ui.view">
+            <field name="name">promissory.form</field>
+            <field name="model">promissory</field>
+            <field name="arch" type="xml">
+                <form string="promissory" create="false" edit="false">
+                    <header>
+                        <button name="to_paid" type='object' string='مدفوع' states='open' invisible="1"
+                                groups="promissory_module.manager_promissory_access_group"/>
+                        <button name="to_tm" type='object' string='تم' states='paid' class="oe_highlight"
+                                invisible="1"/>
+                        <field name="state" widget="statusbar" statusbar_visible="open,paid,tm,cancel"
+                               statusbar_colors='{"wallet":"blue","rejected":"red","cancel":"red"}'/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name_partner_id"/>
+                                <field name="edit_date"/>
+                                <field name="get_date"/>
+                                <field name="journal_idd"/>
+                                <field name="amount"/>
+                            </group>
+                            <group>
+                                <field name="date_tsdeed"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="promissory_action" model="ir.actions.act_window">
+            <field name="name">الكمبيالات</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">promissory</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--
+                <record model="ir.actions.act_window.view" id="promissory_module_orginal_action_tree">
+                    <field name="sequence" eval="1"/>
+                    <field name="view_mode">tree</field>
+                    <field name="view_id" ref="promissory_module_tree_view"/>
+                    <field name="act_window_id" ref="promissory_action"/>
+                </record>
+
+                <record model="ir.actions.act_window.view" id="promissory_module_orginal_action_form">
+                    <field name="sequence" eval="2"/>
+                    <field name="view_mode">form</field>
+                    <field name="view_id" ref="promissory_module_form_view"/>
+                    <field name="act_window_id" ref="promissory_action"/>
+                </record>
+        -->
+
+
+        <menuitem id="promissory_sub_sub" name="الكمبيالات الوارده" parent="promissory_sub" action="promissory_action"/>
+
+
+</odoo>

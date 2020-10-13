@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="fleet_vehicle_open_inherit" model="ir.ui.view">
+        <field name="name">fleet.vehicle.inherit</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/field[@name='state_id']" position="before">
+                <button name="create_fleet_vehicle" string="انشاء توصيل خارجي" class="oe_highlight" type="object"
+                />
+            </xpath>
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button type="object" name="action_view_moving_form" class="oe_stat_button" icon="fa-truck">
+                    <field name="moving_form_count" widget="statinfo" string="الحركات الخارجية"/>
+                    <field name="moving_form_ids" invisible="1"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

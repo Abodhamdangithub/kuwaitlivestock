@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<odoo>
+
+
+           <record id="promissory_module_security" model="ir.module.category">
+           		<field name="name">كمبيالات</field>
+           </record>
+           
+           <record id="staff_promissory_access_group" model="res.groups">
+               <field name="name">مستخدم</field>
+               <field name="category_id" ref="promissory_module_security"/>
+           </record>
+
+
+    <record id="check_module_security" model="ir.module.category">
+           		<field name="name">الشيكات</field>
+           </record>
+
+           <record id="staff_check_access_group" model="res.groups">
+               <field name="name">مستخدم</field>
+               <field name="category_id" ref="check_module_security"/>
+           </record>
+
+	</odoo>

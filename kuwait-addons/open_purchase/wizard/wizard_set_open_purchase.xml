@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="wizard_set_open_purchase_view_form" model="ir.ui.view">
+            <field name="name">wizard.set.open.purchase.inherit</field>
+            <field name="model">wizard.set.open.purchase</field>
+            <field name="arch" type="xml">
+                <form string="الارساليات">
+                    <sheet>
+                        <group>
+                            <field name="open_purchase_id" domain="[('state','=','draft')]" options="{'no_create': True, 'no_edit': True}"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="set_open_purchase_to_order_line" type="object" string="اعتماد" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_set_open_purchase_action" model="ir.actions.act_window">
+            <field name="name">تحديد الارسالية</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.set.open.purchase</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+    </data>
+
+</odoo>
