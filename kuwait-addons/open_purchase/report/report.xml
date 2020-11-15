@@ -40,6 +40,7 @@
                                 <tr style="border-collapse: collapse;border: 0.5px solid black; ">
                                     <th class="text-center" style="background-color:  #EADBDB ;">رقم الارسالية</th>
                                     <th class="text-center" style="background-color:  #EADBDB ;">اسم الارسالية</th>
+                                    <th class="text-center" style="background-color:  #EADBDB ;">اسم المورد </th>
                                     <th class="text-center" style="background-color: #EADBDB;">تاريخ الانشاء</th>
                                     <th class="text-center" style="background-color: #EADBDB;">تاريخ الاغلاق</th>
 
@@ -50,6 +51,9 @@
                                     </td>
                                     <td class="text-center">
                                         <span t-field="o.name"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="o.purchase_id.partner_id.name"/>
                                     </td>
                                     <td class="text-center">
                                         <span t-field="o.date"/>
