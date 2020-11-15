@@ -210,9 +210,9 @@ class OpenPurchaseLine(models.Model):
     qty_talef = fields.Float(string="الكمية التالفة (النافق)",readonly=True)
     qty = fields.Float(string="الكمية المتبقية", readonly=True, compute='_compute_qty', store=True)
     price_unit_purchase_orginal = fields.Float(string="سعر وحدة الشراء الاصلي", invisible=True)
-    price_unit_purchase = fields.Float(string="سعر وحدة الشراء", required=True, compute='_compute_price_unit',
-                                       store=True)
-    #price_unit = fields.Float(string="سعر وحدة البيع", required=True)
+    price_unit_purchase = fields.Float(string="سعر وحدة الشراء", required=True, compute='_compute_price_unit',store=True)
+
+    price_unit_purchase_invisible = fields.Float(string="سعر وحدة الشراء المخفي", required=True, compute='_compute_price_unit_purchase_invisible',store=True)
     sale_order_line_ids = fields.One2many('sale.order.line', 'open_purchas_line_id', string="سطور طلبيات المبيعات")
     stock_scrap_ids = fields.One2many('stock.scrap', 'open_purchase_line_id', string="Stock Scrap")
     qty_sales = fields.Float(string="كمية المبيعات", readonly=True, compute='_compute_qty_sales', store=True)
@@ -246,11 +246,20 @@ class OpenPurchaseLine(models.Model):
             }
         }
 
-    @api.depends('qty_talef', 'open_purchase_id.amount_outlay')
+
+
+
+    @api.depends('price_unit_purchase_invisible', 'open_purchase_id.type','qty_talef', 'open_purchase_id.amount_outlay')
     def _compute_price_unit(self):
         for me in self:
-            me.price_unit_purchase = round( ((me.price_unit_purchase_orginal * me.qty_not) / me.qty) + (
+            me.price_unit_purchase_invisible = round(((me.price_unit_purchase_orginal * me.qty_not) / me.qty) + (
+                    me.open_purchase_id.amount_outlay / me.qty), 3)
+
+            if me.open_purchase_id.type != "comm":
+                me.price_unit_purchase = round( ((me.price_unit_purchase_orginal * me.qty_not) / me.qty) + (
                         me.open_purchase_id.amount_outlay / me.qty),3)
+            else:
+                me.price_unit_purchase = 0.0
 
     @api.depends('qty_not', "qty_talef")
     def _compute_qty(self):
