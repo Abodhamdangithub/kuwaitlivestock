@@ -210,9 +210,9 @@ class OpenPurchaseLine(models.Model):
     qty_talef = fields.Float(string="الكمية التالفة (النافق)",readonly=True)
     qty = fields.Float(string="الكمية المتبقية", readonly=True, compute='_compute_qty', store=True)
     price_unit_purchase_orginal = fields.Float(string="سعر وحدة الشراء الاصلي", invisible=True)
-    price_unit_purchase = fields.Float(string="سعر وحدة الشراء", required=True, compute='_compute_price_unit',store=True)
+    price_unit_purchase = fields.Float(string="سعر وحدة الشراء",  compute='_compute_price_unit',store=True)
 
-    price_unit_purchase_invisible = fields.Float(string="سعر وحدة الشراء المخفي", required=True, compute='_compute_price_unit',store=True)
+    price_unit_purchase_invisible = fields.Float(string="سعر وحدة الشراء المخفي", compute='_compute_price_unit',store=True)
     sale_order_line_ids = fields.One2many('sale.order.line', 'open_purchas_line_id', string="سطور طلبيات المبيعات")
     stock_scrap_ids = fields.One2many('stock.scrap', 'open_purchase_line_id', string="Stock Scrap")
     qty_sales = fields.Float(string="كمية المبيعات", readonly=True, compute='_compute_qty_sales', store=True)
