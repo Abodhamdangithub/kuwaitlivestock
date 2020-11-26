@@ -9,7 +9,9 @@
         <field name="arch" type="xml">
             <field name="journal_id" position="after">
                 <field name="type_expenses_purchase" attrs="{'invisible': [('type', '!=', 'in_invoice')],'required': [('type', '=', 'in_invoice')]}"/>
-                <field name="open_purchase_id" domain="[('state','=','draft')]" attrs="{'readonly': [('state', '!=', 'draft')],'required': [('type_expenses_purchase', '=', 'open_purchase')]}"/>
+                <field name="open_purchase_id" domain="[('state','=','draft')]" attrs="{'readonly': [('state', '!=', 'draft')],'required': [('type_expenses_purchase', '=', 'open_purchase')],'invisible': [('type_expenses_purchase', '!=', 'open_purchase')]}"/>
+                <field name="stock_picking_id"  attrs="{'readonly': [('state', '!=', 'draft')],'invisible': [('type_expenses_purchase', '!=', 'open_purchase')]}"/>
+
             </field>
         </field>
     </record>

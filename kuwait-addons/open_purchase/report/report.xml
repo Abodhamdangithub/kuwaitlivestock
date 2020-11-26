@@ -27,9 +27,9 @@
 
                             </div>
                         </div>
-                        <div class="page">
+                        <div class="page" style="font-family:Scheherazade">
                             <div class="col-xs-12">
-                                <center style="font-size:30px;font-weight:bold;left:150px;color :#a51b0b ;text-align:center;">
+                                <center style="font-size:30px;font-weight:bold;left:150px;color :#a51b0b ;text-align:center;font-family:Scheherazade">
                                     الارسالية
                                 </center>
                             </div>
@@ -106,7 +106,7 @@
                                 </h3>
                             </center>
                             <table class="table table-condensed table table-striped"
-                                   style="font-size:15px;font-family:arial;border: 1px solid black;">
+                                   style="font-size:15px;font-family:Scheherazade;border: 1px solid black;">
                                 <tr style="border-collapse: collapse;border: 0.5px solid black; ">
                                     <th class="text-center" style="background-color: #EADBDB;">المنتج</th>
                                     <th class="text-center" style="background-color: #EADBDB;">الكمية الفعلية</th>
@@ -149,7 +149,7 @@
 
                             </table>
 
-                            <center>
+                            <center style="font-family:Scheherazade">
                                 <h3>
                                     المصاريف
                                 </h3>
@@ -184,14 +184,14 @@
                                 </t>
                             </table>
 
-                            <center>
+                            <center style="font-family:Scheherazade">
                                 <h3>
                                     معلومات الحوالة
                                 </h3>
                             </center>
                             <div class="col-xs-12">
                                 <table class="table table-condensed table table-striped"
-                                       style="font-size:15px;font-family:arial;">
+                                       style="font-size:15px;font-family:Scheherazade;">
                                     <tr>
                                         <th class="text-center">اسم البنك</th>
                                         <th class="text-center">قيمة الحوالة</th>
@@ -222,7 +222,7 @@
                             </div>
                             <div class="col-xs-12">
                                 <table class="table table-condensed table table-striped"
-                                       style="font-size:15px;font-family:arial;">
+                                       style="font-size:15px;font-family:Scheherazade;">
                                     <tr>
                                         <th class="text-center">الموظف</th>
                                         <th class="text-center">المحاسب</th>

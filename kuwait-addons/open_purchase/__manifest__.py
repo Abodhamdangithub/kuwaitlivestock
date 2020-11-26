@@ -28,6 +28,7 @@
         'views/account_move.xml',
         'security/ir.model.access.csv',
         'views/sequance.xml',
+        'views/stock_quant.xml',
         'report/report.xml',
     ],
     'installable': True,
