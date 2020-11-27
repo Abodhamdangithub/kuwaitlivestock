@@ -10,6 +10,5 @@ class AccountMove(models.Model):
 
     open_purchase_id = fields.Many2one('open.purchase', readonly=False, string="الارسالية")
     type_expenses_purchase = fields.Selection([('normal', 'عادي'), ('open_purchase', 'مصروف ارسالية')],string="عادي/مصروف ارسالية",copy=False)
-    stock_picking_id = fields.Many2one('stock.picking', readonly=False, string="تحويل الكميات")
 
 
