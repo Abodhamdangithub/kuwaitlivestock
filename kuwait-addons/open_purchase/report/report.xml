@@ -143,7 +143,7 @@
                                             -
                                         </td>
                                         <td class="text-center">
-                                            <p t-field="o.amount_comm"/>
+                                            <p t-field="o.amount_comm" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                         <t t-set="total" t-value="o.amount_outlay + o.amount_comm"/>
                                     </tr>
@@ -158,7 +158,7 @@
                                             المجموع
                                         </td>
                                         <td class="text-center">
-                                            <t t-esc="total"/>
+                                            <t t-esc="total" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -203,7 +203,7 @@
                                                 المجموع
                                             </td>
                                             <td class="text-center">
-                                                <p t-field="l.price_all_sales"/>
+                                                <p t-field="l.price_all_sales" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
 
                                             </td>
                                         </tr>
@@ -325,7 +325,7 @@
                                             <span t-field="o.bank_id.name"/>
                                         </td>
                                         <td class="text-center">
-                                            <p t-field="o.amount_convert"/>
+                                            <p t-field="o.amount_convert" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                         <td class="text-center">
                                             <p t-field="o.number_convert"/>

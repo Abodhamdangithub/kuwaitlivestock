@@ -7,7 +7,7 @@
             <field name="name">open.purchase.inherit</field>
             <field name="model">open.purchase</field>
             <field name="arch" type="xml">
-                <form string="الارساليات">
+                <form string="الارساليات" create="false">
                     <header>
                         <button name="close_this" type="object"
                                 string="اغلاق"
@@ -86,8 +86,8 @@
                                         <field name="price_all_sales"/>
                                         <field name="qty_available"/>
                                         <field name="state" invisible="1"/>
-                                        <field name="amount_win" attrs="{'invisible': [('state', '=', 'draft')]}"/>
-                                        <field name="amount_not_win" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                        <field name="amount_win" invisible="1"/>
+                                        <field name="amount_not_win" invisible="1"/>
                                     </tree>
                                 </field>
                             </page>
@@ -107,7 +107,7 @@
             <field name="name">open.purchase.tree.inherit</field>
             <field name="model">open.purchase</field>
             <field name="arch" type="xml">
-                <tree string="الارساليات">
+                <tree string="الارساليات" create="false">
                     <field name="name"/>
                     <field name="purchase_id"/>
                 </tree>
@@ -122,10 +122,8 @@
         </record>
 
 
-        <!--
                 <menuitem id="open_purchase_menu" action="open_purchase_action" name="الارساليات"
-                          parent="purchase.menu_procurement_management"/>
-        -->
+                          parent="purchase.menu_purchase_root"/>
     </data>
 
 </odoo>

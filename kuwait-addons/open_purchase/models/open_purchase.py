@@ -41,6 +41,12 @@ class OpenPurchase(models.Model):
 
     amount_supplier = fields.Float(string="صافي المورد", default=0.0,readonly=True)
 
+    def name_get(self):
+        res = []
+        for record in self:
+            res.append((record.id, "%s %s" % (record.order_number, record.name)))
+        return res
+
     def cancel_create_entry(self):
         self.account_move_id.button_draft()
         lines = self.env['account.move.line'].search([('move_id', '=', self.account_move_id.id)])
