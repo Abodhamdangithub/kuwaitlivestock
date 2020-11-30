@@ -117,7 +117,7 @@
                                             الفرعي
                                         </th>
                                     </tr>
-
+                                                <t t-set="sum_suptotal" t-value="0"/>
                                         <tr t-foreach="o.open_purchase_line_ids" t-as="p" t-if="o.type != 'comm'"
                                             style="border-collapse: collapse;border: 0.5px solid black;">
                                             <td class="text-center">
@@ -136,6 +136,7 @@
                                                    t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
 
                                             </td>
+                                                <t t-set="sum_suptotal" t-value="sum_suptotal+subtotal"/>
                                         </tr>
 
 
@@ -187,7 +188,7 @@
                                             المجموع
                                         </td>
                                         <td class="text-center">
-                                            <t t-esc="total"
+                                            <t t-esc="total+sum_suptotal"
                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                     </tr>
