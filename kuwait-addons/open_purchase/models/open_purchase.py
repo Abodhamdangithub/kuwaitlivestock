@@ -22,24 +22,30 @@ class OpenPurchase(models.Model):
     amount_comm = fields.Float(string="قيمة العمولة", compute='_compute_amount_comm', store=True)
     amount_sales = fields.Float(string="مجموع المبيعات", compute='_compute_amount_sales', store=True)
     amount_outlay = fields.Float(string="مجموع المصاريف", compute='_compute_amount_outlay', store=True)
-
     amount_win = fields.Float(string="مجموع الربح", compute='_compute_amount_win', store=True)
     amount_lose = fields.Float(string="مجموع الخسارة", compute='_compute_amount_lose', store=True)
-
     state = fields.Selection([('draft', 'فتح'), ('closed', 'مغلق')], default='draft', required=True, tracking=True,
                              copy=False)
     account_move_id = fields.Many2one('account.move',string="القيد",readonly=True)
     account_id = fields.Many2one('account.account',string="حساب الربح أو الخسارة", readonly=True)
     journal_id = fields.Many2one('account.journal',string="اليومية", readonly=True)
     have_moved = fields.Boolean(string="يحتوي قيود محاسبية")
-
     bank_id = fields.Many2one('res.bank',string="اسم البنك", readonly=False)
     amount_convert = fields.Float(string="قيمة الحوالة")
     number_convert = fields.Char(string="رقم الحوالة")
     date_convert = fields.Date(string="تاريخ الحوالة")
-
-
     amount_supplier = fields.Float(string="صافي المورد", default=0.0,readonly=True)
+
+
+    product_available_qty = fields.Char(string="المنتج والكمية المتاحة", compute='_compute_product_available_qty')
+
+    def _compute_product_available_qty(self):
+        for me in self:
+            strings = ""
+            for line in me.open_purchase_line_ids:
+                strings += line.product_id.name +' ['+ str(line.qty_available) + '], '
+            me.product_available_qty = strings
+
 
     def name_get(self):
         res = []

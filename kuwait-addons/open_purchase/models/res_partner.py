@@ -17,7 +17,7 @@ class ResPartner(models.Model):
     def _compute_balance_partner(self):
         try:
             for me in self:
-                select = "select COALESCE( sum(debit) - sum(credit),0) as balance from account_move_line where partner_id = %s and  (select type from account_account_type where id = (select user_type_id from account_account where id = account_move_line.account_id) )  in ('receivable','payable')" % (me.id)
+                select = "select COALESCE( sum(debit) - sum(credit),0) as balance from account_move_line where partner_id = %s and  (select type from account_account_type where id = (select user_type_id from account_account where id = account_move_line.account_id) )  in ('receivable','payable') and (select state from account_move where id = account_move_line.move_id) = 'posted'" % (me.id)
                 me.env.cr.execute(select)
                 results = me.env.cr.dictfetchall()[0]['balance']
                 me.balance_partner = results

@@ -108,8 +108,11 @@
             <field name="model">open.purchase</field>
             <field name="arch" type="xml">
                 <tree string="الارساليات" create="false">
+                    <field name="order_number"/>
                     <field name="name"/>
                     <field name="purchase_id"/>
+                    <field name="product_available_qty"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>

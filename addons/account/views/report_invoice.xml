@@ -199,6 +199,7 @@
                     <tr>
                         <td>
                             <i class="oe_form_field text-right oe_payment_label">Paid on <t t-esc="payment_vals['date']" t-options='{"widget": "date"}'/></i>
+                                                        <span t-esc="payment_vals['ref']" />
                         </td>
                         <td class="text-right">
                             <span t-esc="payment_vals['amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
