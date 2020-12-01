@@ -41,8 +41,12 @@
                             <group>
                                 <field name="date" readonly="1" style="width: 33%"/>
                                 <field name="date_close" readonly="1" style="width: 33%"/>
+                                <field name="type_comm" attrs="{'readonly': [('state', '=', 'closed')],'invisible': [('type', '!=', 'comm')],'required': [('type', '=', 'comm')]}"  style="width: 33%"/>
                                 <field name="comm"
-                                       attrs="{'readonly': [('state', '=', 'closed')],'invisible': [('type', '!=', 'comm')],'required': [('type', '=', 'comm')]}"
+                                       attrs="{'readonly': [('state', '=', 'closed')],'invisible': ['|',('type', '!=', 'comm'),('type_comm', '!=', 'nsbeh')],'required': [('type', '=', 'comm'),('type_comm', '=', 'nsbeh')]}"
+                                       style="width: 33%"/>
+                                <field name="comm_on_qty"
+                                       attrs="{'readonly': [('state', '=', 'closed')],'invisible': ['|',('type', '!=', 'comm'),('type_comm', '!=', 'qty')],'required': [('type', '=', 'comm'),('type_comm', '=', 'qty')]}"
                                        style="width: 33%"/>
                                 <field name="amount_sales" style="width: 33%"/>
                                 <field name="amount_comm" attrs="{'invisible': [('type', '!=', 'comm')]}"

@@ -18,7 +18,9 @@ class OpenPurchase(models.Model):
                             tracking=True, copy=False)
     date = fields.Date(string=" تاريخ الانشاء", default=datetime.now())
     date_close = fields.Date(string=" تاريخ الاغلاق")
+    type_comm = fields.Selection([('nsbeh', 'نسبة'), ('qty', 'حسب الكمية')], string='نوع العمولة',copy=False)
     comm = fields.Integer(string="النسبة (%)")
+    comm_on_qty = fields.Integer(string="عمولة الوحدة")
     amount_comm = fields.Float(string="قيمة العمولة", compute='_compute_amount_comm', store=True)
     amount_sales = fields.Float(string="مجموع المبيعات", compute='_compute_amount_sales', store=True)
     amount_outlay = fields.Float(string="مجموع المصاريف", compute='_compute_amount_outlay', store=True)
@@ -165,13 +167,20 @@ class OpenPurchase(models.Model):
 
         self.state = "closed"
 
-    @api.depends("type", "comm", "open_purchase_line_ids", "open_purchase_line_ids.price_all_sales")
+    @api.depends("type", "type_comm", "comm", "comm_on_qty", "open_purchase_line_ids.qty_sales", "open_purchase_line_ids", "open_purchase_line_ids.price_all_sales")
     def _compute_amount_comm(self):
         for me in self:
-            sum = 0.0
-            for line in me.open_purchase_line_ids:
-                sum += (me.comm / 100) * line.price_all_sales
-            me.amount_comm = sum
+            if me.type_comm == "nsbeh":
+                sum = 0.0
+                for line in me.open_purchase_line_ids:
+                    sum += (me.comm / 100) * line.price_all_sales
+                me.amount_comm = sum
+            elif me.type_comm == "qty":
+                sum = 0.0
+                for line in me.open_purchase_line_ids:
+                    sum += me.comm_on_qty * line.qty_sales
+                me.amount_comm = sum
+
 
     @api.depends("open_purchase_line_ids", "open_purchase_line_ids.amount_win")
     def _compute_amount_win(self):
