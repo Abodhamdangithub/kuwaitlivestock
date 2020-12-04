@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="try_sales_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="header">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="watermark"
+                                         style="opacity:20;size:auto;font-size:3em;height:100%;width:100%;right:350px;border:0;">
+                                        <img src='company.logo'
+                                             style="margin-right:-20px;margin-bottom: 2450px; margin-top: 350px;max-height: 1000px;max-width: 1000px;width: 20000px;height: 20000px;"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <img src='company.logo'
+                                         style="width: 100%;height: auto;"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page" style="font-family:Scheherazade">
+                            <div class="col-xs-12">
+                                <center style="font-size:30px;font-weight:bold;left:150px;color :#a51b0b ;text-align:center;font-family:Scheherazade">
+                                    الجرد الشهري
+                                </center>
+                            </div>
+                            <table class="table table-condensed table table-striped"
+                                   style="font-size:15px;font-family:Scheherazade;border: 1px solid black;">
+                                <tr style="border-collapse: collapse;border: 0.5px solid black; ">
+                                    <th class="text-center" style="background-color:  #EADBDB ;">التسلسل</th>
+                                    <th class="text-center" style="background-color:  #EADBDB ;">من تاريخ</th>
+                                    <th class="text-center" style="background-color:  #EADBDB ;">الى تاريخ</th>
+                                </tr>
+                                <tr style="font-size:15px;border-collapse: collapse;border: 0.5px solid black;">
+                                    <td class="text-center">
+                                        <span t-field="o.order_number"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="o.from_date"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="o.to_date"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div>
+                                <h3 style="font-family:Scheherazade; float: right; padding-right: 190px;">
+                                    الايرادات
+                                </h3>
+                                <h3 style="font-family:Scheherazade; float: right; padding-right: 350px;">
+                                    المصاريف
+                                </h3>
+                                <br></br>
+                            </div>
+                            <div>
+                                <br></br>
+                                <table style="float: right">
+                                    <tr style="font-size:15px;border-collapse: collapse;border: 1px solid black; ">
+                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                            المبلغ
+                                        </th>
+                                        <th class="text-center" width="300" style="background-color: #EADBDB;">
+                                            البيان
+                                        </th>
+                                    </tr>
+                                    <t t-set="amount" t-value="0"/>
+                                    <t t-set="sum_open_purchase_ids" t-value="0"/>
+                                    <tr t-foreach="o.open_purchase_ids" t-as="p"
+                                        style="border-collapse: collapse;border: 0.5px solid black;">
+                                        <t t-set="amount" t-value="p.amount_win - p.amount_lose"/>
+                                        <td class="text-center">
+                                            <t t-esc="amount"
+                                               t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <p t-field="p.order_number"/>
+                                        </td>
+                                        <t t-set="sum_open_purchase_ids" t-value="sum_open_purchase_ids+amount"/>
+                                    </tr>
+
+                                    <tr style="font-weight:bold; border-collapse: collapse;border: 0.5px solid black;">
+                                        <td class="text-center">
+                                            <t t-esc="sum_open_purchase_ids"
+                                               t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+
+                                        </td>
+                                        <td class="text-center">
+                                            المجموع
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+                                <table style="float: right">
+                                    <tr style="font-size:15px;border-collapse: collapse;border: 1px solid black; ">
+                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                            المبلغ
+                                        </th>
+                                        <th class="text-center" width="310" style="background-color: #EADBDB;">
+                                            البيان
+                                        </th>
+                                    </tr>
+                                    <t t-set="amount" t-value="0"/>
+                                    <t t-set="sum_hr" t-value="0"/>
+                                    <tr t-foreach="o.hr_expense_ids" t-as="h"
+                                        style="border-collapse: collapse;border: 0.5px solid black;">
+                                        <t t-set="amount" t-value=" h.total_amount"/>
+                                        <td class="text-center">
+                                            <t t-esc="amount"
+                                               t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <p t-field="h.name"/>
+                                        </td>
+                                        <t t-set="sum_hr" t-value="sum_hr+amount"/>
+                                    </tr>
+                                    <tr style="font-weight:bold; border-collapse: collapse;border: 0.5px solid black;">
+                                        <td class="text-center">
+                                            <t t-esc="sum_hr"
+                                               t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+
+                                        </td>
+                                        <td class="text-center">
+                                            المجموع
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+
+                            <t t-set="sum_last" t-value="sum_open_purchase_ids-sum_hr"/>
+                            <div class="col-xs-12">
+                                <table class="table table-condensed table table-striped"
+                                       style="font-size:15px;font-family:Scheherazade;">
+                                    <tr>
+                                        <th class="text-center">قيمة الصافي</th>
+                                        <th class="text-center">
+                                            <t t-esc="sum_last"
+                                               t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </th>
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                            <div class="col-xs-12">
+                                <table class="table table-condensed table table-striped"
+                                       style="font-size:15px;font-family:Scheherazade;">
+                                    <tr>
+                                        <th class="text-center">توقيع الشركة</th>
+                                        <th class="text-center">توقيع المحاسب</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">.........</th>
+                                        <th class="text-center">.........</th>
+                                    </tr>
+                                </table>
+                                <hr size="20" style="border-width:4" width="100%"/>
+
+                            </div>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <report
+                id="try_sales"
+                model="try.sales"
+                string="الجرد الشهري"
+                report_type="qweb-pdf"
+                name="open_purchase.try_sales_report"
+                file="open_purchase.try_sales_report"
+        />
+    </data>
+</odoo>

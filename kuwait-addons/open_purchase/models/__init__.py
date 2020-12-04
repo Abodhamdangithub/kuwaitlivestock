@@ -8,3 +8,5 @@ from . import sale_order
 from . import fleet_vehicle
 from . import moving_form
 from . import res_partner
+from . import hr_expense
+from . import try_sales

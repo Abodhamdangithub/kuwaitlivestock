@@ -39,6 +39,8 @@ class OpenPurchase(models.Model):
     amount_supplier = fields.Float(string="صافي المورد", default=0.0,readonly=True)
 
 
+    try_sales_id = fields.Many2one('try.sales',string="try.sales", invisible=True)
+
     product_available_qty = fields.Char(string="المنتج والكمية المتاحة", compute='_compute_product_available_qty')
 
     def _compute_product_available_qty(self):
