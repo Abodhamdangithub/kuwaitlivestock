@@ -13,8 +13,8 @@ class TrySales(models.Model):
     open_purchase_ids = fields.One2many('open.purchase', 'try_sales_id', string="open purchase")
     hr_expense_ids = fields.One2many('hr.expense', 'try_sales_id', string="hr expense")
     state = fields.Selection([('draft', 'مسودة'), ('sumation', 'محتسب')], default='draft', tracking=True,copy=False)
-    from_date = fields.Date(string="من تاريخ")
-    to_date = fields.Date(string="الى تاريخ")
+    # from_date = fields.Date(string="من تاريخ")
+    # to_date = fields.Date(string="الى تاريخ")
 
 
     @api.model
@@ -24,11 +24,12 @@ class TrySales(models.Model):
         return super(TrySales, self).create(vals)
 
     def sumation_function(self):
-        open_purchase_ids = self.env['open.purchase'].search([('try_sales_id', '=', False),('state', '=', 'closed'),('date_close', '>=', self.from_date),('date_close', '<=', self.to_date)])
+        #open_purchase_ids = self.env['open.purchase'].search([('try_sales_id', '=', False),('state', '=', 'closed'),('date_close', '>=', self.from_date),('date_close', '<=', self.to_date)])
+        open_purchase_ids = self.env['open.purchase'].search([('try_sales_id', '=', False),('state', '=', 'closed')])
         for o in open_purchase_ids:
             o.try_sales_id = self.id
-
-        hr_expense_ids = self.env['hr.expense'].search([('try_sales_id', '=', False),('date', '>=', self.from_date),('date', '<=', self.to_date)])
+        #hr_expense_ids = self.env['hr.expense'].search([('try_sales_id', '=', False),('date', '>=', self.from_date),('date', '<=', self.to_date)])
+        hr_expense_ids = self.env['hr.expense'].search([('try_sales_id', '=', False)])
         for h in hr_expense_ids:
             h.try_sales_id = self.id
         self.state = "sumation"

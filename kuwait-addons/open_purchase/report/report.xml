@@ -77,16 +77,21 @@
                                         <th class="text-center" width="106" style="background-color: #EADBDB;">نوع
                                             الشراء
                                         </th>
-                                        <th class="text-center" width="106" style="background-color: #EADBDB;">نسبة
+                                        <th class="text-center" width="106" style="background-color: #EADBDB;" t-if="o.type_comm == 'nsbeh'">نسبة
                                             العمولة (%)
+                                        </th>
+                                        <th class="text-center" width="106" style="background-color: #EADBDB;" t-if="o.type_comm == 'qty'">قيمة وحدة العمولة
                                         </th>
                                     </tr>
                                     <tr style="font-size:15px;border-collapse: collapse;border: 0.5px solid black;">
                                         <td class="text-center" width="106">
                                             <span t-field="o.type"/>
                                         </td>
-                                        <td class="text-center" width="106">
+                                        <td class="text-center" width="106" t-if="o.type_comm == 'nsbeh'">
                                             <p t-field="o.comm"/>
+                                        </td>
+                                        <td class="text-center" width="106" t-if="o.type_comm == 'qty'">
+                                            <p t-field="o.comm_on_qty"/>
                                         </td>
 
 

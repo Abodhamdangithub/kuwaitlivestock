@@ -115,6 +115,7 @@
                     <field name="order_number"/>
                     <field name="name"/>
                     <field name="purchase_id"/>
+                    <field name="type"/>
                     <field name="product_available_qty"/>
                     <field name="state"/>
                 </tree>
