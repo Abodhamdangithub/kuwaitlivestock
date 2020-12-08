@@ -20,7 +20,7 @@ class OpenPurchase(models.Model):
     date_close = fields.Date(string=" تاريخ الاغلاق")
     type_comm = fields.Selection([('nsbeh', 'نسبة'), ('qty', 'حسب الكمية')], string='نوع العمولة',copy=False)
     comm = fields.Integer(string="النسبة (%)")
-    comm_on_qty = fields.Integer(string="عمولة الوحدة")
+    comm_on_qty = fields.Float(string="عمولة الوحدة")
     amount_comm = fields.Float(string="قيمة العمولة", compute='_compute_amount_comm', store=True)
     amount_sales = fields.Float(string="مجموع المبيعات", compute='_compute_amount_sales', store=True)
     amount_outlay = fields.Float(string="مجموع المصاريف", compute='_compute_amount_outlay', store=True)
