@@ -350,7 +350,7 @@
                                 </h3>
                             </center>
 -->
-                            <div class="col-xs-12">
+                            <div class="col-xs-12" t-if="o.state == 'closed'">
                                 <table class="table table-condensed table table-striped"
                                        style="font-size:15px;font-family:Scheherazade;">
                                     <tr>

@@ -33,7 +33,7 @@ class OpenPurchase(models.Model):
     journal_id = fields.Many2one('account.journal',string="اليومية", readonly=True)
     have_moved = fields.Boolean(string="يحتوي قيود محاسبية")
     bank_id = fields.Many2one('res.bank',string="اسم البنك", readonly=False)
-    amount_convert = fields.Float(string="قيمة الحوالة")
+    amount_convert = fields.Float(string="قيمة الحوالة",readonly=True)
     number_convert = fields.Char(string="رقم الحوالة")
     date_convert = fields.Date(string="تاريخ الحوالة")
     amount_supplier = fields.Float(string="صافي المورد", default=0.0,readonly=True)
@@ -158,15 +158,19 @@ class OpenPurchase(models.Model):
 
             line.state = 'closed'
         self.date_close = datetime.now()
-
+        amount_comm = 0.0
         if self.type == "comm":
             self.amount_supplier = self.amount_sales - self.amount_comm - self.amount_outlay
+            if self.type_comm == "nsbeh":
+                amount_comm = self.comm
+            elif self.type_comm == "qty":
+                amount_comm = self.comm_on_qty
         elif self.type == "sharing":
             if self.amount_win > 0.0:
                 self.amount_supplier = self.amount_sales - self.amount_win - self.amount_outlay
             elif self.amount_lose > 0.0:
                 self.amount_supplier = self.amount_sales + self.amount_lose - self.amount_outlay
-
+        self.amount_convert = self.amount_sales - self.amount_outlay - amount_comm
         self.state = "closed"
 
     @api.depends("type", "type_comm", "comm", "comm_on_qty", "open_purchase_line_ids.qty_sales", "open_purchase_line_ids", "open_purchase_line_ids.price_all_sales")
