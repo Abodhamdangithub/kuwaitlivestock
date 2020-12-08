@@ -343,11 +343,13 @@
                                                         </table>
                             -->
 
+<!--
                             <center style="font-family:Scheherazade">
                                 <h3>
                                     معلومات الحوالة
                                 </h3>
                             </center>
+-->
                             <div class="col-xs-12">
                                 <table class="table table-condensed table table-striped"
                                        style="font-size:15px;font-family:Scheherazade;">
