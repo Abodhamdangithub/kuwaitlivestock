@@ -32,16 +32,46 @@ class OpenPurchase(models.Model):
     account_id = fields.Many2one('account.account',string="حساب الربح أو الخسارة", readonly=True)
     journal_id = fields.Many2one('account.journal',string="اليومية", readonly=True)
     have_moved = fields.Boolean(string="يحتوي قيود محاسبية")
-    bank_id = fields.Many2one('res.bank',string="اسم البنك", readonly=False)
-    amount_convert = fields.Float(string="قيمة الحوالة",readonly=True)
-    number_convert = fields.Char(string="رقم الحوالة")
-    date_convert = fields.Date(string="تاريخ الحوالة")
     amount_supplier = fields.Float(string="صافي المورد", default=0.0,readonly=True)
-
-
     try_sales_id = fields.Many2one('try.sales',string="try.sales", invisible=True)
-
     product_available_qty = fields.Char(string="المنتج والكمية المتاحة", compute='_compute_product_available_qty')
+
+    payment_ids = fields.One2many('account.payment', 'open_purchase_id', string="Payments")
+    amount_payment = fields.Float(string="مجموع الدفعات", compute='_compute_amount_payment', store=True)
+    amount_not_paid = fields.Float(string="المبلغ المتبقي", compute='_compute_amount_payment', store=True)
+
+    def action_open_purchase_register_payment(self):
+        return self.env['account.payment']\
+            .with_context(active_ids=self.ids, active_model='open.purchase', active_id=self.id,default_payment_type='outbound',default_open_purchase_id=self.id,default_partner_id = self.purchase_id.partner_id.id)\
+            .action_register_payment()
+
+    @api.depends("payment_ids", "payment_ids.amount", "payment_ids.state")
+    def _compute_amount_payment(self):
+        for me in self:
+            sum = 0.0
+            for line in me.payment_ids:
+                if line.state not in ['draft','cancelled']:
+                    sum += line.amount
+            me.amount_payment = sum
+            me.amount_not_paid = me.amount_supplier - sum
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     def _compute_product_available_qty(self):
         for me in self:
@@ -158,19 +188,13 @@ class OpenPurchase(models.Model):
 
             line.state = 'closed'
         self.date_close = datetime.now()
-        amount_comm = 0.0
         if self.type == "comm":
             self.amount_supplier = self.amount_sales - self.amount_comm - self.amount_outlay
-            if self.type_comm == "nsbeh":
-                amount_comm = self.comm
-            elif self.type_comm == "qty":
-                amount_comm = self.comm_on_qty
         elif self.type == "sharing":
             if self.amount_win > 0.0:
                 self.amount_supplier = self.amount_sales - self.amount_win - self.amount_outlay
             elif self.amount_lose > 0.0:
                 self.amount_supplier = self.amount_sales + self.amount_lose - self.amount_outlay
-        self.amount_convert = self.amount_sales - self.amount_outlay - amount_comm
         self.state = "closed"
 
     @api.depends("type", "type_comm", "comm", "comm_on_qty", "open_purchase_line_ids.qty_sales", "open_purchase_line_ids", "open_purchase_line_ids.price_all_sales")
@@ -226,6 +250,16 @@ class OpenPurchase(models.Model):
             if open.amount_comm > 0 or open.amount_sales > 0 or open.amount_outlay > 0:
                 raise UserError(_('لا يمكنك حذف الارسالية '))
             return super(OpenPurchase, self).unlink()
+
+    @api.depends("payment_ids", "payment_ids.amount", "payment_ids.state")
+    def _compute_amount_payment(self):
+        for me in self:
+            sum = 0.0
+            for line in me.payment_ids:
+                if line.state not in ['draft','cancelled']:
+                    sum += line.amount
+            me.amount_payment = sum
+            me.amount_not_paid = me.amount_supplier - sum
 
 
 class OpenPurchaseLine(models.Model):

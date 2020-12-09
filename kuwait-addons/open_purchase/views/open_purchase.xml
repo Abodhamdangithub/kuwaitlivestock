@@ -21,6 +21,9 @@
                         <button name="cancel_create_entry" type="object"
                                 string="الغاء القيود محاسبية"
                                 attrs="{'invisible': ['|',('have_moved', '!=', True),('type', '=', 'normal')]}"/>
+                        <button name="action_open_purchase_register_payment" type="object"
+                                string="تسجيل دفعة" attrs="{'invisible': [('have_moved', '!=', True)]}"
+                                />
 
                         <field name="state" widget="statusbar"/>
                     </header>
@@ -52,19 +55,14 @@
                                 <field name="amount_comm" attrs="{'invisible': [('type', '!=', 'comm')]}"
                                        style="width: 33%"/>
                                 <field name="amount_outlay" style="width: 33%"/>
+                            </group>
+
+                            <group >
                                 <field name="amount_supplier" style="width: 33%" attrs="{'invisible': [('amount_supplier', '=', 0.0)]}"/>
-
-
+                                <field name="amount_payment" style="width: 33%" />
+                                <field name="amount_not_paid" style="width: 33%" />
                                 <field name="amount_win" style="width: 33%" />
                                 <field name="amount_lose" style="width: 33%" />
-                            </group>
-                            <group string="معلومات الحوالة">
-                                <field name="bank_id"  style="width: 33%"/>
-                                <field name="amount_convert"  style="width: 33%"/>
-                                <field name="number_convert"  style="width: 33%"/>
-                                <field name="date_convert"  style="width: 33%"/>
-
-
                             </group>
                         </group>
 
@@ -98,6 +96,9 @@
                             <page string="فواتير المصاريف">
                                 <field name="invoice_ids" readonly="1">
                                 </field>
+                            </page>
+                            <page string="الدفعات" >
+                                <field name="payment_ids"></field>
                             </page>
                             <page string="القيود" attrs="{'invisible': [('have_moved', '=', False)]}">
                                 <field name="account_move_id"></field>

@@ -77,10 +77,12 @@
                                         <th class="text-center" width="106" style="background-color: #EADBDB;">نوع
                                             الشراء
                                         </th>
-                                        <th class="text-center" width="106" style="background-color: #EADBDB;" t-if="o.type_comm == 'nsbeh'">نسبة
+                                        <th class="text-center" width="106" style="background-color: #EADBDB;"
+                                            t-if="o.type_comm == 'nsbeh'">نسبة
                                             العمولة (%)
                                         </th>
-                                        <th class="text-center" width="106" style="background-color: #EADBDB;" t-if="o.type_comm == 'qty'">قيمة وحدة العمولة
+                                        <th class="text-center" width="106" style="background-color: #EADBDB;"
+                                            t-if="o.type_comm == 'qty'">قيمة وحدة العمولة
                                         </th>
                                     </tr>
                                     <tr style="font-size:15px;border-collapse: collapse;border: 0.5px solid black;">
@@ -122,27 +124,27 @@
                                             الفرعي
                                         </th>
                                     </tr>
-                                                <t t-set="sum_suptotal" t-value="0"/>
-                                        <tr t-foreach="o.open_purchase_line_ids" t-as="p" t-if="o.type != 'comm'"
-                                            style="border-collapse: collapse;border: 0.5px solid black;">
-                                            <td class="text-center">
-                                                <span t-field="p.product_id"/>
-                                            </td>
-                                            <td class="text-center">
-                                                <p t-field="p.qty"/>
-                                            </td>
-                                            <td class="text-center">
-                                                <p t-field="p.price_unit_purchase"
-                                                   t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
-                                            </td>
-                                            <td class="text-center">
-                                                <t t-set="subtotal" t-value="p.qty * p.price_unit_purchase"/>
-                                                <t t-esc="subtotal"
-                                                   t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    <t t-set="sum_suptotal" t-value="0"/>
+                                    <tr t-foreach="o.open_purchase_line_ids" t-as="p" t-if="o.type != 'comm'"
+                                        style="border-collapse: collapse;border: 0.5px solid black;">
+                                        <td class="text-center">
+                                            <span t-field="p.product_id"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <p t-field="p.qty"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <p t-field="p.price_unit_purchase"
+                                               t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-set="subtotal" t-value="p.qty * p.price_unit_purchase"/>
+                                            <t t-esc="subtotal"
+                                               t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
 
-                                            </td>
-                                                <t t-set="sum_suptotal" t-value="sum_suptotal+subtotal"/>
-                                        </tr>
+                                        </td>
+                                        <t t-set="sum_suptotal" t-value="sum_suptotal+subtotal"/>
+                                    </tr>
 
 
                                     <t t-foreach="o.invoice_ids" t-as="l">
@@ -256,125 +258,39 @@
                             <br></br>
                             <br></br>
                             <br></br>
-                            <!--
-                                                        <center>
-                                                            <h3>
-                                                                المشتريات
-                                                            </h3>
-                                                        </center>
-                                                        <table class="table table-condensed table table-striped"
-                                                               style="font-size:15px;font-family:Scheherazade;border: 1px solid black;">
-                                                            <tr style="border-collapse: collapse;border: 0.5px solid black; ">
-                                                                <th class="text-center" style="background-color: #EADBDB;">المنتج</th>
-                                                                <th class="text-center" style="background-color: #EADBDB;">الكمية الفعلية</th>
-                                                                <th class="text-center" style="background-color: #EADBDB;">الكمية التالفة (النافق)
-                                                                </th>
-                                                                <th class="text-center" style="background-color: #EADBDB;">سعر الشراء</th>
-                                                                <th class="text-center" style="background-color: #EADBDB;">كمية المبيعات</th>
-                                                                <th class="text-center" style="background-color: #EADBDB;">قيمة المبيعات</th>
-                                                                <th class="text-center" style="background-color: #EADBDB;">قيمة الربح</th>
-                                                                <th class="text-center" style="background-color: #EADBDB;">قيمة الخسارة</th>
-                                                            </tr>
-
-                                                            <tr t-foreach="o.open_purchase_line_ids" t-as="l"
-                                                                style="border-collapse: collapse;border: 0.5px solid black;">
-                                                                <td class="text-center">
-                                                                    <span t-field="l.product_id"/>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <span t-field="l.qty_not"/>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <span t-field="l.qty_talef"/>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <span t-field="l.price_unit_purchase"/>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <span t-field="l.qty_sales"/>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <span t-field="l.price_all_sales"/>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <span t-field="l.amount_win"/>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <span t-field="l.amount_not_win"/>
-                                                                </td>
-                                                            </tr>
-
-
-                                                        </table>
-
-                                                        <center style="font-family:Scheherazade">
-                                                            <h3>
-                                                                المصاريف
-                                                            </h3>
-                                                        </center>
-                                                        <table class="table table-condensed table table-striped"
-                                                               style="font-size:15px;font-family:Scheherazade;border: 1px solid black;">
-
-                                                            <tr style="font-size:15px;border-collapse: collapse;border: 1px solid black; ">
-                                                                <th class="text-center" style="background-color: #EADBDB;">المصروف</th>
-                                                                <th class="text-center" style="background-color: #EADBDB;">الكمية</th>
-                                                                <th class="text-center" style="background-color: #EADBDB;">القيمة</th>
-                                                                <th class="text-center" style="background-color: #EADBDB;">المجموع الفرعي</th>
-                                                            </tr>
-                                                            <t t-foreach="o.invoice_ids" t-as="l">
-
-                                                                <tr t-foreach="l.invoice_line_ids" t-as="w"
-                                                                    style="border-collapse: collapse;border: 0.5px solid black;">
-                                                                    <td class="text-center">
-                                                                        <span t-field="w.product_id"/>
-                                                                    </td>
-                                                                    <td class="text-center">
-                                                                        <p t-field="w.quantity"/>
-                                                                    </td>
-                                                                    <td class="text-center">
-                                                                        <p t-field="w.price_unit"/>
-                                                                    </td>
-                                                                    <td class="text-center">
-                                                                        <p t-field="w.price_subtotal"/>
-
-                                                                    </td>
-                                                                </tr>
-                                                            </t>
-                                                        </table>
-                            -->
-
-<!--
-                            <center style="font-family:Scheherazade">
-                                <h3>
-                                    معلومات الحوالة
-                                </h3>
-                            </center>
--->
                             <div class="col-xs-12" t-if="o.state == 'closed'">
                                 <table class="table table-condensed table table-striped"
                                        style="font-size:15px;font-family:Scheherazade;">
                                     <tr>
-                                        <th class="text-center">اسم البنك</th>
-                                        <th class="text-center">قيمة الحوالة</th>
-                                        <th class="text-center">رقم الحوالة</th>
                                         <th class="text-center">التاريخ</th>
+                                        <th class="text-center">رقم الدفعة</th>
+                                        <th class="text-center">دفتر اليومية</th>
+                                        <th class="text-center">المبلغ</th>
+                                        <th class="text-center">البيان</th>
                                     </tr>
-                                    <tr style="border-collapse: collapse;border: 0.5px solid black;">
-                                        <td class="text-center">
-                                            <span t-field="o.bank_id.name"/>
-                                        </td>
-                                        <td class="text-center">
-                                            <p t-field="o.amount_convert"
-                                               t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
-                                        </td>
-                                        <td class="text-center">
-                                            <p t-field="o.number_convert"/>
-                                        </td>
-                                        <td class="text-center">
-                                            <p t-field="o.date_convert"/>
-
-                                        </td>
-                                    </tr>
+                                    <t t-foreach="o.payment_ids" t-as="l">
+                                        <tr style="border-collapse: collapse;border: 0.5px solid black;" t-if="l.state in ('posted','sent','reconciled')">
+                                            <td class="text-center">
+                                                <p t-field="l.payment_date"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-field="l.name"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <p t-field="l.journal_id"
+                                                />
+                                            </td>
+                                            <td class="text-center">
+                                                <p t-field="l.amount"
+                                                   t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                />
+                                            </td>
+                                            <td class="text-center">
+                                                <p t-field="l.communication"
+                                                />
+                                            </td>
+                                        </tr>
+                                    </t>
 
 
                                 </table>
