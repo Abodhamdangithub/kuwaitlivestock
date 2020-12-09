@@ -57,7 +57,7 @@
                                 <field name="amount_outlay" style="width: 33%"/>
                             </group>
 
-                            <group >
+                            <group attrs="{'invisible': [('state', '!=', 'closed')]}">
                                 <field name="amount_supplier" style="width: 33%" attrs="{'invisible': [('amount_supplier', '=', 0.0)]}"/>
                                 <field name="amount_payment" style="width: 33%" />
                                 <field name="amount_not_paid" style="width: 33%" />

@@ -45,15 +45,6 @@ class OpenPurchase(models.Model):
             .with_context(active_ids=self.ids, active_model='open.purchase', active_id=self.id,default_payment_type='outbound',default_open_purchase_id=self.id,default_partner_id = self.purchase_id.partner_id.id)\
             .action_register_payment()
 
-    @api.depends("payment_ids", "payment_ids.amount", "payment_ids.state", "state")
-    def _compute_amount_payment(self):
-        for me in self:
-            sum = 0.0
-            for line in me.payment_ids:
-                if line.state not in ['draft','cancelled']:
-                    sum += line.amount
-            me.amount_payment = sum
-            me.amount_not_paid = me.amount_supplier - sum
 
 
 
