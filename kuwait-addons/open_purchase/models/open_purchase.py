@@ -186,6 +186,7 @@ class OpenPurchase(models.Model):
                 self.amount_supplier = self.amount_sales - self.amount_win - self.amount_outlay
             elif self.amount_lose > 0.0:
                 self.amount_supplier = self.amount_sales + self.amount_lose - self.amount_outlay
+
         self.state = "closed"
 
     @api.depends("type", "type_comm", "comm", "comm_on_qty", "open_purchase_line_ids.qty_sales", "open_purchase_line_ids", "open_purchase_line_ids.price_all_sales")
@@ -242,9 +243,10 @@ class OpenPurchase(models.Model):
                 raise UserError(_('لا يمكنك حذف الارسالية '))
             return super(OpenPurchase, self).unlink()
 
-    @api.depends("payment_ids", "payment_ids.amount", "payment_ids.state")
+    @api.depends("payment_ids", "payment_ids.amount", "payment_ids.state", "state")
     def _compute_amount_payment(self):
         for me in self:
+
             sum = 0.0
             for line in me.payment_ids:
                 if line.state not in ['draft','cancelled']:
