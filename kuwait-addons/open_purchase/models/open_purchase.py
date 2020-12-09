@@ -45,7 +45,7 @@ class OpenPurchase(models.Model):
             .with_context(active_ids=self.ids, active_model='open.purchase', active_id=self.id,default_payment_type='outbound',default_open_purchase_id=self.id,default_partner_id = self.purchase_id.partner_id.id)\
             .action_register_payment()
 
-    @api.depends("payment_ids", "payment_ids.amount", "payment_ids.state")
+    @api.depends("payment_ids", "payment_ids.amount", "payment_ids.state", "state")
     def _compute_amount_payment(self):
         for me in self:
             sum = 0.0
