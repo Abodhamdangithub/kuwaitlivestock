@@ -36,16 +36,16 @@ class OpenPurchase(models.Model):
     try_sales_id = fields.Many2one('try.sales',string="try.sales", invisible=True)
     product_available_qty = fields.Char(string="المنتج والكمية المتاحة", compute='_compute_product_available_qty')
 
-    payment_ids = fields.One2many('account.payment', 'open_purchase_id', string="Payments")
+    payment_ids = fields.One2many('account.payment', 'open_purchase_payment_id', string="Payments")
     amount_payment = fields.Float(string="مجموع الدفعات", compute='_compute_amount_payment', store=True)
     amount_not_paid = fields.Float(string="المبلغ المتبقي", compute='_compute_amount_payment', store=True)
 
     def action_open_purchase_register_payment(self):
-        return self.env['account.payment']\
-            .with_context(active_ids=self.ids, active_model='open.purchase', active_id=self.id,default_payment_type='outbound',default_open_purchase_id=self.id,default_partner_id = self.purchase_id.partner_id.id)\
+        result = self.env['account.payment']\
+            .with_context(active_ids=self.ids, active_model='open.purchase', active_id=self.id,default_payment_type='outbound',default_open_purchase_payment_id=self.id,default_partner_id = self.purchase_id.partner_id.id)\
             .action_register_payment()
-
-
+        print ("result",result)
+        return result
 
 
 
@@ -186,8 +186,10 @@ class OpenPurchase(models.Model):
                 self.amount_supplier = self.amount_sales - self.amount_win - self.amount_outlay
             elif self.amount_lose > 0.0:
                 self.amount_supplier = self.amount_sales + self.amount_lose - self.amount_outlay
-
         self.state = "closed"
+        if not self.purchase_id.invoice_ids:
+            return self.purchase_id.action_view_invoice()
+
 
     @api.depends("type", "type_comm", "comm", "comm_on_qty", "open_purchase_line_ids.qty_sales", "open_purchase_line_ids", "open_purchase_line_ids.price_all_sales")
     def _compute_amount_comm(self):
@@ -306,12 +308,16 @@ class OpenPurchaseLine(models.Model):
     @api.depends('price_unit_purchase_invisible', 'open_purchase_id.type','qty_talef', 'open_purchase_id.amount_outlay')
     def _compute_price_unit(self):
         for me in self:
-            me.price_unit_purchase_invisible = round(((me.price_unit_purchase_orginal * me.qty_not) / me.qty) + (
-                    me.open_purchase_id.amount_outlay / me.qty), 3)
+            if me.qty > 0:
+                qty = me.qty
+            elif me.qty == 0:
+                qty = 1
+            me.price_unit_purchase_invisible = round(((me.price_unit_purchase_orginal * me.qty_not) / qty) + (
+                    me.open_purchase_id.amount_outlay / qty), 3)
 
             if me.open_purchase_id.type != "comm":
-                me.price_unit_purchase = round( ((me.price_unit_purchase_orginal * me.qty_not) / me.qty) + (
-                        me.open_purchase_id.amount_outlay / me.qty),3)
+                me.price_unit_purchase = round( ((me.price_unit_purchase_orginal * me.qty_not) / qty) + (
+                        me.open_purchase_id.amount_outlay / qty),3)
             else:
                 me.price_unit_purchase = 0.0
 

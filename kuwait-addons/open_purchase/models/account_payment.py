@@ -8,4 +8,4 @@ from odoo import api, fields, models, _
 class AccountPayment(models.Model):
     _inherit = 'account.payment'
 
-    open_purchase_id = fields.Many2one('open.purchase', readonly=False, string="الارسالية")
+    open_purchase_payment_id = fields.Many2one('open.purchase', readonly=False, string="الارسالية")

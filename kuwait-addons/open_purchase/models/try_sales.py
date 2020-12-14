@@ -15,7 +15,9 @@ class TrySales(models.Model):
     state = fields.Selection([('draft', 'مسودة'), ('sumation', 'محتسب')], default='draft', tracking=True,copy=False)
     # from_date = fields.Date(string="من تاريخ")
     # to_date = fields.Date(string="الى تاريخ")
-
+    date = fields.Date(string="التاريخ")
+    month = fields.Selection([('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'),('11','11'),('12','12')],string="الشهر")
+    note = fields.Char(string="ملاحظات")
 
     @api.model
     def create(self, vals):

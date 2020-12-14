@@ -114,13 +114,13 @@
                                 <br></br>
                                 <table style="float: right">
                                     <tr style="font-size:15px;border-collapse: collapse;border: 1px solid black; ">
-                                        <th class="text-center" width="100" style="background-color: #EADBDB;">المصروف
+                                        <th class="text-center" width="95" style="background-color: #EADBDB;">المصروف
                                         </th>
-                                        <th class="text-center" width="100" style="background-color: #EADBDB;">الكمية
+                                        <th class="text-center" width="95" style="background-color: #EADBDB;">الكمية
                                         </th>
-                                        <th class="text-center" width="100" style="background-color: #EADBDB;">القيمة
+                                        <th class="text-center" width="95" style="background-color: #EADBDB;">القيمة
                                         </th>
-                                        <th class="text-center" width="100" style="background-color: #EADBDB;">المجموع
+                                        <th class="text-center" width="95" style="background-color: #EADBDB;">المجموع
                                             الفرعي
                                         </th>
                                     </tr>
@@ -202,14 +202,14 @@
                                 </table>
                                 <table style="float: right">
                                     <tr style="font-size:15px;border-collapse: collapse;border: 1px solid black; ">
-                                        <th class="text-center" width="100" style="background-color: #EADBDB;">المنتج
+                                        <th class="text-center" width="95" style="background-color: #EADBDB;">المنتج
                                         </th>
-                                        <th class="text-center" width="100" style="background-color: #EADBDB;">سعر
+                                        <th class="text-center" width="95" style="background-color: #EADBDB;">سعر
                                             الوحدة
                                         </th>
-                                        <th class="text-center" width="100" style="background-color: #EADBDB;">الكمية
+                                        <th class="text-center" width="95" style="background-color: #EADBDB;">الكمية
                                         </th>
-                                        <th class="text-center" width="100" style="background-color: #EADBDB;">المبلغ
+                                        <th class="text-center" width="95" style="background-color: #EADBDB;">المبلغ
                                             كاملا
                                         </th>
                                     </tr>
