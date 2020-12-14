@@ -80,6 +80,9 @@
             <field name="arch" type="xml">
                 <tree string="الارساليات">
                     <field name="order_number"/>
+                    <field name="date"/>
+                    <field name="month"/>
+                    <field name="note"/>
                     <field name="state"/>
                 </tree>
             </field>
