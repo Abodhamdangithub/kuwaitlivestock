@@ -30,6 +30,7 @@
         'views/sequance.xml',
         'views/stock_quant.xml',
         'views/try_sales.xml',
+        'views/try_vehicle.xml',
         'report/report.xml',
         'report/try_sales_report.xml',
     ],

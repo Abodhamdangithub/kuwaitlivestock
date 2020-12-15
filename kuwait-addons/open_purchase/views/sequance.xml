@@ -1,6 +1,14 @@
 <odoo>
     <data>
 
+        <record id="moving_form_seq" model="ir.sequence">
+            <field name="name">moving.form</field>
+            <field name="code">moving.form</field>
+            <field name="prefix">MVFM/</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+        </record>
+
         <record id="open_purchase_seq" model="ir.sequence">
             <field name="name">open.purchase</field>
             <field name="code">open.purchase</field>
@@ -14,6 +22,13 @@
             <field name="name">try.sales</field>
             <field name="code">try.sales</field>
             <field name="prefix">TRYSALES/</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="try_vehicle_seq" model="ir.sequence">
+            <field name="name">try.vehicle</field>
+            <field name="code">try.vehicle</field>
+            <field name="prefix">TRYVHCL/</field>
             <field name="padding">4</field>
             <field name="number_increment">1</field>
         </record>

@@ -11,4 +11,5 @@ from . import moving_form
 from . import res_partner
 from . import hr_expense
 from . import try_sales
+from . import try_vehicle
 from . import stock_immediate_transfer

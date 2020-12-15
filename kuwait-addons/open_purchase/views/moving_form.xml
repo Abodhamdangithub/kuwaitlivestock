@@ -7,7 +7,7 @@
             <field name="name">moving.form.inherit</field>
             <field name="model">moving.form</field>
             <field name="arch" type="xml">
-                <form string="الحركات الخارجية" create='false'>
+                <form string="مصاريف/ايرادات" create='false'>
                     <header>
                         <button name="close_this" type="object"
                                 string="اغلاق"
@@ -21,14 +21,13 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="name" readonly="1"/>
+                                <field name="order_number" readonly="1"/>
+                                <field name="name" attrs="{'readonly': [('state', '=', 'closed')]}"/>
                                 <field name="fleet_vehicle_id" readonly="1"/>
                                 <field name="driver_id" readonly="1"/>
+                                <field name="type" attrs="{'readonly': [('state', '=', 'closed')]}"/>
                                 <field name="journal_id" attrs="{'readonly': [('state', '=', 'closed')]}"/>
-                                <field name="account_id" attrs="{'readonly': [('state', '=', 'closed')]}"/>
-                                <field name="amount_full" attrs="{'readonly': [('state', '=', 'closed')]}"/>
                                 <field name="amount_company" attrs="{'readonly': [('state', '=', 'closed')]}"/>
-                                <field name="amount_driver" attrs="{'readonly': [('state', '=', 'closed')]}"/>
                             </group>
                             <group>
                                 <field name="date" attrs="{'readonly': [('state', '=', 'closed')]}"/>
@@ -40,7 +39,7 @@
                         </group>
                         <notebook>
                             <page string="ملاحظات" >
-                                <field name="note"></field>
+                                <field name="note" attrs="{'readonly': [('state', '=', 'closed')]}"> </field>
                             </page>
                             <page string="القيود" attrs="{'invisible': [('state', '=', 'draft')]}">
                                 <field name="account_move_id"></field>
@@ -55,18 +54,22 @@
             <field name="name">moving.form.tree.inherit</field>
             <field name="model">moving.form</field>
             <field name="arch" type="xml">
-                <tree string="الحركات الخارجية" create='false'>
+                <tree string="مصاريف/ايرادات" create='false'>
+                    <field name="order_number"/>
                     <field name="fleet_vehicle_id"/>
-                    <field name="amount_full"/>
-                    <field name="amount_company"/>
-                    <field name="amount_driver"/>
                     <field name="driver_id"/>
+                    <field name="date"/>
+                    <field name="type"/>
+                    <field name="journal_id"/>
+                    <field name="amount_company" sum='Total '/>
+                    <field name="from_addrress"/>
+                    <field name="to_addrress"/>
                 </tree>
             </field>
         </record>
 
         <record id="moving_form_action" model="ir.actions.act_window">
-            <field name="name">الحركات الخارجية</field>
+            <field name="name">مصاريف/ايرادات</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">moving.form</field>
             <field name="view_mode">tree,form</field>

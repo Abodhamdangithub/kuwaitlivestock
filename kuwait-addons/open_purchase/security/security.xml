@@ -26,5 +26,8 @@
         <record model="ir.ui.menu" id="account.menu_action_account_payments_payable">
             <field name="groups_id" eval="[(4,ref('make_invisible'))]"/>
         </record>
+
+
+
     </data>
 </odoo>

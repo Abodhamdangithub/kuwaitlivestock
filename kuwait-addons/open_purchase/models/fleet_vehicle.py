@@ -9,7 +9,9 @@ class FleetVehicle(models.Model):
     moving_form_ids = fields.One2many('moving.form','fleet_vehicle_id', readonly=False,invisible=True)
     moving_form_count = fields.Integer(compute='_compute_fleet_vehicle_count')
 
-
+    account_expense = fields.Many2one('account.account',string="حساب المصروف")
+    account_revenues = fields.Many2one('account.account',string="حساب الايرادات")
+    comm = fields.Float(string="نسبة العمولة")
 
     def create_fleet_vehicle(self):
         create_open_purcahse = self.env["moving.form"].create({"fleet_vehicle_id": self.id,"driver_id": self.driver_id.id})

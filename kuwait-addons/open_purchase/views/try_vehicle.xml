@@ -3,11 +3,11 @@
 
     <data>
 
-        <record id="try_sales_view_form" model="ir.ui.view">
-            <field name="name">try.sales.inherit</field>
-            <field name="model">try.sales</field>
+        <record id="try_vehicle_view_form" model="ir.ui.view">
+            <field name="name">try.vehicle.inherit</field>
+            <field name="model">try.vehicle</field>
             <field name="arch" type="xml">
-                <form string="الجرد الشهري">
+                <form string="جرد السيارات">
                     <header>
                         <button name="sumation_function" type="object"
                                 string="احتساب"
@@ -22,48 +22,46 @@
                         <group>
                             <group>
                                 <field name="order_number" readonly="1" style="width: 50%"/>
+                                <field name="vehicle_id" attrs="{'readonly': [('state', '!=', 'draft')]}" style="width: 50%"/>
+                                <field name="date" attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                       style="width: 50%"/>
                             </group>
-<!--
                             <group>
                                 <field name="from_date" attrs="{'readonly': [('state', '!=', 'draft')]}"
                                        style="width: 50%"/>
                                 <field name="to_date" attrs="{'readonly': [('state', '!=', 'draft')]}"
                                        style="width: 50%"/>
                             </group>
--->
-                            <group>
-                                <field name="date" attrs="{'readonly': [('state', '!=', 'draft')]}"
-                                       style="width: 50%"/>
-                                <field name="month" attrs="{'readonly': [('state', '!=', 'draft')]}"
-                                       style="width: 50%"/>
-                            </group>
                             <group>
                                 <field name="note" attrs="{'readonly': [('state', '!=', 'draft')]}"
                                        />
+                                <field name="result" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                <field name="commition" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                             </group>
+
                         </group>
                         <notebook>
-                            <page string="الارساليات">
-                                <field name="open_purchase_ids" readonly="1">
+                            <page string="الايرادات">
+                                <field name="moving_form_ids" readonly="1" domain="[('type','=','revenues')]">
                                     <tree>
                                         <field name="order_number"/>
                                         <field name="name"/>
-                                        <field name="purchase_id"/>
-                                        <field name="amount_win" sum="Total Amount" widget="monetary"
-                                               options="{'currency_field': 'currency_id'}"/>
-                                        <field name="amount_lose" sum="Total Amount" widget="monetary"
+                                        <field name="date"/>
+                                        <field name="type"/>
+                                        <field name="amount_company" sum="Total Amount" widget="monetary"
                                                options="{'currency_field': 'currency_id'}"/>
                                         <field name="state"/>
                                     </tree>
                                 </field>
                             </page>
                             <page string="المصروفات">
-                                <field name="hr_expense_ids" readonly="1">
+                                <field name="hr_expense_ids" readonly="1" domain="[('type','=','expense')]">
                                     <tree>
-                                        <field name="date"/>
+                                        <field name="order_number"/>
                                         <field name="name"/>
-                                        <field name="employee_id"/>
-                                        <field name="total_amount" sum="Total Amount" widget="monetary"
+                                        <field name="date"/>
+                                        <field name="type"/>
+                                        <field name="amount_company" sum="Total Amount" widget="monetary"
                                                options="{'currency_field': 'currency_id'}"/>
                                         <field name="state"/>
                                     </tree>
@@ -74,30 +72,29 @@
                 </form>
             </field>
         </record>
-        <record id="try_sales_view_tree" model="ir.ui.view">
-            <field name="name">try.sales.tree.inherit</field>
-            <field name="model">try.sales</field>
+        <record id="try_vehicle_view_tree" model="ir.ui.view">
+            <field name="name">try.vehicle.tree.inherit</field>
+            <field name="model">try.vehicle</field>
             <field name="arch" type="xml">
                 <tree string="جرد السيارات">
                     <field name="order_number"/>
                     <field name="date"/>
-                    <field name="month"/>
                     <field name="note"/>
                     <field name="state"/>
                 </tree>
             </field>
         </record>
 
-        <record id="try_sales_action" model="ir.actions.act_window">
-            <field name="name">الجرد الشهري</field>
+        <record id="try_vehicle_action" model="ir.actions.act_window">
+            <field name="name">جرد السيارات</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">try.sales</field>
+            <field name="res_model">try.vehicle</field>
             <field name="view_mode">tree,form</field>
         </record>
 
 
-        <menuitem id="try_sales_menu" action="try_sales_action" name="الجرد الشهري"
-                  parent="purchase.menu_purchase_root"/>
+        <menuitem id="try_vehicle_menu" action="try_vehicle_action" name="جرد السيارات"
+                  parent="fleet.menu_root"/>
     </data>
 
 </odoo>
