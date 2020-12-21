@@ -269,7 +269,8 @@
                                         <th class="text-center">البيان</th>
                                     </tr>
                                     <t t-foreach="o.payment_ids" t-as="l">
-                                        <tr style="border-collapse: collapse;border: 0.5px solid black;" t-if="l.state in ('posted','sent','reconciled')">
+                                        <tr style="border-collapse: collapse;border: 0.5px solid black;"
+                                            t-if="l.state in ('posted','sent','reconciled')">
                                             <td class="text-center">
                                                 <p t-field="l.payment_date"/>
                                             </td>
@@ -291,7 +292,15 @@
                                             </td>
                                         </tr>
                                     </t>
-
+                                    <tr>
+                                        <th class="text-center">
+                                        </th>
+                                        <th class="text-center">
+                                        </th>
+                                        <th class="text-center"> </th>
+                                        <th class="text-center">المبلغ المتبقي: <p t-field="o.amount_not_paid" /></th>
+                                        <th class="text-center"> </th>
+                                    </tr>
 
                                 </table>
                                 <hr size="20" style="border-width:4" width="100%"/>

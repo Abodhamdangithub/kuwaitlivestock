@@ -187,7 +187,14 @@ class OpenPurchase(models.Model):
             elif self.amount_lose > 0.0:
                 self.amount_supplier = self.amount_sales + self.amount_lose - self.amount_outlay
         self.state = "closed"
-        if not self.purchase_id.invoice_ids:
+
+        if not self.purchase_id.invoice_ids and self.type in ['comm','sharing']:
+            for order_line in self.purchase_id.order_line:
+                for open_lines in self.open_purchase_line_ids:
+                    if order_line.product_id.id == open_lines.product_id.id:
+                        order_line.product_qty = open_lines.qty_sales
+                        order_line.price_unit = (self.amount_supplier / open_lines.qty_sales)
+
             return self.purchase_id.action_view_invoice()
 
 
