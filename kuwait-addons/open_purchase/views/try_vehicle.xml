@@ -37,6 +37,7 @@
                                        />
                                 <field name="result" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                                 <field name="commition" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                <field name="result_last" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                             </group>
 
                         </group>

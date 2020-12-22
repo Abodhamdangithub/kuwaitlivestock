@@ -14,7 +14,7 @@ class TryVehicle(models.Model):
     moving_form_ids = fields.Many2many('moving.form', 'relation_table_one', 'try_1', 'try_vehicle_id', string="الايرادات")
     hr_expense_ids = fields.Many2many('moving.form', 'relation_table_two', 'try_2', 'try_vehicle_id', string="المصاريف")
     vehicle_id = fields.Many2one('fleet.vehicle', string="السيارة",required=True)
-
+    try_sales_id = fields.Many2one('try.sales',string="try.sales", invisible=True)
     state = fields.Selection([('draft', 'مسودة'), ('sumation', 'محتسب')], default='draft', tracking=True,copy=False)
     from_date = fields.Date(string="من تاريخ",required=True)
     to_date = fields.Date(string="الى تاريخ",required=True)
@@ -22,7 +22,7 @@ class TryVehicle(models.Model):
     note = fields.Char(string="ملاحظات",required=True)
     result = fields.Float(string="الصافي",readonly=True)
     commition = fields.Float(string="قيمة العمولة",readonly=True)
-
+    result_last = fields.Float(string="الصافي بعد العمولة",readonly=True)
     @api.model
     def create(self, vals):
         if 'order_number' not in vals:
@@ -47,6 +47,7 @@ class TryVehicle(models.Model):
             self.commition = sum*(self.vehicle_id.comm/100)
         else:
             self.commition = 0.0
+        self.result_last = self.result - self.commition
         self.state = "sumation"
 
     def cancel_sumation_function(self):
@@ -56,6 +57,7 @@ class TryVehicle(models.Model):
             o.try_vehicle_id = False
         self.result = 0.0
         self.commition = 0.0
+        self.result_last = 0.0
         self.moving_form_ids = [(6,0, [])]
         self.hr_expense_ids = [(6,0, [])]
         self.state = "draft"

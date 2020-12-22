@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="try_sales_report">
+        <template id="try_vehicle_report">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.external_layout">
@@ -23,21 +23,33 @@
                         <div class="page" style="font-family:Scheherazade">
                             <div class="col-xs-12">
                                 <center style="font-size:30px;font-weight:bold;left:150px;color :#a51b0b ;text-align:center;font-family:Scheherazade">
-                                    الجرد الشهري
+                                    جرد السيارات
                                 </center>
                             </div>
                             <table class="table table-condensed table table-striped"
                                    style="font-size:15px;font-family:Scheherazade;border: 1px solid black;">
                                 <tr style="border-collapse: collapse;border: 0.5px solid black; ">
                                     <th class="text-center" style="background-color:  #EADBDB ;">التسلسل</th>
-                                    <th class="text-center" style="background-color:  #EADBDB ;"> تاريخ</th>
+                                    <th class="text-center" style="background-color:  #EADBDB ;">السيارة</th>
+                                    <th class="text-center" style="background-color:  #EADBDB ;">السائق</th>
+                                    <th class="text-center" style="background-color:  #EADBDB ;">من تاريخ</th>
+                                    <th class="text-center" style="background-color:  #EADBDB ;">الى تاريخ</th>
                                 </tr>
                                 <tr style="font-size:15px;border-collapse: collapse;border: 0.5px solid black;">
                                     <td class="text-center">
                                         <span t-field="o.order_number"/>
                                     </td>
                                     <td class="text-center">
-                                        <span t-field="o.date"/>
+                                        <span t-field="o.vehicle_id.license_plate"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="o.vehicle_id.driver_id.name"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="o.from_date"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="o.to_date"/>
                                     </td>
                                 </tr>
                             </table>
@@ -55,77 +67,85 @@
                                 <table style="float: right">
                                     <tr style="font-size:15px;border-collapse: collapse;border: 1px solid black; ">
                                         <th class="text-center" width="120" style="background-color: #EADBDB;">
-                                            المبلغ
+                                            التسلسل
                                         </th>
-                                        <th class="text-center" width="300" style="background-color: #EADBDB;">
-                                            البيان
+                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                            التاريخ
+                                        </th>
+                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                            النوع
+                                        </th>
+                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                            القيمة
                                         </th>
                                     </tr>
                                     <t t-set="amount" t-value="0"/>
-                                    <t t-set="sum_open_purchase_ids" t-value="0"/>
-                                    <tr t-foreach="o.open_purchase_ids" t-as="p"
+                                    <tr t-foreach="o.moving_form_ids" t-as="p"
                                         style="border-collapse: collapse;border: 0.5px solid black;">
-                                        <t t-set="amount" t-value="p.amount_win - p.amount_lose"/>
-                                        <td class="text-center">
-                                            <t t-esc="amount"
-                                               t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
-                                        </td>
+                                        <t t-set="amount" t-value="amount + p.amount_company"/>
                                         <td class="text-center">
                                             <p t-field="p.order_number"/>
                                         </td>
-                                        <t t-set="sum_open_purchase_ids" t-value="sum_open_purchase_ids+amount"/>
-                                    </tr>
-                                    <tr t-foreach="o.try_vehicle_ids" t-as="h"
-                                        style="border-collapse: collapse;border: 0.5px solid black;">
-                                        <t t-set="sum_open_purchase_ids" t-value="sum_open_purchase_ids + h.result_last"/>
                                         <td class="text-center">
-                                            <t t-esc="h.result_last"
-                                               t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                            <p t-field="p.date"/>
                                         </td>
                                         <td class="text-center">
-                                            <p t-field="h.vehicle_id.license_plate"/>
+                                            <p t-field="p.type"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-esc="amount_company"
+                                               t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                     </tr>
 
                                     <tr style="font-weight:bold; border-collapse: collapse;border: 0.5px solid black;">
-                                        <td class="text-center">
-                                            <t t-esc="sum_open_purchase_ids"
-                                               t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
-
-                                        </td>
-                                        <td class="text-center">
-                                            المجموع
-                                        </td>
-                                    </tr>
-                                </table>
-
-
-                                <table style="float: right">
-                                    <tr style="font-size:15px;border-collapse: collapse;border: 1px solid black; ">
-                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
-                                            المبلغ
-                                        </th>
-                                        <th class="text-center" width="285" style="background-color: #EADBDB;">
-                                            البيان
-                                        </th>
-                                    </tr>
-                                    <t t-set="amount" t-value="0"/>
-                                    <t t-set="sum_hr" t-value="0"/>
-                                    <tr t-foreach="o.hr_expense_ids" t-as="h"
-                                        style="border-collapse: collapse;border: 0.5px solid black;">
-                                        <t t-set="amount" t-value=" h.total_amount"/>
                                         <td class="text-center">
                                             <t t-esc="amount"
                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+
                                         </td>
                                         <td class="text-center">
-                                            <p t-field="h.name"/>
+                                            المجموع
                                         </td>
-                                        <t t-set="sum_hr" t-value="sum_hr+amount"/>
                                     </tr>
+                                </table>
+                                <table style="float: right">
+                                    <tr style="font-size:15px;border-collapse: collapse;border: 1px solid black; ">
+                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                            التسلسل
+                                        </th>
+                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                            التاريخ
+                                        </th>
+                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                            النوع
+                                        </th>
+                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                            القيمة
+                                        </th>
+                                    </tr>
+                                    <t t-set="amount" t-value="0"/>
+                                    <tr t-foreach="o.hr_expense_ids" t-as="p"
+                                        style="border-collapse: collapse;border: 0.5px solid black;">
+                                        <t t-set="amount" t-value="amount + p.amount_company"/>
+                                        <td class="text-center">
+                                            <p t-field="p.order_number"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <p t-field="p.date"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <p t-field="p.type"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-esc="amount_company"
+                                               t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                    </tr>
+
                                     <tr style="font-weight:bold; border-collapse: collapse;border: 0.5px solid black;">
                                         <td class="text-center">
-                                            <t t-esc="sum_hr"
+                                            <t t-esc="amount"
                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
 
                                         </td>
@@ -135,43 +155,37 @@
                                     </tr>
                                 </table>
 
-                            </div>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
 
-                            <t t-set="sum_last" t-value="sum_open_purchase_ids-sum_hr"/>
-                            <div class="col-xs-12">
-                                <table class="table table-condensed table table-striped"
-                                       style="font-size:15px;font-family:Scheherazade;">
-                                    <tr>
-                                        <th class="text-center">قيمة الصافي</th>
-                                        <th class="text-center">
-                                            <t t-esc="sum_last"
-                                               t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
-                                        </th>
-                                    </tr>
-                                </table>
 
                             </div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+                            <table class="table table-condensed table table-striped"
+                                   style="font-size:15px;font-family:Scheherazade;border: 1px solid black;">
+                                <tr style="border-collapse: collapse;border: 0.5px solid black; ">
+                                    <th class="text-center" style="background-color:  #EADBDB ;">الصافي</th>
+                                    <th class="text-center" style="background-color:  #EADBDB ;">العمولة</th>
+                                    <th class="text-center" style="background-color:  #EADBDB ;">الصافي بعد العمولة</th>
+                                </tr>
+                                <tr style="font-size:15px;border-collapse: collapse;border: 0.5px solid black;">
+                                    <td class="text-center">
+                                        <span t-field="o.result"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="o.commition"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="o.result_last"/>
+                                    </td>
+                                </tr>
+                            </table>
 
-                            <div class="col-xs-12">
-                                <table class="table table-condensed table table-striped"
-                                       style="font-size:15px;font-family:Scheherazade;">
-                                    <tr>
-                                        <th class="text-center">توقيع الشركة</th>
-                                        <th class="text-center">توقيع المحاسب</th>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-center">.........</th>
-                                        <th class="text-center">.........</th>
-                                    </tr>
-                                </table>
-                                <hr size="20" style="border-width:4" width="100%"/>
 
-                            </div>
 
                         </div>
                     </t>
@@ -179,12 +193,12 @@
             </t>
         </template>
         <report
-                id="try_sales"
-                model="try.sales"
-                string="الجرد الشهري"
+                id="try_vehicle"
+                model="try.vehicle"
+                string="جرد السيارات"
                 report_type="qweb-pdf"
-                name="open_purchase.try_sales_report"
-                file="open_purchase.try_sales_report"
+                name="open_purchase.try_vehicle_report"
+                file="open_purchase.try_vehicle_report"
         />
     </data>
 </odoo>

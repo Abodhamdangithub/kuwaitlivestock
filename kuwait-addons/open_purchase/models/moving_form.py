@@ -17,17 +17,17 @@ class MovingForm(models.Model):
     journal_id = fields.Many2one('account.journal',string="اليومية", readonly=True)
     from_addrress = fields.Char(string="مكان الانطلاق" )
     to_addrress = fields.Char(string="مكان الهدف",)
-    date = fields.Date(string="تاريخ التحرير",required=True)
-    from_date = fields.Date(string="من تاريخ",required=True)
-    to_date = fields.Date(string="الى تاريخ",required=True)
+    date = fields.Date(string="تاريخ التحرير",required=False)
+    from_date = fields.Date(string="من تاريخ",required=False)
+    to_date = fields.Date(string="الى تاريخ",required=False)
     note = fields.Text(string="ملاحظات",)
-    amount_company = fields.Float(string="المبلغ",required=True)
+    amount_company = fields.Float(string="المبلغ",required=False)
     state = fields.Selection([('draft', 'مسودة'), ('closed', 'مغلق')], default='draft', required=True, tracking=True, copy=False)
     account_move_id = fields.Many2one('account.move',string="القيد",readonly=True)
     try_vehicle_id = fields.Many2one('try.vehicle',string="try_vehicle_id",invisible=True)
 
 
-    type = fields.Selection([('expense', 'مصروف'), ('revenues', 'ايرادات')],string="النوع", required=True, copy=False)
+    type = fields.Selection([('expense', 'مصروف'), ('revenues', 'ايرادات')],string="النوع", required=False, copy=False)
 
     @api.model
     def create(self, vals):
