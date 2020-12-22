@@ -66,16 +66,16 @@
                                 <br></br>
                                 <table style="float: right">
                                     <tr style="font-size:15px;border-collapse: collapse;border: 1px solid black; ">
-                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                        <th class="text-center" width="103" style="background-color: #EADBDB;">
                                             التسلسل
                                         </th>
-                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                        <th class="text-center" width="103" style="background-color: #EADBDB;">
                                             التاريخ
                                         </th>
-                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                        <th class="text-center" width="103" style="background-color: #EADBDB;">
                                             النوع
                                         </th>
-                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                        <th class="text-center" width="103" style="background-color: #EADBDB;">
                                             القيمة
                                         </th>
                                     </tr>
@@ -111,16 +111,16 @@
                                 </table>
                                 <table style="float: right">
                                     <tr style="font-size:15px;border-collapse: collapse;border: 1px solid black; ">
-                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                        <th class="text-center" width="103" style="background-color: #EADBDB;">
                                             التسلسل
                                         </th>
-                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                        <th class="text-center" width="103" style="background-color: #EADBDB;">
                                             التاريخ
                                         </th>
-                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                        <th class="text-center" width="103" style="background-color: #EADBDB;">
                                             النوع
                                         </th>
-                                        <th class="text-center" width="120" style="background-color: #EADBDB;">
+                                        <th class="text-center" width="103" style="background-color: #EADBDB;">
                                             القيمة
                                         </th>
                                     </tr>
