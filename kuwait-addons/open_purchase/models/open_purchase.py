@@ -187,7 +187,8 @@ class OpenPurchase(models.Model):
             elif self.amount_lose > 0.0:
                 self.amount_supplier = self.amount_sales + self.amount_lose - self.amount_outlay
         self.state = "closed"
-
+        if self.type == "comm":
+            self.amount_win = self.amount_comm
         if not self.purchase_id.invoice_ids and self.type in ['comm','sharing']:
             for order_line in self.purchase_id.order_line:
                 for open_lines in self.open_purchase_line_ids:

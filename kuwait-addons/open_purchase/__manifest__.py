@@ -33,6 +33,7 @@
         'views/try_sales.xml',
         'views/try_vehicle.xml',
         'report/try_vehicle.xml',
+        'report/moving_form.xml',
         'report/report.xml',
         'report/try_sales_report.xml',
     ],

@@ -14,10 +14,9 @@ class FleetVehicle(models.Model):
     comm = fields.Float(string="نسبة العمولة")
 
     def create_fleet_vehicle(self):
-        create_open_purcahse = self.env["moving.form"].create({"fleet_vehicle_id": self.id,"driver_id": self.driver_id.id})
-        return self.action_view_vehicle(create_open_purcahse)
+        return self.action_view_vehicle()
 
-    def action_view_vehicle(self,create_open_purcahse):
+    def action_view_vehicle(self):
         return {
             'view_mode': 'form',
             'view_id': self.env.ref('open_purchase.moving_form_view_form').id,
@@ -27,7 +26,6 @@ class FleetVehicle(models.Model):
                 'default_driver_id': self.driver_id.id,
             },
             'type': 'ir.actions.act_window',
-            'id': create_open_purcahse.id,
                 }
 
     def _compute_fleet_vehicle_count(self):
