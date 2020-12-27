@@ -36,6 +36,7 @@
                                        style="width: 50%"/>
                                 <field name="month" attrs="{'readonly': [('state', '!=', 'draft')]}"
                                        style="width: 50%"/>
+                                <field name="sum_asset"  style="width: 50%" readonly="1"/>
                             </group>
                             <group>
                                 <field name="note" attrs="{'readonly': [('state', '!=', 'draft')]}"

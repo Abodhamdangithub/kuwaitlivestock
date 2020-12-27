@@ -17,6 +17,7 @@ class TrySales(models.Model):
     date = fields.Date(string="التاريخ")
     month = fields.Selection([('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'),('11','11'),('12','12')],string="الشهر")
     note = fields.Char(string="ملاحظات")
+    sum_asset = fields.Float(string="مجموع الاصول")
 
     @api.model
     def create(self, vals):
@@ -34,6 +35,12 @@ class TrySales(models.Model):
         hr_expense_ids = self.env['hr.expense'].search([('try_sales_id', '=', False),('type_in_not', '=', "not")])
         for h in hr_expense_ids:
             h.try_sales_id = self.id
+
+        asset_ids = self.env['account.asset.asset'].search([('state', '!=', 'draft')])
+        sum = 0.0
+        for asset in asset_ids:
+            sum += asset.value_residual
+        self.sum_asset = sum
         self.state = "sumation"
 
     def cancel_sumation_function(self):
@@ -46,4 +53,6 @@ class TrySales(models.Model):
         hr_expense_ids = self.env['hr.expense'].search([('try_sales_id', '=', self.id)])
         for h in hr_expense_ids:
             h.try_sales_id = False
+        self.sum_asset = 0.0
+
         self.state = "draft"
