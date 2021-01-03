@@ -11,7 +11,8 @@ class StockImmediateTransfer(models.TransientModel):
 
     def process(self):
         purchase_id = self.env['purchase.order'].search([('name', '=', self.pick_ids.origin)])
-        if not purchase_id.open_purchase_ids:
-            purchase_id.create_open_purchase()
+        if purchase_id:
+            if not purchase_id.open_purchase_ids:
+                purchase_id.create_open_purchase()
         return super(StockImmediateTransfer, self).process()
 
