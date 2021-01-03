@@ -12,7 +12,7 @@ class PurchaseOrder(models.Model):
     def create_open_purchase(self):
         create_open_purcahse = self.env["open.purchase"].create({"purchase_id": self.id})
         for line in self.order_line:
-            self.env["open.purchase.line"].create({"open_purchase_id": create_open_purcahse.id,"product_id": line.product_id.id,"qty_not": line.product_qty,"qty_talef": 0.0,"qty": line.product_qty,"price_unit_purchase": line.price_unit,"price_unit_purchase_orginal": line.price_unit})
+            self.env["open.purchase.line"].create({"purchase_order_line": line.id,"open_purchase_id": create_open_purcahse.id,"product_id": line.product_id.id,"qty_not": line.product_qty,"qty_talef": 0.0,"qty": line.product_qty,"price_unit_purchase": line.price_unit,"price_unit_purchase_orginal": line.price_unit})
         self.open_purchase_ids = create_open_purcahse.id
 
 

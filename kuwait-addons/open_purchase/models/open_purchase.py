@@ -75,7 +75,7 @@ class OpenPurchase(models.Model):
     def name_get(self):
         res = []
         for record in self:
-            res.append((record.id, "%s %s" % (record.order_number, record.name)))
+            res.append((record.id, "%s %s" % (record.order_number, record.product_available_qty)))
         return res
 
     def cancel_create_entry(self):
@@ -269,8 +269,9 @@ class OpenPurchaseLine(models.Model):
     _name = 'open.purchase.line'
 
     open_purchase_id = fields.Many2one('open.purchase', readonly=True)
+    purchase_order_line = fields.Many2one('purchase.order.line', readonly=True)
     product_id = fields.Many2one('product.product', string="المنتج", required=True)
-    qty_not = fields.Float(string="الكمية الفعلية", required=True)
+    qty_not = fields.Float(string="الكمية الفعلية", required=True, compute='_compute_qty_not')
     qty_talef = fields.Float(string="الكمية التالفة (النافق)",readonly=True)
     qty = fields.Float(string="الكمية المتبقية", readonly=True, compute='_compute_qty', store=True)
     price_unit_purchase_orginal = fields.Float(string="سعر وحدة الشراء الاصلي", invisible=True)
@@ -329,6 +330,10 @@ class OpenPurchaseLine(models.Model):
             else:
                 me.price_unit_purchase = 0.0
 
+    @api.depends('purchase_order_line.qty_received')
+    def _compute_qty_not(self):
+        for me in self:
+            me.qty_not = self.purchase_order_line.qty_received
     @api.depends('qty_not', "qty_talef")
     def _compute_qty(self):
         for me in self:

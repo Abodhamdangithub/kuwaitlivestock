@@ -20,7 +20,7 @@
                 </button>
             </xpath>
             <notebook position="inside">
-                <page string="الارساليات">
+                <page string="الارساليات" invisible="1">
                     <sheet>
                         <group>
                             <field name="open_purchase_ids"/>
