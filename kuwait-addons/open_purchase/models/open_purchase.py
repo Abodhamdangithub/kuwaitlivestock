@@ -314,18 +314,18 @@ class OpenPurchaseLine(models.Model):
 
 
 
-    @api.depends('price_unit_purchase_invisible', 'open_purchase_id.type','qty_talef', 'open_purchase_id.amount_outlay')
+    @api.depends('price_unit_purchase_invisible', 'open_purchase_id.type','qty_talef', 'open_purchase_id.amount_outlay', 'purchase_order_line.price_unit')
     def _compute_price_unit(self):
         for me in self:
             if me.qty > 0:
                 qty = me.qty
             elif me.qty == 0:
                 qty = 1
-            me.price_unit_purchase_invisible = round(((me.price_unit_purchase_orginal * me.qty_not) / qty) + (
+            me.price_unit_purchase_invisible = round(((me.purchase_order_line.price_unit * me.qty_not) / qty) + (
                     me.open_purchase_id.amount_outlay / qty), 3)
 
             if me.open_purchase_id.type != "comm":
-                me.price_unit_purchase = round( ((me.price_unit_purchase_orginal * me.qty_not) / qty) + (
+                me.price_unit_purchase = round( ((me.purchase_order_line.price_unit * me.qty_not) / qty) + (
                         me.open_purchase_id.amount_outlay / qty),3)
             else:
                 me.price_unit_purchase = 0.0
