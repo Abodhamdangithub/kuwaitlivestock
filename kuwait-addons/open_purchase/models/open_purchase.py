@@ -333,7 +333,7 @@ class OpenPurchaseLine(models.Model):
     @api.depends('purchase_order_line.qty_received')
     def _compute_qty_not(self):
         for me in self:
-            me.qty_not = self.purchase_order_line.qty_received
+            me.qty_not = me.purchase_order_line.qty_received
     @api.depends('qty_not', "qty_talef")
     def _compute_qty(self):
         for me in self:
