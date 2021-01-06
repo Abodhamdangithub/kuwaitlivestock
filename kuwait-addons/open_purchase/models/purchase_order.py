@@ -9,6 +9,8 @@ class PurchaseOrder(models.Model):
     open_purchase_ids = fields.Many2one('open.purchase', readonly=False)
     open_purchase_count = fields.Integer(compute='_compute_open_purchase_count')
 
+
+
     def create_open_purchase(self):
         create_open_purcahse = self.env["open.purchase"].create({"purchase_id": self.id})
         for line in self.order_line:
@@ -43,3 +45,18 @@ class PurchaseOrder(models.Model):
             })
         action['context'] = context
         return action
+
+class PurchaseOrderLine(models.Model):
+    _inherit = 'purchase.order.line'
+
+    def action_view_pay_more_product(self):
+        return {
+            'view_mode': 'form',
+            'view_id': self.env.ref('open_purchase.pay_more_product_view_form').id,
+            'res_model': 'pay.more.product',
+            'target': 'new',
+            'context': {
+                'default_purchase_line_id': self.id,
+            },
+            'type': 'ir.actions.act_window',
+                }

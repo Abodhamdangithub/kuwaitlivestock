@@ -10,3 +10,6 @@ group_try_sales_user2,group_try_sales_user22,model_try_sales,group_try_sales_use
 
 moving_form2,moving_form22,model_moving_form,fleet.fleet_group_user,1,1,1,1
 group_try_vehicle_user2,group_try_vehicle_user22,model_try_vehicle,fleet.fleet_group_user,1,1,1,1
+
+
+pay_more_product1,pay_more_product22,model_pay_more_product,group_open_purchase_user,1,1,1,1

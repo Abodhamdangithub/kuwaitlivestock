@@ -19,6 +19,11 @@
                     <field name="open_purchase_ids" invisible="1"/>
                 </button>
             </xpath>
+            <xpath expr="//tree/field[@name='name']" position="after">
+                <button name="action_view_pay_more_product" string="Add CTY" type="object"
+                        icon="terp-product" class="oe_hilight" groups="open_purchase.group_open_purchase_user"/>
+            </xpath>
+
             <notebook position="inside">
                 <page string="الارساليات" invisible="1">
                     <sheet>

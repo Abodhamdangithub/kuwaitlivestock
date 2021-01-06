@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="pay_more_product_view_form" model="ir.ui.view">
+            <field name="name">pay.more.product.inherit</field>
+            <field name="model">pay.more.product</field>
+            <field name="arch" type="xml">
+                <form string="اضافة منتجات">
+                    <sheet>
+                        <group>
+                            <field name="purchase_line_id" invisible="1"/>
+                            <field name="qty"/>
+                            <field name="amount"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="set_data_added" type="object" string="اعتماد" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+
+    </data>
+
+</odoo>

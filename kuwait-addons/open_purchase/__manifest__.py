@@ -17,6 +17,7 @@
     'data': [
         'security/security.xml',
         'wizard/stock_scrap.xml',
+        'wizard/pay_more_product.xml',
         'views/account_bank_statement.xml',
         'views/purchase_order.xml',
         'views/res_partner.xml',

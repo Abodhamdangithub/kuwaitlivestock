@@ -13,3 +13,4 @@ from . import hr_expense
 from . import try_sales
 from . import try_vehicle
 from . import stock_immediate_transfer
+from . import pay_more_product
