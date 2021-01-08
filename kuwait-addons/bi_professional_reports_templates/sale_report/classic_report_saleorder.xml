@@ -58,11 +58,11 @@
                                     </th>
                                     <th width="20px"
                                         style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                        تاريخ الاقتباس
+                                        تاريخ الطلب
                                     </th>
                                     <th width="20px"
                                         style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                        اقتباس #
+                                        الطلب #
                                     </th>
                                 </tr>
                             </thead>

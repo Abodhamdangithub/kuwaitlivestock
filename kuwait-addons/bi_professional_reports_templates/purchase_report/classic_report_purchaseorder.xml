@@ -43,6 +43,35 @@
                 <div class="page">
                     <div class="oe_structure"/>
 
+
+
+
+
+
+                    <div class="row mt32 mb32" >
+                    <div class="col-4">
+                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
+                             style="max-height: 50px;"/>
+                    </div>
+                    <h2>
+                        <center style="margin-right:20px;font-family:Scheherazade">
+                            <span t-field="company.partner_id"/>
+                        </center>
+                    </h2>
+                        <div>
+                        <hr/>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
+
+
                     <table class="table table-sm" style=" table-layout:fixed;">
                         <thead>
                             <tr>

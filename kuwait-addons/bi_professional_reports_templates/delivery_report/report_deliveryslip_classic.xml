@@ -10,27 +10,33 @@
             </t>
             <div class="header">
                 <div class="row mt32 mb32">
-                    <div class="col-6">
+                    <div class="col-4">
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
                              style="max-height: 50px;"/>
                     </div>
-                    <div class="col-6 text-right" style="font:12px lucida-console,sans-serif !important;">
-                        <span t-field="company.partner_id"/>
-                        <br/>
-                        <span t-field="company.partner_id.street"/>
-                        <br/>
-                        <span t-field="company.partner_id.street2"/>
-                        <br/>
-                        <span t-field="company.partner_id.city"/>
-                        <br/>
-                        <span t-field="company.partner_id.country_id"/>
-                        <br/>
-                        <span t-field="company.partner_id.vat"/>
-                        <br/>
-                    </div>
+                    <h2>
+                        <center style="margin-right:20px;font-family:Scheherazade">
+                            <span t-field="company.partner_id"/>
+                        </center>
+                    </h2>
+                    <!--
+                                        <div class="col-6 text-right" style="font:12px lucida-console,sans-serif !important;">
+                                            <span t-field="company.partner_id"/>
+                                            <br/>
+                                            <span t-field="company.partner_id.street"/>
+                                            <br/>
+                                            <span t-field="company.partner_id.street2"/>
+                                            <br/>
+                                            <span t-field="company.partner_id.city"/>
+                                            <br/>
+                                            <span t-field="company.partner_id.country_id"/>
+                                            <br/>
+                                            <span t-field="company.partner_id.vat"/>
+                                            <br/>
+                                        </div>
+                    -->
                 </div>
             </div>
-
             <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
                 <div class="page">
@@ -41,23 +47,23 @@
                             <tr>
                                 <th width="30px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    Customer Address
+                                    عنوان العميل
                                 </th>
                                 <th width="30px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    Contact Address
+                                    عنوان الإتصال
                                 </th>
                                 <th width="20px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    Origin
+                                    الأصل
                                 </th>
                                 <th width="20px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    Scheduled Date
+                                    التاريخ المقرر
                                 </th>
                                 <th width="20px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    Delevery #
+                                    توصيل #
                                 </th>
                             </tr>
                         </thead>
@@ -175,7 +181,7 @@
                             <tr>
                                 <th style="background-color:#3498DB !important;color:#FFF !important;">Product</th>
                                 <th style="background-color:#3498DB !important;color:#FFF !important;">Ordered
-                                    Quantity
+                                    كمية
                                 </th>
                             </tr>
                         </thead>
@@ -199,15 +205,15 @@
                                 <th style="background-color:#3498DB !important;color:#FFF !important;">Product</th>
                                 <th style="background-color:#3498DB !important;color:#FFF !important;" name="lot_serial"
                                     t-if="has_serial_number">
-                                    Lot/Serial Number
+                                    الدفعة / الرقم التسلسلي
                                 </th>
                                 <th style="background-color:#3498DB !important;color:#FFF !important;"
-                                    class="text-center">Ordered Quantity
+                                    class="text-center">الكمية المطلوبة
                                 </th>
                                 <th style="background-color:#3498DB !important;color:#FFF !important;"
                                     t-if="any([move_line.state == 'done' for move_line in o.move_line_ids])"
                                     class="text-right">
-                                    Delivered Quantity
+                                    كمية تسليمها
                                 </th>
                             </tr>
                         </thead>
