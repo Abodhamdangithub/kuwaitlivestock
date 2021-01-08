@@ -15,11 +15,11 @@
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
                              style="max-height: 50px;"/>
                     </div>
-                    <h2>
+                    <h1>
                         <center style="margin-right:20px;font-family:Scheherazade">
                             <span t-field="company.partner_id"/>
                         </center>
-                    </h2>
+                    </h1>
                     <!--
                                         <div class="col-6 text-right" style="font:12px lucida-console,sans-serif !important;">
                                             <span t-field="company.partner_id"/>
