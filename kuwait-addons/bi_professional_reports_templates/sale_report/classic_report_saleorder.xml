@@ -130,20 +130,20 @@
                                 <tr>
                                     <th style="background-color:#3498DB !important;color:#FFF !important;">وصف</th>
                                     <th style="background-color:#3498DB !important;color:#FFF !important;"
-                                        class="text-right">كمية
+                                        >كمية
                                     </th>
                                     <th style="background-color:#3498DB !important;color:#FFF !important;"
-                                        class="text-right">سعر الوحدة
+                                        >سعر الوحدة
                                     </th>
                                     <th style="background-color:#3498DB !important;color:#FFF !important;"
-                                        t-if="display_discount" class="text-right"
+                                        t-if="display_discount"
                                         groups="sale.group_discount_per_so_line">خصم.(%)
                                     </th>
                                     <th style="background-color:#3498DB !important;color:#FFF !important;"
-                                        class="text-right">الضرائب
+                                        >الضرائب
                                     </th>
                                     <th style="background-color:#3498DB !important;color:#FFF !important;"
-                                        class="text-right">السعر
+                                        >السعر
                                     </th>
                                 </tr>
                             </thead>
@@ -153,21 +153,21 @@
                                         <td>
                                             <span t-field="l.name"/>
                                         </td>
-                                        <td class="text-right">
+                                        <td >
                                             <span t-field="l.product_uom_qty"/>
                                             <span groups="product.group_uom" t-field="l.product_uom"/>
                                         </td>
-                                        <td class="text-right">
+                                        <td  >
                                             <span t-field="l.price_unit"/>
                                         </td>
-                                        <td t-if="display_discount" class="text-right"
+                                        <td t-if="display_discount"
                                             groups="sale.group_discount_per_so_line">
                                             <span t-field="l.discount"/>
                                         </td>
-                                        <td class="text-right">
+                                        <td  >
                                             <span t-esc="', '.join(map(lambda x: (x.description or x.name), l.tax_id))"/>
                                         </td>
-                                        <td class="text-right">
+                                        <td  >
                                             <span t-field="l.price_subtotal"
                                                   t-field-options='{"widget": "monetary", "display_currency": "doc.pricelist_id.currency_id"}'/>
                                         </td>

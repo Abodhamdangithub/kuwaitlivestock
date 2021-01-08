@@ -162,15 +162,15 @@
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     <strong>التاريخ.</strong>
                                 </th>
-                                <th class="text-right"
+                                <th
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     <strong>الكمية</strong>
                                 </th>
-                                <th class="text-right"
+                                <th
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     <strong>سعر الوحدة</strong>
                                 </th>
-                                <th class="text-right"
+                                <th
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     <strong>صافي القيمة</strong>
                                 </th>
@@ -187,14 +187,14 @@
                                 <td class="text-center">
                                     <span t-field="line.date_planned"/>
                                 </td>
-                                <td class="text-right">
+                                <td >
                                     <span t-field="line.product_qty"/>
                                     <span t-field="line.product_uom.name" groups="product.group_uom"/>
                                 </td>
-                                <td class="text-right">
+                                <td >
                                     <span t-field="line.price_unit"/>
                                 </td>
-                                <td class="text-right">
+                                <td >
                                     <span t-field="line.price_subtotal"
                                           t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
                                 </td>

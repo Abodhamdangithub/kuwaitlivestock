@@ -173,7 +173,7 @@
                                     <th style="background-color:#3498DB !important;color:#FFF !important;">سعر الوحدة
                                     </th>
                                     <th style="background-color:#3498DB !important;color:#FFF !important;"
-                                        t-if="display_discount" class="text-right"
+                                        t-if="display_discount"
                                         groups="sale.group_discount_per_so_line">الخصم.(%)
                                     </th>
                                     <th style="background-color:#3498DB !important;color:#FFF !important;">الضرائب</th>
@@ -185,21 +185,21 @@
                                     <td>
                                         <span t-field="l.name"/>
                                     </td>
-                                    <td class="text-right">
+                                    <td >
                                         <span t-field="l.quantity"/>
                                         <span t-field="l.uom_id" groups="product.group_uom"/>
                                     </td>
-                                    <td class="text-right">
+                                    <td >
                                         <span t-field="l.price_unit"/>
                                     </td>
-                                    <td t-if="display_discount" class="text-right"
+                                    <td t-if="display_discount"
                                         groups="sale.group_discount_per_so_line">
                                         <span t-field="l.discount"/>
                                     </td>
                                     <td>
                                         <span t-esc="', '.join(map(lambda x: (x.description or x.name), l.tax_ids))"/>
                                     </td>
-                                    <td class="text-right">
+                                    <td >
                                         <span t-field="l.price_subtotal"
                                               t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
                                     </td>
