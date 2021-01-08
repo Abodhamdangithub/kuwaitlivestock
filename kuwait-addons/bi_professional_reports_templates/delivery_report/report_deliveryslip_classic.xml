@@ -25,7 +25,7 @@
             </div>
             <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
-                <div class="page" style="font-family:Scheherazade">
+                <div class="page" style="font-family:Sultanbold">
                     <div class="oe_structure"/>
 
                     <table class="table table-sm" style=" table-layout:fixed;">
