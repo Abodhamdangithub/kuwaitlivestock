@@ -9,11 +9,15 @@
                 <t t-set="company" t-value="res_company"></t>
             </t>
             <div class="header">
-                <div class="row mt32 mb32">
-                    <div class="col-6">
+                <div class="row mt32 mb32" style="background-color: #d6d6d6;">
+                    <div class="col-4">
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
                              style="max-height: 50px;"/>
                     </div>
+                    <center>
+                        <span t-field="company.partner_id"/>
+                    </center>
+<!--
                     <div class="col-6 text-right" style="font:12px lucida-console,sans-serif !important;">
                         <span t-field="company.partner_id"/>
                         <br/>
@@ -28,26 +32,8 @@
                         <span t-field="company.partner_id.vat"/>
                         <br/>
                     </div>
-
-                        <div class="col-xs-12">
-                            <div class="watermark"
-                                 style="opacity:20;size:auto;font-size:3em;height:100%;width:100%;right:350px;border:0;">
-<img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
-                             style="max-height: 50px;"/>
-                            </div>
-
-                        </div>
-
-                        <div>
-
-<img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
-                             style="max-height: 50px;"/>
-
-                        </div>
+-->
                 </div>
-
-
-
             </div>
 
             <t t-call="web.external_layout">
@@ -60,23 +46,23 @@
                             <tr>
                                 <th width="30px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    Vendor
+                                    بائع
                                 </th>
                                 <th width="30px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    Shipping Address
+                                    عنوان الشحن
                                 </th>
                                 <th width="20px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    Reference/Description
+                                    المرجع / الوصف
                                 </th>
                                 <th t-if="o.state != 'draft'" width="20px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    Purchase Order #
+                                    أمر شراء #
                                 </th>
                                 <th t-if="o.state == 'draft'" width="20px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    Request for Quotation #
+                                    طلب عرض أسعار #
                                 </th>
                             </tr>
                         </thead>
@@ -141,19 +127,19 @@
                             <tr>
                                 <th width="30px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    Order Date
+                                    تاريخ الطلب
                                 </th>
                                 <th width="30px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    Scheduled Date
+                                    التاريخ المقرر
                                 </th>
                                 <th width="20px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    Approval Date
+                                    تاريخ الموافقة
                                 </th>
                                 <th width="20px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    Payment Term
+                                    شروط الدفع
                                 </th>
                             </tr>
                         </thead>
@@ -179,26 +165,26 @@
                         <thead>
                             <tr>
                                 <th style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    <strong>Description</strong>
+                                    <strong>الوصف</strong>
                                 </th>
                                 <th style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    <strong>Taxes</strong>
+                                    <strong>الضرائب</strong>
                                 </th>
                                 <th class="text-center"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    <strong>Date Req.</strong>
+                                    <strong>التاريخ.</strong>
                                 </th>
                                 <th class="text-right"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    <strong>Qty</strong>
+                                    <strong>الكمية</strong>
                                 </th>
                                 <th class="text-right"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    <strong>Unit Price</strong>
+                                    <strong>سعر الوحدة</strong>
                                 </th>
                                 <th class="text-right"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    <strong>Net Price</strong>
+                                    <strong>صافي القيمة</strong>
                                 </th>
                             </tr>
                         </thead>
@@ -233,7 +219,7 @@
                         <table class="table table-condensed">
                             <tr class="border-black">
                                 <td>
-                                    <strong>Total Without Taxes</strong>
+                                    <strong>المجموع بدون ضرائب</strong>
                                 </td>
                                 <td class="text-right">
                                     <span t-field="o.amount_untaxed"
@@ -241,7 +227,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Taxes</td>
+                                <td>الضرائب</td>
                                 <td class="text-right">
                                     <span t-field="o.amount_tax"
                                           t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
@@ -249,7 +235,7 @@
                             </tr>
                             <tr style=" background-color: #3498DB;" class="border-black">
                                 <td>
-                                    <strong>Total</strong>
+                                    <strong>المجموع</strong>
                                 </td>
                                 <td class="text-right">
                                     <span t-field="o.amount_total"
@@ -268,7 +254,7 @@
                     <div style=" background-color: #3498DB; color:#fff !important; font:15px lucida-console,sans-serif !important; ">
                         <p t-if="o.notes">
                             <strong>
-                                <span>Note:</span>
+                                <span>ملاحظات:</span>
                             </strong>
                             <span t-field="o.notes"/>
                         </p>
