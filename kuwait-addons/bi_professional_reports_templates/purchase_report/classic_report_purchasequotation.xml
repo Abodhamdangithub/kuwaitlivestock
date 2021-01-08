@@ -9,13 +9,13 @@
                 <t t-set="company" t-value="res_company"></t>
             </t>
             <div class="header">
-                <div class="row mt32 mb32" style="background-color: #d6d6d6;">
+                <div class="row mt32 mb32" >
                     <div class="col-4">
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
                              style="max-height: 50px;"/>
                     </div>
                     <h2>
-                        <center style="font-family:Scheherazade">
+                        <center style="margin-right:20px;font-family:Scheherazade">
                             <span t-field="company.partner_id"/>
                         </center>
                     </h2>
