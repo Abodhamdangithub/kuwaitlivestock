@@ -14,6 +14,8 @@
                         <field name="purchase_template"/>
                         <field name="account_template"/>
                         <field name="stock_template"/>
+                <field name="upload_image_header" widget="image" class="oe_left oe_avatar"  accept=".png"/>
+                <field name="upload_image_footer" widget="image" class="oe_left oe_avatar"  accept=".png"/>
                     </group>
                 </field>
             </field>

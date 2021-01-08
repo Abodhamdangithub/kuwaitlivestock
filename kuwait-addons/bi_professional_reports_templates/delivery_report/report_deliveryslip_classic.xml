@@ -11,8 +11,8 @@
             <div class="header">
                 <div class="row mt32 mb32">
                     <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
-                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
-                             style="max-height: 50px;"/>
+                        <img t-if="company.upload_image_header" t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_header)"
+                             style="max-height: 100px;"/>
                     </div>
                 </div>
             </div>
@@ -249,6 +249,15 @@
                 </div>
 
             </t>
+                        <div class="footer">
+                <div class="row mt32 mb32">
+                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
+                        <img t-if="company.upload_image_footer" t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_footer)"
+                             style="max-height: 100px;"/>
+                    </div>
+                </div>
+            </div>
+
         </template>
 
         <template id="report_deliveryslip" inherit_id="stock.report_deliveryslip">
