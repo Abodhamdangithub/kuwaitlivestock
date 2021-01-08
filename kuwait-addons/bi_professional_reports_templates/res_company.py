@@ -6,6 +6,11 @@ from odoo import models, fields, api, _
 class res_company(models.Model):
     _inherit = "res.company"
 
+
+    upload_image_header = fields.Binary("Upload Image Header" ,
+                                 attachment=True,
+                                 )
+
     sale_template = fields.Selection([
             ('fency', 'Fency'),
             ('classic', 'Classic'),
