@@ -13,7 +13,7 @@
                 <div class="row mt32 mb32" >
                     <div class="col-12">
                         <img t-if="company.upload_image_header" t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_header)"
-                             style="max-height: 50px;"/>
+                             style="height: 50px;width: 200px;"/>
                     </div>
                     <div class="col-4">
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
