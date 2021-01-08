@@ -10,6 +10,12 @@
                 <t t-set="company" t-value="res_company"></t>
             </t>
             <div class="header">
+                            <div style="position: absolute;opacity: 0.25;z-index: 1000;width: 150%;">
+                <t>
+                    <img t-if="company.upload_image" t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image)" style="top:306px;position:absolute;width:65%;height:750px;opacity:0.85;z-index:-1000;"/>
+                </t>
+            </div>
+
                 <div class="row mt32 mb32" >
                     <div class="col-4">
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
