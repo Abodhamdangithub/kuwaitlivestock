@@ -9,27 +9,35 @@
                 <t t-set="company" t-value="res_company"></t>
             </t>
             <div class="header">
-                <div class="row mt32 mb32">
-                    <div class="col-6">
+                <div class="row mt32 mb32" style="background-color: #d6d6d6;">
+                    <div class="col-4">
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
                              style="max-height: 50px;"/>
                     </div>
-                    <div class="col-6 text-right" style="font:12px lucida-console,sans-serif !important;">
-                        <span t-field="company.partner_id"/>
-                        <br/>
-                        <span t-field="company.partner_id.street"/>
-                        <br/>
-                        <span t-field="company.partner_id.street2"/>
-                        <br/>
-                        <span t-field="company.partner_id.city"/>
-                        <br/>
-                        <span t-field="company.partner_id.country_id"/>
-                        <br/>
-                        <span t-field="company.partner_id.vat"/>
-                        <br/>
-                    </div>
+                    <h2>
+                        <center style="font-family:Scheherazade">
+                            <span t-field="company.partner_id"/>
+                        </center>
+                    </h2>
+                    <!--
+                                        <div class="col-6 text-right" style="font:12px lucida-console,sans-serif !important;">
+                                            <span t-field="company.partner_id"/>
+                                            <br/>
+                                            <span t-field="company.partner_id.street"/>
+                                            <br/>
+                                            <span t-field="company.partner_id.street2"/>
+                                            <br/>
+                                            <span t-field="company.partner_id.city"/>
+                                            <br/>
+                                            <span t-field="company.partner_id.country_id"/>
+                                            <br/>
+                                            <span t-field="company.partner_id.vat"/>
+                                            <br/>
+                                        </div>
+                    -->
                 </div>
             </div>
+
 
             <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
@@ -41,19 +49,19 @@
                                 <tr>
                                     <th width="30px"
                                         style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                        Customer
+                                        الزبون
                                     </th>
                                     <th width="30px"
                                         style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                        Delivery Address
+                                        عنوان التسليم
                                     </th>
                                     <th width="20px"
                                         style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                        Reference/Description
+                                        المرجع / الوصف
                                     </th>
                                     <th width="20px"
                                         style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                        Invoice #
+                                        فاتورة #
                                     </th>
                                 </tr>
                             </thead>
@@ -120,7 +128,7 @@
                                     </td>
                                     <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</div>
-                                        <div t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</div>
+                                        <div t-if="o.type == 'out_invoice' and o.state == 'draft'">مسودة فاتورة</div>
                                         <br/>
                                         <b>
                                             <div t-field="o.name"/>
@@ -135,19 +143,19 @@
                                 <tr>
                                     <th width="30px"
                                         style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                        Invoice Date
+                                        تاريخ الفاتورة
                                     </th>
                                     <th width="30px"
                                         style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                        Due Date
+                                        تاريخ الاستحقاق
                                     </th>
                                     <th width="20px"
                                         style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                        Payment Term
+                                        شروط الدفع
                                     </th>
                                     <th width="20px"
                                         style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                        SalesPerson
+                                        مندوب مبيعات
                                     </th>
                                 </tr>
                             </thead>
@@ -176,17 +184,17 @@
                         <table class="table table-sm">
                             <thead>
                                 <tr>
-                                    <th style="background-color:#3498DB !important;color:#FFF !important;">Description
+                                    <th style="background-color:#3498DB !important;color:#FFF !important;">وصف
                                     </th>
-                                    <th style="background-color:#3498DB !important;color:#FFF !important;">Quantity</th>
-                                    <th style="background-color:#3498DB !important;color:#FFF !important;">Unit Price
+                                    <th style="background-color:#3498DB !important;color:#FFF !important;">كمية</th>
+                                    <th style="background-color:#3498DB !important;color:#FFF !important;">سعر الوحدة
                                     </th>
                                     <th style="background-color:#3498DB !important;color:#FFF !important;"
                                         t-if="display_discount" class="text-right"
-                                        groups="sale.group_discount_per_so_line">Disc.(%)
+                                        groups="sale.group_discount_per_so_line">الخصم.(%)
                                     </th>
-                                    <th style="background-color:#3498DB !important;color:#FFF !important;">Taxes</th>
-                                    <th style="background-color:#3498DB !important;color:#FFF !important;">Price</th>
+                                    <th style="background-color:#3498DB !important;color:#FFF !important;">الضرائب</th>
+                                    <th style="background-color:#3498DB !important;color:#FFF !important;">السعر</th>
                                 </tr>
                             </thead>
                             <tbody class="invoice_tbody">
@@ -311,7 +319,7 @@
                         </div>
                     </p>
                     <p t-if="o.fiscal_position_id.note">
-                        <strong>Fiscal Position Remark:</strong>
+                        <strong>ملاحظة الموقف المالي:</strong>
                         <span t-field="o.fiscal_position_id.note"/>
                     </p>
                 </div>

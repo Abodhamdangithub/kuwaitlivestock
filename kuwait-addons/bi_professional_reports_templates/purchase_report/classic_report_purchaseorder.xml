@@ -14,25 +14,27 @@
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
                              style="max-height: 50px;"/>
                     </div>
-                    <center>
-                        <span t-field="company.partner_id"/>
-                    </center>
-<!--
-                    <div class="col-6 text-right" style="font:12px lucida-console,sans-serif !important;">
-                        <span t-field="company.partner_id"/>
-                        <br/>
-                        <span t-field="company.partner_id.street"/>
-                        <br/>
-                        <span t-field="company.partner_id.street2"/>
-                        <br/>
-                        <span t-field="company.partner_id.city"/>
-                        <br/>
-                        <span t-field="company.partner_id.country_id"/>
-                        <br/>
-                        <span t-field="company.partner_id.vat"/>
-                        <br/>
-                    </div>
--->
+                    <h2>
+                        <center style="font-family:Scheherazade">
+                            <span t-field="company.partner_id"/>
+                        </center>
+                    </h2>
+                    <!--
+                                        <div class="col-6 text-right" style="font:12px lucida-console,sans-serif !important;">
+                                            <span t-field="company.partner_id"/>
+                                            <br/>
+                                            <span t-field="company.partner_id.street"/>
+                                            <br/>
+                                            <span t-field="company.partner_id.street2"/>
+                                            <br/>
+                                            <span t-field="company.partner_id.city"/>
+                                            <br/>
+                                            <span t-field="company.partner_id.country_id"/>
+                                            <br/>
+                                            <span t-field="company.partner_id.vat"/>
+                                            <br/>
+                                        </div>
+                    -->
                 </div>
             </div>
 
