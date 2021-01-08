@@ -28,7 +28,7 @@
                     <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
                         <img t-if="company.upload_image_footer"
                              t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_footer)"
-                             style="max-height: 100px;"/>
+                             style="max-height: 180px;"/>
                     </div>
                 </div>
             </div>
@@ -264,15 +264,6 @@
                     <div class="oe_structure"/>
                 </div>
             </t>
-            <div class="footer">
-                <div class="row mt32 mb32">
-                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
-                        <img t-if="company.upload_image_footer"
-                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_footer)"
-                             style="max-height: 100px;"/>
-                    </div>
-                </div>
-            </div>
 
         </template>
 
