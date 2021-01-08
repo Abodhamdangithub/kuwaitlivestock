@@ -48,7 +48,7 @@
 
 
 
-                    <div class="row mt32 mb32" >
+                    <div class="row mt32 mb32" style="border-style: ridge;">
                     <div class="col-4">
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
                              style="max-height: 50px;"/>
