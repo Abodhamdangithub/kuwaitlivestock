@@ -12,7 +12,8 @@
             <div class="header">
                 <div class="row mt32 mb32">
                     <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
-                        <img t-if="company.upload_image_header" t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_header)"
+                        <img t-if="company.upload_image_header"
+                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_header)"
                              style="max-height: 180px;"/>
                     </div>
                 </div>
@@ -27,7 +28,7 @@
 
             <t t-call="web.external_layout">
                 <t t-set="doc" t-value="doc.with_context({'lang':zh_CN})"/>
-                <div class="page">
+                <div class="page" style="font-family:Scheherazade">
                     <div class="oe_structure"/>
                     <div>
                         <table class="table table-sm" style=" table-layout:fixed;">
@@ -239,7 +240,8 @@
             <div class="footer">
                 <div class="row mt32 mb32">
                     <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
-                        <img t-if="company.upload_image_footer" t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_footer)"
+                        <img t-if="company.upload_image_footer"
+                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_footer)"
                              style="max-height: 100px;"/>
                     </div>
                 </div>
