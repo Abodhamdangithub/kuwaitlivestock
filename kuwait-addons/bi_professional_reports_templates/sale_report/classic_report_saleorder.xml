@@ -25,6 +25,15 @@
                 </div>
             </div>
 
+            <div class="footer">
+                <div class="row mt32 mb32">
+                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
+                        <img t-if="company.upload_image_footer"
+                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_footer)"
+                             style="max-height: 100px;"/>
+                    </div>
+                </div>
+            </div>
 
             <t t-call="web.external_layout">
                 <t t-set="doc" t-value="doc.with_context({'lang':zh_CN})"/>
