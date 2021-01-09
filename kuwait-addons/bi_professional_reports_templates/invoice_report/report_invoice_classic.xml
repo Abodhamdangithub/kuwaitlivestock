@@ -64,7 +64,7 @@
                             <span t-field="o.name"/>
                         </h3>
 
-                        <h3 style="margin-right:45px;">
+                        <h3 >
                             التاريخ:
                             <span t-field="o.invoice_date"/>
                         </h3>
