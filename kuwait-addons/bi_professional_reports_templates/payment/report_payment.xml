@@ -33,7 +33,7 @@
 
                 <t t-call="web.external_layout">
                     <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
-                    <div class="page" style="font-family:Scheherazade;font:20px">
+                    <div class="page" style="font-family:Scheherazade;font-size:20px">
                     <t t-if="o.payment_type == 'inbound'">
                         <center>
                             <h1>سند قبض</h1>

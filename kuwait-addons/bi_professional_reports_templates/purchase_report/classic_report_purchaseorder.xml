@@ -36,7 +36,7 @@
             </div>
             <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
-                <div class="page" style="font-family:Scheherazade;font:20px">
+                <div class="page" style="font-family:Scheherazade;font-size:20px">
                     <center><h1>أمر شراء</h1></center>
                     <div class="oe_structure"/>
 

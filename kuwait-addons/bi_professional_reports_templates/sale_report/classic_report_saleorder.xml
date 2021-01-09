@@ -37,7 +37,7 @@
 
             <t t-call="web.external_layout">
                 <t t-set="doc" t-value="doc.with_context({'lang':zh_CN})"/>
-                <div class="page" style="font-family:Scheherazade;font:20px">
+                <div class="page" style="font-family:Scheherazade;font-size:20px">
                     <center><h1>أمر البيع</h1></center>
                     <div class="oe_structure"/>
                     <div>
