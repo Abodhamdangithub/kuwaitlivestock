@@ -90,31 +90,6 @@
                                 <tr>
                                     <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-field="o.partner_id"/>
-                                        <t t-if="o.partner_id.street">
-                                            <t t-esc="o.partner_id.street"/>
-                                        </t>
-                                        <br/>
-                                        <t t-if="o.partner_id.street2">
-                                            <t t-esc="o.partner_id.street2"/>
-                                        </t>
-                                        <br/>
-                                        <t t-if="o.partner_id.city">
-                                            <t t-esc="o.partner_id.city"/>
-                                        </t>
-                                        <br/>
-                                        <t t-if="o.partner_id.state_id.name">
-                                            <t t-esc="o.partner_id.state_id.name"/>
-                                        </t>
-                                        <br/>
-                                        <t t-if="o.partner_id.country_id.name">
-                                            <t t-esc="o.partner_id.country_id.name"/>
-                                        </t>
-                                        <br/>
-                                        <t t-if="o.partner_id.zip">
-                                            <t t-esc="o.partner_id.zip"/>
-                                        </t>
-                                        <br/>
-                                        <div t-field="o.partner_id.vat"/>
                                     </td>
                                     <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-field="o.partner_shipping_id"/>
@@ -122,9 +97,6 @@
                                             <t t-esc="o.partner_shipping_id.street"/>
                                         </t>
                                         <br/>
-                                        <t t-if="o.partner_shipping_id.street2">
-                                            <t t-esc="o.partner_shipping_id.street2"/>
-                                        </t>
                                         <br/>
                                         <t t-if="o.partner_shipping_id.city">
                                             <t t-esc="o.partner_shipping_id.city"/>
@@ -137,12 +109,6 @@
                                         <t t-if="o.partner_shipping_id.country_id.name">
                                             <t t-esc="o.partner_shipping_id.country_id.name"/>
                                         </t>
-                                        <br/>
-                                        <t t-if="o.partner_shipping_id.zip">
-                                            <t t-esc="o.partner_shipping_id.zip"/>
-                                        </t>
-                                        <br/>
-                                        <div t-field="o.partner_shipping_id.vat"/>
                                     </td>
                                     <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-field="o.name"/>
