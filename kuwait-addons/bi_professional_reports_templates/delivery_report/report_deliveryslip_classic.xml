@@ -19,7 +19,7 @@
                 <div class="row mt32 mb32">
                     <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
-                             style="max-height: 130px;"/>
+                             style="max-height: 160px;"/>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
 
             <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
-                <div class="page" style="font-family:Scheherazade;font-size:15px">
+                <div class="page" style="font-family:Scheherazade;font:20px">
                     <center><h1>أمر الاستلام</h1></center>
                     <div class="oe_structure"/>
 
@@ -176,9 +176,9 @@
                     <table class="table table-sm" t-if="not o.move_line_ids">
                         <thead>
                             <tr>
-                                <th style="background-color:#3498DB !important;color:#FFF !important;">Product</th>
-                                <th style="background-color:#3498DB !important;color:#FFF !important;">Ordered
-                                    كمية
+                                <th style="background-color:#3498DB !important;color:#FFF !important;">المنتج</th>
+                                <th style="background-color:#3498DB !important;color:#FFF !important;">
+                                    الكمية
                                 </th>
                             </tr>
                         </thead>
@@ -263,7 +263,14 @@
                             </tr>
                         </tbody>
                     </table>
-
+                    <div style=" background-color: #3498DB; color:#fff !important; font:15px lucida-console,sans-serif !important; ">
+                        <p t-if="o.notes">
+                            <strong>
+                                <span>ملاحظات:</span>
+                            </strong>
+                            <span t-field="o.note"/>
+                        </p>
+                    </div>
                     <table class="table table-sm" style=" table-layout:fixed; padding-top=20px;">
                         <thead>
                             <tr>

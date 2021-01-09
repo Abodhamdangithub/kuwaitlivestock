@@ -20,7 +20,7 @@
                 <div class="row mt32 mb32">
                     <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
-                             style="max-height: 130px;"/>
+                             style="max-height: 160px;"/>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
 
             <t t-call="web.external_layout">
                 <t t-set="doc" t-value="doc.with_context({'lang':zh_CN})"/>
-                <div class="page" style="font-family:Scheherazade;font-size:15px">
+                <div class="page" style="font-family:Scheherazade;font:20px">
                     <center><h1>أمر البيع</h1></center>
                     <div class="oe_structure"/>
                     <div>
