@@ -19,7 +19,7 @@
                 <div class="row mt32 mb32">
                     <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
-                             style="max-height: 100px;"/>
+                             style="max-height: 130px;"/>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,8 @@
 
             <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
-                <div class="page" style="font-family:Scheherazade">
+                <div class="page" style="font-family:Scheherazade;font-size:15px">
+                    <center><h1>أمر الاستلام</h1></center>
                     <div class="oe_structure"/>
 
                     <table class="table table-sm" style=" table-layout:fixed;">
@@ -261,6 +262,26 @@
                                 </td>
                             </tr>
                         </tbody>
+                    </table>
+
+                    <table class="table table-sm" style=" table-layout:fixed; padding-top=20px;">
+                        <thead>
+                            <tr>
+                                <th width="30px"
+                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    <center>
+                                        توقيع الشركة
+                                    </center>
+                                </th>
+                                <th width="30px"
+                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+
+                                    <center>
+                                        توقيع الاستلام
+                                    </center>
+                                </th>
+                            </tr>
+                        </thead>
                     </table>
 
                 </div>

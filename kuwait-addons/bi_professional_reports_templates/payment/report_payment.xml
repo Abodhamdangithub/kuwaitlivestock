@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_payment_receipt_new" inherit_id="account.report_payment_receipt_document">
+            <xpath expr="//t[@t-name='account.report_payment_receipt_document']" position="replace">
+            <div class="header">
+                <div class="row mt32 mb32">
+                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
+                        <img t-if="company.upload_image_header"
+                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_header)"
+                             style="max-height: 180px;"/>
+                    </div>
+                </div>
+                <div class="row mt32 mb32">
+                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
+                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
+                             style="max-height: 130px;"/>
+                    </div>
+                </div>
+            </div>
+                        <div class="footer">
+                <div class="row mt32 mb32">
+                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
+                        <img t-if="company.upload_image_footer"
+                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_footer)"
+                             style="max-height: 180px;"/>
+                    </div>
+                </div>
+            </div>
+
+
+                <t t-call="web.external_layout">
+                    <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+                    <div class="page" style="font-family:Scheherazade;font-size:15px">
+                        <center>
+                            <h1>سند قبض</h1>
+                        </center>
+
+                        <div class="oe_structure"/>
+                        <div>
+                            <h3>
+                                <span t-field="o.name"/>
+                            </h3>
+
+                            <h3 style="margin-right:45px;">
+                                التاريخ:
+                                <span t-field="o.payment_date"/>
+                            </h3>
+
+                            <table class="table table-sm" style=" table-layout:fixed;">
+                                <thead>
+                                    <tr>
+                                        <th width="30px"
+                                            style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            الزبون
+                                        </th>
+                                        <th width="30px"
+                                            style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            البيان
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <div t-field="o.partner_id"/>
+                                            <t t-if="o.partner_id.street">
+                                                <t t-esc="o.partner_id.street"/>
+                                            </t>
+                                            <br/>
+                                            <t t-if="o.partner_id.street2">
+                                                <t t-esc="o.partner_id.street2"/>
+                                            </t>
+                                            <br/>
+                                            <t t-if="o.partner_id.city">
+                                                <t t-esc="o.partner_id.city"/>
+                                            </t>
+                                            <br/>
+                                            <t t-if="o.partner_id.state_id.name">
+                                                <t t-esc="o.partner_id.state_id.name"/>
+                                            </t>
+                                            <br/>
+                                            <t t-if="o.partner_id.country_id.name">
+                                                <t t-esc="o.partner_id.country_id.name"/>
+                                            </t>
+                                            <br/>
+                                            <t t-if="o.partner_id.zip">
+                                                <t t-esc="o.partner_id.zip"/>
+                                            </t>
+                                            <br/>
+                                            <div t-field="o.partner_id.vat"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <div t-field="o.communication"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-sm" style=" table-layout:fixed; padding-top=20px;">
+                                <thead>
+                                    <tr>
+                                        <th width="30px"
+                                            style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            القيمة
+                                        </th>
+                                        <th width="20px"
+                                            style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            اليومية
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <div t-field="o.amount"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <div t-field="o.journal_id.name"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div style="padding-top:50px;">
+                        </div>
+                        <table class="table table-sm" style=" table-layout:fixed; padding-top=20px;">
+                            <thead>
+                                <tr>
+                                    <th width="30px"
+                                        style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                        <center>
+                                            توقيع المستلم
+                                        </center>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </t>
+            </xpath>
+        </template>
+
+
+    </data>
+</odoo>

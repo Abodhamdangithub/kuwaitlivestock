@@ -19,7 +19,7 @@
                 <div class="row mt32 mb32">
                     <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
-                             style="max-height: 100px;"/>
+                             style="max-height: 130px;"/>
                     </div>
                 </div>
             </div>
@@ -36,9 +36,39 @@
 
             <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
-                <div class="page" style="font-family:Scheherazade">
+                <div class="page" style="font-family:Scheherazade;font-size:15px">
+                    <t t-if="o.type == 'in_invoice'">
+                        <center>
+                            <h1>فاتورة شراء</h1>
+                        </center>
+                    </t>
+                    <t t-if="o.type == 'in_refund'">
+                        <center>
+                            <h1>مردود شراء</h1>
+                        </center>
+                    </t>
+                    <t t-if="o.type == 'out_invoice'">
+                        <center>
+                            <h1>فاتورة مبيعات</h1>
+                        </center>
+                    </t>
+                    <t t-if="o.type == 'out_refund'">
+                        <center>
+                            <h1>مردود مبيعات</h1>
+                        </center>
+                    </t>
+
                     <div class="oe_structure"/>
                     <div>
+                        <h3 >
+                            <span t-field="o.name"/>
+                        </h3>
+
+                        <h3 style="margin-right:45px;">
+                            التاريخ:
+                            <span t-field="o.invoice_date"/>
+                        </h3>
+
                         <table class="table table-sm" style=" table-layout:fixed;">
                             <thead>
                                 <tr>
@@ -53,10 +83,6 @@
                                     <th width="20px"
                                         style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                         المرجع / الوصف
-                                    </th>
-                                    <th width="20px"
-                                        style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                        فاتورة #
                                     </th>
                                 </tr>
                             </thead>
@@ -121,11 +147,6 @@
                                     <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-field="o.name"/>
                                     </td>
-                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
-                                        <b>
-                                            <div t-field="o.name"/>
-                                        </b>
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -133,10 +154,6 @@
                         <table class="table table-sm" style=" table-layout:fixed; padding-top=20px;">
                             <thead>
                                 <tr>
-                                    <th width="30px"
-                                        style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                        تاريخ الفاتورة
-                                    </th>
                                     <th width="30px"
                                         style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                         تاريخ الاستحقاق
@@ -153,9 +170,6 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
-                                        <div t-field="o.invoice_date"/>
-                                    </td>
                                     <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-field="o.invoice_date_due"/>
                                     </td>
@@ -185,7 +199,6 @@
                                         t-if="display_discount"
                                         groups="sale.group_discount_per_so_line">الخصم.(%)
                                     </th>
-                                    <th style="background-color:#3498DB !important;color:#FFF !important;">الضرائب</th>
                                     <th style="background-color:#3498DB !important;color:#FFF !important;">السعر</th>
                                 </tr>
                             </thead>
@@ -194,11 +207,11 @@
                                     <td>
                                         <span t-field="l.name"/>
                                     </td>
-                                    <td >
+                                    <td>
                                         <span t-field="l.quantity"/>
                                         <span t-field="l.uom_id" groups="product.group_uom"/>
                                     </td>
-                                    <td >
+                                    <td>
                                         <span t-field="l.price_unit"/>
                                     </td>
                                     <td t-if="display_discount"
@@ -206,9 +219,6 @@
                                         <span t-field="l.discount"/>
                                     </td>
                                     <td>
-                                        <span t-esc="', '.join(map(lambda x: (x.description or x.name), l.tax_ids))"/>
-                                    </td>
-                                    <td >
                                         <span t-field="l.price_subtotal"
                                               t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
                                     </td>
@@ -284,66 +294,29 @@
                         <strong>تعليق:</strong>
                         <span t-field="o.narration"/>
                     </p>
-
-                    <!--
-                                        <p t-if="o.paypal_chk">
-                                            <div style="background-color: #3498DB;">
-                                                <strong style="color:#fff !important;">Paypal Account Details</strong>
-                                                <br/>
-                                                <span>
-                                                    <font color="#fff">Paypal Id :</font>
-                                                </span>
-                                                <span style="color:#fff !important;" t-field="o.paypal_id"/>
-                                            </div>
-                                        </p>
-                                        <p t-if="o.paypal_chk == False">
-                                            <div style="background-color: #3498DB;">
-                                                <strong style="color:#fff !important;">Bank Account Details</strong>
-                                                <br/>
-                                                <span>
-                                                    <font color="#fff">Account Id :</font>
-                                                </span>
-                                                <span style="color:#fff !important;" t-field="o.company_id.bank_account_id.acc_number"/>
-                                                <br/>
-                                                <span>
-                                                    <font color="#fff">Bank Name :</font>
-                                                </span>
-                                                <span style="color:#fff !important;" t-field="o.company_id.bank_account_id.bank_id.name"/>
-                                                <br/>
-                                                <span>
-                                                    <font color="#fff">Branch Name/Address :</font>
-                                                </span>
-                                                <span style="color:#fff !important;" t-field="o.company_id.bank_account_id.branch_name"/>
-                                                <br/>
-                                                <span style="color:#fff !important;" t-field="o.company_id.bank_account_id.street"/>
-                                                <br/>
-                                                <span style="color:#fff !important;" t-field="o.company_id.bank_account_id.street2"/>
-                                                <span style="color:#fff !important;">,</span>
-                                                <span style="color:#fff !important;" t-field="o.company_id.bank_account_id.city"/>
-                                                <span style="color:#fff !important;">,</span>
-                                                <span style="color:#fff !important;" t-field="o.company_id.bank_account_id.zip"/>
-                                                <br/>
-                                                <span style="color:#fff !important;" t-field="o.company_id.bank_account_id.state_id"/>
-                                                <span style="color:#fff !important;">,</span>
-                                                <span style="color:#fff !important;" t-field="o.company_id.bank_account_id.country_id"/>
-                                                <br/>
-                                                <span>
-                                                    <font color="#fff">Swift Code :</font>
-                                                </span>
-                                                <span style="color:#fff !important;" t-field="o.company_id.bank_account_id.swift_code"/>
-                                                <br/>
-                                                <span>
-                                                    <font color="#fff">IFSC Code :</font>
-                                                </span>
-                                                <span style="color:#fff !important;" t-field="o.company_id.bank_account_id.ifsc"/>
-                                                <br/>
-                                            </div>
-                                        </p>
-                    -->
                     <p t-if="o.fiscal_position_id.note">
                         <strong>ملاحظة الموقف المالي:</strong>
                         <span t-field="o.fiscal_position_id.note"/>
                     </p>
+                    <table class="table table-sm" style=" table-layout:fixed; padding-top=20px;">
+                        <thead>
+                            <tr>
+                                <th width="30px"
+                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    <center>
+                                        توقيع البائع
+                                    </center>
+                                </th>
+                                <th width="30px"
+                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+
+                                    <center>
+                                        توقيع المشتري
+                                    </center>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </t>
 

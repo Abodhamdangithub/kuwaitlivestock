@@ -25,6 +25,9 @@
 	"invoice_report/report_invoice_modern.xml",
         "invoice_report/report_invoice_odoo_standard.xml",
 
+        "payment/report_payment.xml",
+
+
         "delivery_report/stock_report_classic.xml",
         "delivery_report/fency_report_deliveryslip.xml",
         "delivery_report/modern_report_deliveryslip.xml",
