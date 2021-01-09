@@ -50,19 +50,19 @@
                     <table class="table table-sm" style=" table-layout:fixed;">
                         <thead>
                             <tr>
-                                <th width="30px"
+                                <th width="30px" class="text-center"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     عنوان العميل
                                 </th>
-                                <th width="30px"
+                                <th width="30px" class="text-center"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     عنوان الإتصال
                                 </th>
-                                <th width="20px"
+                                <th width="20px" class="text-center"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     الأصل
                                 </th>
-                                <th width="20px" t-if="o.note"
+                                <th width="20px" t-if="o.note" class="text-center"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     ملاحظات
                                 </th>
@@ -70,7 +70,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;" class="text-center">
                                     <div t-field="o.partner_id"/>
                                     <t t-if="o.partner_id.street">
                                         <t t-esc="o.partner_id.street"/>
@@ -89,7 +89,7 @@
                                     </t>
                                 </td>
 
-                                <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;" class="text-center">
                                     <div t-if="o.move_lines and o.move_lines[0].partner_id and o.move_lines[0].partner_id.id != o.partner_id.id">
                                         <div>
                                             <div t-field="o.move_lines[0].partner_id"/>
@@ -131,10 +131,10 @@
                                         </t>
                                     </div>
                                 </td>
-                                <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;" class="text-center">
                                     <div t-field="o.picking_type_id"/>
                                 </td>
-                                <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;" t-if="o.note" >
+                                <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;" t-if="o.note" class="text-center">
                             <span t-field="o.note"/>
                                 </td>
                             </tr>
@@ -167,8 +167,8 @@
                            groups="stock.group_production_lot"/>
                         <thead>
                             <tr>
-                                <th style="background-color:#3498DB !important;color:#FFF !important;">المنتج</th>
-                                <th style="background-color:#3498DB !important;color:#FFF !important;" name="lot_serial"
+                                <th style="background-color:#3498DB !important;color:#FFF !important;" class="text-center">المنتج</th>
+                                <th style="background-color:#3498DB !important;color:#FFF !important;" name="lot_serial"  class="text-center"
                                     t-if="has_serial_number">
                                     الدفعة / الرقم التسلسلي
                                 </th>
@@ -184,7 +184,7 @@
                         </thead>
                         <tbody>
                             <tr t-foreach="o.move_line_ids" t-as="move_line">
-                                <td>
+                                <td class="text-center">
                                     <span t-field="move_line.product_id"/>
                                     <p t-if="o.picking_type_code == 'outgoing'">
                                         <span t-field="move_line.product_id.description_pickingout"/>
@@ -196,7 +196,7 @@
                                         <span t-field="move_line.package_id"/>
                                     </t>
                                 </td>
-                                <t t-if="has_serial_number">
+                                <t t-if="has_serial_number" class="text-center">
                                     <td>
                                         <table width="100%">
                                             <tr>
