@@ -39,6 +39,14 @@
                 <div class="page" style="font-family:Scheherazade;font-size:20px">
                     <center><h1>أمر شراء</h1></center>
                     <div class="oe_structure"/>
+                        <h3 >
+                            <span t-field="o.name"/>
+                        </h3>
+
+                        <h3 >
+                            تاريخ الطلب:
+                            <span t-field="o.date_order"/>
+                        </h3>
 
                     <table class="table table-sm" style=" table-layout:fixed;">
                         <thead>
@@ -58,10 +66,6 @@
                                 <th t-if="o.state != 'draft'" width="20px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     أمر شراء #
-                                </th>
-                                <th t-if="o.state == 'draft'" width="20px"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    طلب عرض أسعار #
                                 </th>
                             </tr>
                         </thead>
@@ -112,11 +116,6 @@
                                 <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                     <div t-field="o.partner_ref"/>
                                 </td>
-                                <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
-                                    <b>
-                                        <div t-field="o.name"/>
-                                    </b>
-                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -124,10 +123,6 @@
                     <table class="table table-sm" style=" table-layout:fixed; padding-top=20px;">
                         <thead>
                             <tr>
-                                <th width="30px"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    تاريخ الطلب
-                                </th>
                                 <th width="30px"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     التاريخ المقرر
@@ -144,9 +139,6 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
-                                    <div t-field="o.date_order"/>
-                                </td>
                                 <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                     <div t-field="o.date_planned"/>
                                 </td>

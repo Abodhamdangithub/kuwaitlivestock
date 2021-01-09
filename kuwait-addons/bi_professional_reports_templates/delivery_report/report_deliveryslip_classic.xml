@@ -38,6 +38,14 @@
                 <div class="page" style="font-family:Scheherazade;font-size:20px">
                     <center><h1>أمر الاستلام</h1></center>
                     <div class="oe_structure"/>
+                    <h3>
+                        <span t-field="o.name"/>
+                    </h3>
+
+                    <h3>
+                        التاريخ المقرر:
+                        <span t-field="o.scheduled_date"/>
+                    </h3>
 
                     <table class="table table-sm" style=" table-layout:fixed;">
                         <thead>
@@ -54,13 +62,9 @@
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     الأصل
                                 </th>
-                                <th width="20px"
+                                <th width="20px" t-if="o.note"
                                     style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    التاريخ المقرر
-                                </th>
-                                <th width="20px"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
-                                    توصيل #
+                                    ملاحظات
                                 </th>
                             </tr>
                         </thead>
@@ -83,16 +87,6 @@
                                     <t t-if="o.partner_id.state_id.name">
                                         <t t-esc="o.partner_id.state_id.name"/>
                                     </t>
-                                    <br/>
-                                    <t t-if="o.partner_id.country_id.name">
-                                        <t t-esc="o.partner_id.country_id.name"/>
-                                    </t>
-                                    <br/>
-                                    <t t-if="o.partner_id.zip">
-                                        <t t-esc="o.partner_id.zip"/>
-                                    </t>
-                                    <br/>
-                                    <div t-field="o.partner_id.vat"/>
                                 </td>
 
                                 <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
@@ -114,15 +108,6 @@
                                             <t t-if="o.move_lines[0].partner_id.state_id.name">
                                                 <t t-esc="o.move_lines[0].partner_id.state_id.name"/>
                                             </t>
-                                            <br/>
-                                            <t t-if="o.move_lines[0].partner_id.country_id.name">
-                                                <t t-esc="o.move_lines[0].partner_id.country_id.name"/>
-                                            </t>
-                                            <br/>
-                                            <t t-if="o.move_lines[0].partner_id.zip">
-                                                <t t-esc="o.move_lines[0].partner_id.zip"/>
-                                            </t>
-                                            <br/>
                                         </div>
                                         <div t-field="o.move_lines[0].partner_id.vat"/>
                                     </div>
@@ -144,30 +129,13 @@
                                         <t t-if="o.partner_id.state_id.name">
                                             <t t-esc="o.partner_id.state_id.name"/>
                                         </t>
-                                        <br/>
-                                        <t t-if="o.partner_id.country_id.name">
-                                            <t t-esc="o.partner_id.country_id.name"/>
-                                        </t>
-                                        <br/>
-                                        <t t-if="o.partner_id.zip">
-                                            <t t-esc="o.partner_id.zip"/>
-                                        </t>
-                                        <br/>
-                                        <div t-field="o.partner_id.vat"/>
                                     </div>
                                 </td>
                                 <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                     <div t-field="o.picking_type_id"/>
                                 </td>
-                                <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
-                                    <b>
-                                        <div t-field="o.scheduled_date"/>
-                                    </b>
-                                </td>
-                                <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
-                                    <b>
-                                        <div t-field="o.name"/>
-                                    </b>
+                                <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;" t-if="o.note" >
+                            <span t-field="o.note"/>
                                 </td>
                             </tr>
                         </tbody>
@@ -264,10 +232,7 @@
                         </tbody>
                     </table>
                     <div style=" background-color: #3498DB; color:#fff !important; font:15px lucida-console,sans-serif !important; ">
-                        <p t-if="o.notes">
-                            <strong>
-                                <span>ملاحظات:</span>
-                            </strong>
+                        <p t-if="o.note">
                             <span t-field="o.note"/>
                         </p>
                     </div>
