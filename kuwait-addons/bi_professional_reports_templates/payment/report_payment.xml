@@ -32,9 +32,21 @@
                 <t t-call="web.external_layout">
                     <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
                     <div class="page" style="font-family:Scheherazade;font-size:15px">
+                    <t t-if="o.payment_type == 'inbound'">
                         <center>
                             <h1>سند قبض</h1>
                         </center>
+                    </t>
+                    <t t-if="o.payment_type == 'outbound'">
+                        <center>
+                            <h1>سند صرف</h1>
+                        </center>
+                    </t>
+                    <t t-if="o.payment_type == 'transfer'">
+                        <center>
+                            <h1>نقل داخلي</h1>
+                        </center>
+                    </t>
 
                         <div class="oe_structure"/>
                         <div>
