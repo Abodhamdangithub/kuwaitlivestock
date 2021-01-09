@@ -167,7 +167,7 @@
                            groups="stock.group_production_lot"/>
                         <thead>
                             <tr>
-                                <th style="background-color:#3498DB !important;color:#FFF !important;">Product</th>
+                                <th style="background-color:#3498DB !important;color:#FFF !important;">المنتج</th>
                                 <th style="background-color:#3498DB !important;color:#FFF !important;" name="lot_serial"
                                     t-if="has_serial_number">
                                     الدفعة / الرقم التسلسلي
@@ -177,7 +177,7 @@
                                 </th>
                                 <th style="background-color:#3498DB !important;color:#FFF !important;"
                                     t-if="any([move_line.state == 'done' for move_line in o.move_line_ids])"
-                                    class="text-right">
+                                    class="text-center">
                                     كمية تسليمها
                                 </th>
                             </tr>
@@ -221,7 +221,7 @@
                                     <span t-field="move_line.product_qty"/>
                                     <span t-field="move_line.product_uom_id"/>
                                 </td>
-                                <td class="text-right" t-if="move_line.state == 'done'">
+                                <td class="text-center" t-if="move_line.state == 'done'">
                                     <t t-if="move_line.product_qty != move_line.qty_done">
                                         <t t-set="backorder" t-value="True"/>
                                     </t>
