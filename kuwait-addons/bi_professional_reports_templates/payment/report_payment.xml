@@ -3,7 +3,20 @@
     <data>
         <template id="report_payment_receipt_new" inherit_id="account.report_payment_receipt_document">
             <xpath expr="//t[@t-name='account.report_payment_receipt_document']" position="replace">
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
             <div class="header">
+                <div class="row mt32 mb32">
+                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
+                        <img t-if="company.upload_image_header"
+                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_header)"
+                             style="max-height: 180px;"/>
+                    </div>
+                </div>
                 <div class="row mt32 mb32">
                     <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"

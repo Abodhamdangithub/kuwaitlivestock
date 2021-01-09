@@ -12,6 +12,13 @@
             <div class="header">
                 <div class="row mt32 mb32">
                     <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
+                        <img t-if="company.upload_image_header"
+                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_header)"
+                             style="max-height: 180px;"/>
+                    </div>
+                </div>
+                <div class="row mt32 mb32">
+                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
                         <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
                              style="max-height: 130px;"/>
                     </div>
