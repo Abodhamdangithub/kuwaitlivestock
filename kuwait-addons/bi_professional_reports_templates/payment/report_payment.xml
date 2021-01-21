@@ -64,12 +64,12 @@
                             <table class="table table-sm" style=" table-layout:fixed;">
                                 <thead>
                                     <tr>
-                                        <th width="30px"
-                                            style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                          <th class="text-center" width="30px"
+                                            style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
                                             العميل
                                         </th>
-                                        <th width="30px"
-                                            style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                          <th class="text-center" width="30px"
+                                            style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
                                             البيان
                                         </th>
                                     </tr>
@@ -114,12 +114,12 @@
                             <table class="table table-sm" style=" table-layout:fixed; padding-top=20px;">
                                 <thead>
                                     <tr>
-                                        <th width="30px"
-                                            style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                          <th class="text-center" width="30px"
+                                            style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
                                             القيمة
                                         </th>
-                                        <th width="20px"
-                                            style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                          <th class="text-center" width="20px"
+                                            style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
                                             اليومية
                                         </th>
                                     </tr>
@@ -146,7 +146,7 @@
                             <thead>
                                 <tr>
                                     <th width="30px"
-                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
                                         <center>
                                             توقيع المستلم
                                         </center>

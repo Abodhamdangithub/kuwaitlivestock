@@ -74,16 +74,16 @@
                         <table class="table table-sm" style=" table-layout:fixed;">
                             <thead>
                                 <tr>
-                                    <th width="30px"
-                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                     <th width="30px" class="text-center"
+                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;   !important; ">
                                         العميل
                                     </th>
-                                    <th width="30px"
-                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                     <th width="30px" class="text-center"
+                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;   !important; ">
                                         عنوان التسليم
                                     </th>
-                                    <th width="20px"
-                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                     <th class="text-center"width="20px"
+                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;   !important; ">
                                         المرجع / الوصف
                                     </th>
                                 </tr>
@@ -122,16 +122,16 @@
                         <table class="table table-sm" style=" table-layout:fixed; padding-top=20px;">
                             <thead>
                                 <tr>
-                                    <th width="30px"
-                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                     <th width="30px" class="text-center"
+                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;   !important; ">
                                         تاريخ الاستحقاق
                                     </th>
-                                    <th width="20px"
-                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                     <th class="text-center"width="20px"
+                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;   !important; ">
                                         شروط الدفع
                                     </th>
-                                    <th width="20px"
-                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                     <th class="text-center"width="20px"
+                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;   !important; ">
                                         مندوب مبيعات
                                     </th>
                                 </tr>
@@ -158,16 +158,16 @@
                         <table class="table table-sm">
                             <thead>
                                 <tr>
-                                    <th style="background-color:#EADBDB !important;color:#FFF !important;">وصف
+                                     <th class="text-center"style="background-color:#EADBDB !important;  !important;">وصف
                                     </th>
-                                    <th style="background-color:#EADBDB !important;color:#FFF !important;">كمية</th>
-                                    <th style="background-color:#EADBDB !important;color:#FFF !important;">سعر الوحدة
+                                     <th class="text-center"style="background-color:#EADBDB !important;  !important;">كمية</th>
+                                     <th class="text-center"style="background-color:#EADBDB !important;  !important;">سعر الوحدة
                                     </th>
-                                    <th style="background-color:#EADBDB !important;color:#FFF !important;"
+                                     <th class="text-center"style="background-color:#EADBDB !important;  !important;"
                                         t-if="display_discount"
                                         groups="sale.group_discount_per_so_line">الخصم.(%)
                                     </th>
-                                    <th style="background-color:#EADBDB !important;color:#FFF !important;">السعر</th>
+                                     <th class="text-center"style="background-color:#EADBDB !important;  !important;">السعر</th>
                                 </tr>
                             </thead>
                             <tbody class="invoice_tbody">
@@ -216,7 +216,7 @@
                                         </td>
                                     </tr>
                                 </t>
-                                <tr class="border-black" style=" background-color: #EADBDB; color:#fff !important;">
+                                <tr class="border-black" style=" background-color: #EADBDB;   !important;">
                                     <td>
                                         <strong>المجموع</strong>
                                     </td>
@@ -269,14 +269,14 @@
                     <table class="table table-sm" style=" table-layout:fixed; padding-top=20px;">
                         <thead>
                             <tr>
-                                <th width="30px"
-                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                 <th width="30px" class="text-center"
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;   !important; ">
                                     <center>
                                         توقيع البائع
                                     </center>
                                 </th>
-                                <th width="30px"
-                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                 <th width="30px" class="text-center"
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;   !important; ">
 
                                     <center>
                                         توقيع المشتري
