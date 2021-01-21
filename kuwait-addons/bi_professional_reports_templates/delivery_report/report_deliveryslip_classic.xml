@@ -154,10 +154,10 @@
                         </thead>
                         <tbody>
                             <tr t-foreach="o.move_lines" t-as="move">
-                                <td>
+                                <td class="text-center">
                                     <span t-field="move.product_id"/>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <span t-field="move.product_qty"/>
                                     <span t-field="move.product_uom"/>
                                 </td>
@@ -199,7 +199,7 @@
                                     </t>
                                 </td>
                                 <t t-if="has_serial_number" class="text-center">
-                                    <td>
+                                    <td >
                                         <table width="100%">
                                             <tr>
                                                 <td>

@@ -76,7 +76,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                        <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                             <div t-field="o.partner_id"/>
                                             <t t-if="o.partner_id.street">
                                                 <t t-esc="o.partner_id.street"/>
@@ -104,7 +104,7 @@
                                             <br/>
                                             <div t-field="o.partner_id.vat"/>
                                         </td>
-                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                        <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                             <div t-field="o.communication"/>
                                         </td>
                                     </tr>
@@ -126,10 +126,10 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                        <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                             <div t-field="o.amount"/>
                                         </td>
-                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                        <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                             <div t-field="o.journal_id.name"/>
                                         </td>
                                     </tr>

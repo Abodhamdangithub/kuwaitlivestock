@@ -185,20 +185,20 @@
                         </thead>
                         <tbody>
                             <tr t-foreach="o.order_line" t-as="line">
-                                <td>
+                                <td class="text-center">
                                     <span t-field="line.name"/>
                                 </td>
                                 <td class="text-center">
                                     <span t-field="line.date_planned"/>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <span t-field="line.product_qty"/>
                                     <span t-field="line.product_uom.name" groups="product.group_uom"/>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <span t-field="line.price_unit"/>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <span t-field="line.price_subtotal"
                                           t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
                                 </td>
@@ -228,7 +228,7 @@
                                                         </tr>
                             -->
                             <tr style=" background-color: #EADBDB;" class="border-black">
-                                <td>
+                                <td class="text-center">
                                     <strong>المجموع</strong>
                                 </td>
                                 <td class="text-right">

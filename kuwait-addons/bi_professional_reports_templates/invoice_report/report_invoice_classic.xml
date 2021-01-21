@@ -90,10 +90,10 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                    <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-field="o.partner_id"/>
                                     </td>
-                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                    <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-field="o.partner_shipping_id"/>
                                         <t t-if="o.partner_id.street">
                                             <t t-esc="o.partner_shipping_id.street"/>
@@ -112,7 +112,7 @@
                                             <t t-esc="o.partner_shipping_id.country_id.name"/>
                                         </t>
                                     </td>
-                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                    <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-field="o.name"/>
                                     </td>
                                 </tr>
@@ -138,13 +138,13 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                    <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-field="o.invoice_date_due"/>
                                     </td>
-                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                    <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-field="o.invoice_payment_term_id"/>
                                     </td>
-                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                    <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-field="o.user_id"/>
                                     </td>
                                 </tr>
@@ -172,21 +172,21 @@
                             </thead>
                             <tbody class="invoice_tbody">
                                 <tr t-foreach="o.invoice_line_ids" t-as="l">
-                                    <td>
+                                    <td class="text-center">
                                         <span t-field="l.name"/>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <span t-field="l.quantity"/>
                                         <span t-field="l.uom_id" groups="product.group_uom"/>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <span t-field="l.price_unit"/>
                                     </td>
-                                    <td t-if="display_discount"
+                                    <td class="text-center" t-if="display_discount"
                                         groups="sale.group_discount_per_so_line">
                                         <span t-field="l.discount"/>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <span t-field="l.price_subtotal"
                                               t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
                                     </td>
@@ -198,7 +198,7 @@
                         <div class="col-6 pull-right">
                             <table class="table table-condensed">
                                 <tr class="border-black">
-                                    <td>
+                                    <td class="text-center">
                                         <strong>المجموع الفرعي</strong>
                                     </td>
                                     <td class="text-right">

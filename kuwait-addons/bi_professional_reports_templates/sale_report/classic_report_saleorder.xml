@@ -66,7 +66,7 @@
                             </thead>
                             <tbody class="sale_tbody">
                                 <tr>
-                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                    <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-field="doc.partner_id"/>
                                         <t t-if="doc.partner_id.street">
                                             <t t-esc="doc.partner_id.street"/>
@@ -95,7 +95,7 @@
                                         <div t-field="doc.partner_id.vat"/>
                                     </td>
 
-                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                    <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-field="doc.partner_invoice_id"/>
                                         <t t-if="doc.partner_invoice_id.street">
                                             <t t-esc="doc.partner_invoice_id.street"/>
@@ -122,10 +122,10 @@
                                         <br/>
                                         <div t-field="doc.partner_invoice_id.vat"/>
                                     </td>
-                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                    <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <span t-field="doc.date_order"/>
                                     </td>
-                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                    <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <strong>
                                             <span t-field="doc.name"/>
                                         </strong>
@@ -159,21 +159,21 @@
                             <tbody class="sale_tbody">
                                 <t t-foreach="doc.order_line" t-as="l">
                                     <tr t-if="l.product_uom_qty">
-                                        <td>
+                                        <td class="text-center">
                                             <span t-field="l.name"/>
                                         </td>
-                                        <td >
+                                        <td class="text-center">
                                             <span t-field="l.product_uom_qty"/>
                                             <span groups="product.group_uom" t-field="l.product_uom"/>
                                         </td>
-                                        <td  >
+                                        <td  class="text-center">
                                             <span t-field="l.price_unit"/>
                                         </td>
-                                        <td t-if="display_discount"
+                                        <td class="text-center" t-if="display_discount"
                                             groups="sale.group_discount_per_so_line">
                                             <span t-field="l.discount"/>
                                         </td>
-                                        <td  >
+                                        <td class="text-center" >
                                             <span t-field="l.price_subtotal"
                                                   t-field-options='{"widget": "monetary", "display_currency": "doc.pricelist_id.currency_id"}'/>
                                         </td>
@@ -206,7 +206,7 @@
                                 </tr>
 -->
                                 <tr class="border-black">
-                                    <td style="background-color:#EADBDB !important;   !important;">
+                                    <td class="text-center" style="background-color:#EADBDB !important;   !important;">
                                         <strong>المجموع</strong>
                                     </td>
                                     <td style="background-color:#EADBDB !important;   !important;"
