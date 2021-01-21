@@ -146,8 +146,8 @@
                     <table class="table table-sm" t-if="not o.move_line_ids">
                         <thead>
                             <tr>
-                                 <th class="text-center"style="background-color:#EADBDB !important; !important;">المنتج</th>
-                                 <th class="text-center"style="background-color:#EADBDB !important; !important;">
+                                 <th class="text-center" style="background-color:#EADBDB !important; !important;">المنتج</th>
+                                 <th class="text-center" style="background-color:#EADBDB !important; !important;">
                                     الكمية
                                 </th>
                             </tr>
