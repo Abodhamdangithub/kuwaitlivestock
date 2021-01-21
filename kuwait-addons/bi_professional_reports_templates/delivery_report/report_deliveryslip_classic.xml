@@ -53,19 +53,19 @@
                         <thead>
                             <tr>
                                 <th width="30px" class="text-center"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     عنوان العميل
                                 </th>
                                 <th width="30px" class="text-center"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     عنوان الإتصال
                                 </th>
                                 <th width="20px" class="text-center"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     الأصل
                                 </th>
                                 <th width="20px" t-if="o.note" class="text-center"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     ملاحظات
                                 </th>
                             </tr>
@@ -146,8 +146,8 @@
                     <table class="table table-sm" t-if="not o.move_line_ids">
                         <thead>
                             <tr>
-                                <th style="background-color:#3498DB !important;color:#FFF !important;">المنتج</th>
-                                <th style="background-color:#3498DB !important;color:#FFF !important;">
+                                <th style="background-color:#EADBDB !important;color:#FFF !important;">المنتج</th>
+                                <th style="background-color:#EADBDB !important;color:#FFF !important;">
                                     الكمية
                                 </th>
                             </tr>
@@ -169,15 +169,15 @@
                            groups="stock.group_production_lot"/>
                         <thead>
                             <tr>
-                                <th style="background-color:#3498DB !important;color:#FFF !important;" class="text-center">المنتج</th>
-                                <th style="background-color:#3498DB !important;color:#FFF !important;" name="lot_serial"  class="text-center"
+                                <th style="background-color:#EADBDB !important;color:#FFF !important;" class="text-center">المنتج</th>
+                                <th style="background-color:#EADBDB !important;color:#FFF !important;" name="lot_serial"  class="text-center"
                                     t-if="has_serial_number">
                                     الدفعة / الرقم التسلسلي
                                 </th>
-                                <th style="background-color:#3498DB !important;color:#FFF !important;"
+                                <th style="background-color:#EADBDB !important;color:#FFF !important;"
                                     class="text-center">الكمية المطلوبة
                                 </th>
-                                <th style="background-color:#3498DB !important;color:#FFF !important;"
+                                <th style="background-color:#EADBDB !important;color:#FFF !important;"
                                     t-if="any([move_line.state == 'done' for move_line in o.move_line_ids])"
                                     class="text-center">
                                     كمية تسليمها
@@ -233,7 +233,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div style=" background-color: #3498DB; color:#fff !important; font:15px lucida-console,sans-serif !important; ">
+                    <div style=" background-color: #EADBDB; color:#fff !important; font:15px lucida-console,sans-serif !important; ">
                         <p t-if="o.note">
                             <span t-field="o.note"/>
                         </p>
@@ -242,13 +242,13 @@
                         <thead>
                             <tr>
                                 <th width="30px"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     <center>
                                         توقيع الشركة
                                     </center>
                                 </th>
                                 <th width="30px"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
 
                                     <center>
                                         توقيع الاستلام

@@ -56,19 +56,19 @@
                         <thead>
                             <tr>
                                 <th width="30px"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     بائع
                                 </th>
                                 <th width="30px"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     عنوان الشحن
                                 </th>
                                 <th width="20px"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     المرجع / الوصف
                                 </th>
                                 <th t-if="o.state != 'draft'" width="20px"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     أمر شراء #
                                 </th>
                             </tr>
@@ -131,15 +131,15 @@
                         <thead>
                             <tr>
                                 <th width="30px"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     التاريخ المقرر
                                 </th>
                                 <th width="20px"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     تاريخ الموافقة
                                 </th>
                                 <th width="20px"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     شروط الدفع
                                 </th>
                             </tr>
@@ -162,23 +162,23 @@
                     <table class="table table-sm">
                         <thead>
                             <tr>
-                                <th style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                <th style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     <strong>الوصف</strong>
                                 </th>
                                 <th class="text-center"
-                                    style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                    style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     <strong>التاريخ.</strong>
                                 </th>
                                 <th
-                                        style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     <strong>الكمية</strong>
                                 </th>
                                 <th
-                                        style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     <strong>سعر الوحدة</strong>
                                 </th>
                                 <th
-                                        style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                     <strong>صافي القيمة</strong>
                                 </th>
                             </tr>
@@ -227,7 +227,7 @@
                                                             </td>
                                                         </tr>
                             -->
-                            <tr style=" background-color: #3498DB;" class="border-black">
+                            <tr style=" background-color: #EADBDB;" class="border-black">
                                 <td>
                                     <strong>المجموع</strong>
                                 </td>
@@ -246,7 +246,7 @@
                     <br/>
                     <br/>
                     <br/>
-                    <div style=" background-color: #3498DB; color:#fff !important; font:15px lucida-console,sans-serif !important; ">
+                    <div style=" background-color: #EADBDB; color:#fff !important; font:15px lucida-console,sans-serif !important; ">
                         <p t-if="o.notes">
                             <strong>
                                 <span>ملاحظات:</span>

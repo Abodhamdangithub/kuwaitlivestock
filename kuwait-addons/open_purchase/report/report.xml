@@ -65,7 +65,7 @@
                                         <span t-field="o.date_close"/>
                                     </td>
                                     <td class="text-center">
-                                        <p t-field="o.state"/>
+                                        <span t-field="o.state"/>
 
                                     </td>
                                 </tr>
@@ -262,11 +262,11 @@
                                 <table class="table table-condensed table table-striped"
                                        style="font-size:15px;font-family:Scheherazade;">
                                     <tr>
-                                        <th class="text-center">التاريخ</th>
-                                        <th class="text-center">رقم الدفعة</th>
-                                        <th class="text-center">دفتر اليومية</th>
-                                        <th class="text-center">المبلغ</th>
-                                        <th class="text-center">البيان</th>
+                                        <th style="background-color: #EADBDB;" class="text-center">التاريخ</th>
+                                        <th style="background-color: #EADBDB;" class="text-center">رقم الدفعة</th>
+                                        <th style="background-color: #EADBDB;" class="text-center">دفتر اليومية</th>
+                                        <th style="background-color: #EADBDB;" class="text-center">المبلغ</th>
+                                        <th style="background-color: #EADBDB;" class="text-center">البيان</th>
                                     </tr>
                                     <t t-foreach="o.payment_ids" t-as="l">
                                         <tr style="border-collapse: collapse;border: 0.5px solid black;"
@@ -310,10 +310,10 @@
                                 <table class="table table-condensed table table-striped"
                                        style="font-size:15px;font-family:Scheherazade;">
                                     <tr>
-                                        <th class="text-center">الموظف</th>
-                                        <th class="text-center">المحاسب</th>
-                                        <th class="text-center">امين الصندوق</th>
-                                        <th class="text-center">المستلم</th>
+                                        <th style="background-color: #EADBDB;" class="text-center">الموظف</th>
+                                        <th style="background-color: #EADBDB;" class="text-center">المحاسب</th>
+                                        <th style="background-color: #EADBDB;" class="text-center">امين الصندوق</th>
+                                        <th style="background-color: #EADBDB;" class="text-center">المستلم</th>
 
 
                                     </tr>

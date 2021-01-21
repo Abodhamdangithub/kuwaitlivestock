@@ -65,11 +65,11 @@
                                 <thead>
                                     <tr>
                                         <th width="30px"
-                                            style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                             العميل
                                         </th>
                                         <th width="30px"
-                                            style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                             البيان
                                         </th>
                                     </tr>
@@ -115,11 +115,11 @@
                                 <thead>
                                     <tr>
                                         <th width="30px"
-                                            style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                             القيمة
                                         </th>
                                         <th width="20px"
-                                            style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                             اليومية
                                         </th>
                                     </tr>
@@ -146,7 +146,7 @@
                             <thead>
                                 <tr>
                                     <th width="30px"
-                                        style="background-color:#3498DB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
                                         <center>
                                             توقيع المستلم
                                         </center>
