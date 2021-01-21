@@ -82,7 +82,7 @@
                                         style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;   !important; ">
                                         عنوان التسليم
                                     </th>
-                                     <th class="text-center"width="20px"
+                                     <th class="text-center" width="20px"
                                         style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;   !important; ">
                                         المرجع / الوصف
                                     </th>
@@ -126,11 +126,11 @@
                                         style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;   !important; ">
                                         تاريخ الاستحقاق
                                     </th>
-                                     <th class="text-center"width="20px"
+                                     <th class="text-center" width="20px"
                                         style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;   !important; ">
                                         شروط الدفع
                                     </th>
-                                     <th class="text-center"width="20px"
+                                     <th class="text-center" width="20px"
                                         style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;   !important; ">
                                         مندوب مبيعات
                                     </th>
@@ -158,16 +158,16 @@
                         <table class="table table-sm">
                             <thead>
                                 <tr>
-                                     <th class="text-center"style="background-color:#EADBDB !important;  !important;">وصف
+                                     <th class="text-center" style="background-color:#EADBDB !important;  !important;">وصف
                                     </th>
-                                     <th class="text-center"style="background-color:#EADBDB !important;  !important;">كمية</th>
-                                     <th class="text-center"style="background-color:#EADBDB !important;  !important;">سعر الوحدة
+                                     <th class="text-center" style="background-color:#EADBDB !important;  !important;">كمية</th>
+                                     <th class="text-center" style="background-color:#EADBDB !important;  !important;">سعر الوحدة
                                     </th>
-                                     <th class="text-center"style="background-color:#EADBDB !important;  !important;"
+                                     <th class="text-center" style="background-color:#EADBDB !important;  !important;"
                                         t-if="display_discount"
                                         groups="sale.group_discount_per_so_line">الخصم.(%)
                                     </th>
-                                     <th class="text-center"style="background-color:#EADBDB !important;  !important;">السعر</th>
+                                     <th class="text-center" style="background-color:#EADBDB !important;  !important;">السعر</th>
                                 </tr>
                             </thead>
                             <tbody class="invoice_tbody">
