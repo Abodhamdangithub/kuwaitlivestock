@@ -24,7 +24,7 @@ class SaleOrderLine(models.Model):
 
     @api.depends('product_uom_qty','move_ids.state', 'move_ids.scrapped', 'move_ids.product_uom_qty', 'move_ids.product_uom')
     def _compute_qty_lock(self):
-        for line in self:  
+        for line in self:
             qty = 0
             outgoing_moves, incoming_moves = line._get_outgoing_incoming_moves()
             # for move in outgoing_moves:
