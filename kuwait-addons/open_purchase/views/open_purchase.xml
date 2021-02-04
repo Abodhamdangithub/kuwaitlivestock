@@ -94,7 +94,7 @@
                                 </field>
                             </page>
                             <page string="فواتير المصاريف">
-                                <field name="invoice_ids" readonly="1">
+                                <field name="invoice_ids" readonly="0" context="{'default_type':'in_invoice','default_type_expenses_purchase':'open_purchase'}">
                                 </field>
                             </page>
                             <page string="الدفعات" >
