@@ -191,10 +191,19 @@ class OpenPurchase(models.Model):
             self.amount_win = self.amount_comm
         if not self.purchase_id.invoice_ids and self.type in ['comm','sharing']:
             for order_line in self.purchase_id.order_line:
+                ex = self.amount_outlay
+                qty_all = 0.0
+                for open_lines in self.open_purchase_line_ids:
+                    ex -= open_lines.sum_of_invoice_ids
+                    qty_all += open_lines.qty_not
+                if qty_all != 0.0:
+                    res4 = ex / qty_all
+                else:
+                    res4 = 0.0
                 for open_lines in self.open_purchase_line_ids:
                     if order_line.product_id.id == open_lines.product_id.id:
                         order_line.product_qty = open_lines.qty_sales
-                        order_line.price_unit = (self.amount_supplier / open_lines.qty_sales)
+                        order_line.price_unit = ((open_lines.price_all_sales - (open_lines.price_all_sales* (self.comm/100)) - open_lines.sum_of_invoice_ids - res4*open_lines.qty_not) /open_lines.qty_sales)
 
             return self.purchase_id.action_view_invoice()
 
@@ -267,6 +276,7 @@ class OpenPurchase(models.Model):
 
 class OpenPurchaseLine(models.Model):
     _name = 'open.purchase.line'
+    _rec_name = 'product_id'
 
     open_purchase_id = fields.Many2one('open.purchase', readonly=True)
     purchase_order_line = fields.Many2one('purchase.order.line', readonly=True)
@@ -288,6 +298,9 @@ class OpenPurchaseLine(models.Model):
     amount_not_win = fields.Float(string="قيمة الخسارة", readonly=True)
     state = fields.Selection([('draft', 'فتح'), ('closed', 'مغلق')], default='draft', required=True, tracking=True,
                              copy=False)
+    invoice_ids = fields.One2many('account.move', 'open_purchase_line_id', string="invoice_ids")
+    sum_of_invoice_ids = fields.Float(string="مجموع الصاريف", compute='_compute_sum_of_invoice_ids',store=True)
+
 
     def _get_pay_view_form(self):
         self.ensure_one()
@@ -330,6 +343,13 @@ class OpenPurchaseLine(models.Model):
             else:
                 me.price_unit_purchase = 0.0
 
+    @api.depends('invoice_ids','invoice_ids.invoice_line_ids','invoice_ids.invoice_line_ids.quantity','invoice_ids.invoice_line_ids.price_unit','invoice_ids.amount_total')
+    def _compute_sum_of_invoice_ids(self):
+        for me in self:
+            sum = 0.0
+            for inv in self.invoice_ids:
+                sum += inv.amount_total
+            me.sum_of_invoice_ids = sum
     @api.depends('purchase_order_line.qty_received')
     def _compute_qty_not(self):
         for me in self:

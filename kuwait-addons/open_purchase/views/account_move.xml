@@ -10,6 +10,7 @@
             <field name="journal_id" position="after">
                 <field name="type_expenses_purchase" required = '1' attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                 <field name="open_purchase_id" domain="[('state','=','draft')]" attrs="{'readonly': [('state', '!=', 'draft')],'required': [('type_expenses_purchase', '=', 'open_purchase')],'invisible': [('type_expenses_purchase', '!=', 'open_purchase')]}"/>
+                <field name="open_purchase_line_id" domain="[('open_purchase_id','=',open_purchase_id)]" attrs="{'readonly': [('state', '!=', 'draft')],'invisible': [('open_purchase_id', '=', False)]}"/>
             </field>
         </field>
     </record>
