@@ -154,6 +154,9 @@
                                       <th class="text-center" style="background-color:#EADBDB !important;   !important;"
                                         >السعر
                                     </th>
+                                      <th t-if="amount_of_comm" class="text-center" style="background-color:#EADBDB !important;   !important;"
+                                        >قيمة العمولة للدلال
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody class="sale_tbody">
@@ -175,6 +178,10 @@
                                         </td>
                                         <td class="text-center" >
                                             <span t-field="l.price_subtotal"
+                                                  t-field-options='{"widget": "monetary", "display_currency": "doc.pricelist_id.currency_id"}'/>
+                                        </td>
+                                        <td class="text-center" t-if="amount_of_comm">
+                                            <span t-field="l.amount_of_comm"
                                                   t-field-options='{"widget": "monetary", "display_currency": "doc.pricelist_id.currency_id"}'/>
                                         </td>
                                     </tr>
