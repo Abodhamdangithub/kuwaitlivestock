@@ -52,6 +52,7 @@
                                        attrs="{'readonly': [('state', '=', 'closed')],'invisible': ['|',('type', '!=', 'comm'),('type_comm', '!=', 'qty')],'required': [('type', '=', 'comm'),('type_comm', '=', 'qty')]}"
                                        style="width: 33%"/>
                                 <field name="amount_sales" style="width: 33%"/>
+                                <field name="all_sum_of_amount_of_comm"  style="width: 33%"/>
                                 <field name="amount_comm" attrs="{'invisible': [('type', '!=', 'comm')]}"
                                        style="width: 33%"/>
                                 <field name="amount_outlay" style="width: 33%"/>
@@ -89,6 +90,7 @@
                                         <field name="qty_available"/>
                                         <field name="invoice_ids" invisible="1"/>
                                         <field name="sum_of_invoice_ids"/>
+                                        <field name="sum_of_amount_of_comm"/>
                                         <field name="state" invisible="1"/>
                                         <field name="amount_win" invisible="1"/>
                                         <field name="amount_not_win" invisible="1"/>

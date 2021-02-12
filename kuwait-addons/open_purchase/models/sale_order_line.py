@@ -11,14 +11,25 @@ class SaleOrderLine(models.Model):
 
     open_purchase_id = fields.Many2one('open.purchase',"الارسالية", readonly=True)
     open_purchas_line_id = fields.Many2one('open.purchase.line',"سطر الارسالية", readonly=True)
-
     qty_lock = fields.Float('Lock Quantity', copy=False, compute='_compute_qty_lock',  compute_sudo=True, store=True, digits='Product Unit of Lock', default=0.0)
+
+
+    pecr_of_comm = fields.Float('قيمة العمولة للدلال للوحدة', copy=False, digits='Product Unit of Lock', default=0.0)
+    amount_of_comm = fields.Float('قيمة العمولة للدلال', copy=False, digits='Product Unit of Lock', compute='_compute_amount_of_comm',  compute_sudo=True, store=True, default=0.0)
 
     def write(self, vals):
         res = super(SaleOrderLine, self).write(vals)
         if  self.open_purchas_line_id.qty - self.open_purchas_line_id.qty_sales < 0:
             raise UserError(_('لا يوجد كمية للمنتج %s في الارسالية %s  الكمية المتاحة هي %s'%(self.product_id.name,self.open_purchase_id.order_number,self.open_purchas_line_id.qty_available+self.product_uom_qty )) )
         return res
+
+
+
+    @api.depends('pecr_of_comm','product_uom_qty', 'price_unit')
+    def _compute_amount_of_comm(self):
+        for me in self:
+            me.amount_of_comm = me.pecr_of_comm * me.product_uom_qty
+
 
 
 

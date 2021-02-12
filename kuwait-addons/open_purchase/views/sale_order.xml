@@ -8,6 +8,8 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <tree position="inside">
+                <field name="pecr_of_comm" invisible="0"/>
+                <field name="amount_of_comm" invisible="0"/>
                 <field name="qty_lock" invisible="1"/>
                 <field name="open_purchase_id" domain="[('state','=','draft')]"/>
                 <field name="open_purchas_line_id" invisible="1"/>

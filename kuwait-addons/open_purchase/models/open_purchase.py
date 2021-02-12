@@ -40,6 +40,16 @@ class OpenPurchase(models.Model):
     amount_payment = fields.Float(string="مجموع الدفعات", compute='_compute_amount_payment', store=True)
     amount_not_paid = fields.Float(string="المبلغ المتبقي", compute='_compute_amount_payment', store=True)
 
+
+    all_sum_of_amount_of_comm = fields.Float(string="مجموع عمولات الدلال كاملا", compute='_compute_all_sum_of_amount_of_comm',store=True)
+    @api.depends("open_purchase_line_ids.sum_of_amount_of_comm","open_purchase_line_ids")
+    def _compute_all_sum_of_amount_of_comm(self):
+        for me in self:
+            sum = 0.0
+            for line in me.open_purchase_line_ids:
+                sum += line.sum_of_amount_of_comm
+            me.all_sum_of_amount_of_comm = sum
+
     def get_invoices_data(self):
         data = []
         for inv in self.invoice_ids:
@@ -236,19 +246,19 @@ class OpenPurchase(models.Model):
             return self.purchase_id.action_view_invoice()
 
 
-    @api.depends("type", "type_comm", "comm", "comm_on_qty", "open_purchase_line_ids.qty_sales", "open_purchase_line_ids", "open_purchase_line_ids.price_all_sales")
+    @api.depends("type", "type_comm", "comm", "comm_on_qty", "open_purchase_line_ids.qty_sales", "open_purchase_line_ids", "open_purchase_line_ids.price_all_sales", "all_sum_of_amount_of_comm")
     def _compute_amount_comm(self):
         for me in self:
             if me.type_comm == "nsbeh":
                 sum = 0.0
                 for line in me.open_purchase_line_ids:
                     sum += (me.comm / 100) * line.price_all_sales
-                me.amount_comm = sum
+                me.amount_comm = sum - me.all_sum_of_amount_of_comm
             elif me.type_comm == "qty":
                 sum = 0.0
                 for line in me.open_purchase_line_ids:
                     sum += me.comm_on_qty * line.qty_sales
-                me.amount_comm = sum
+                me.amount_comm = sum - me.all_sum_of_amount_of_comm
 
 
     @api.depends("open_purchase_line_ids", "open_purchase_line_ids.amount_win")
@@ -314,7 +324,6 @@ class OpenPurchaseLine(models.Model):
     qty = fields.Float(string="الكمية المتبقية", readonly=True, compute='_compute_qty', store=True)
     price_unit_purchase_orginal = fields.Float(string="سعر وحدة الشراء الاصلي", invisible=True)
     price_unit_purchase = fields.Float(string="سعر وحدة الشراء",  compute='_compute_price_unit',store=True)
-
     price_unit_purchase_invisible = fields.Float(string="سعر وحدة الشراء المخفي", compute='_compute_price_unit',store=True)
     sale_order_line_ids = fields.One2many('sale.order.line', 'open_purchas_line_id', string="سطور طلبيات المبيعات")
     stock_scrap_ids = fields.One2many('stock.scrap', 'open_purchase_line_id', string="Stock Scrap")
@@ -328,6 +337,16 @@ class OpenPurchaseLine(models.Model):
                              copy=False)
     invoice_ids = fields.One2many('account.move', 'open_purchase_line_id', string="invoice_ids")
     sum_of_invoice_ids = fields.Float(string="مجموع الصاريف", compute='_compute_sum_of_invoice_ids',store=True)
+
+
+    sum_of_amount_of_comm = fields.Float(string="مجموع عمولات الدلال", compute='_compute_sum_of_amount_of_comm',store=True)
+    @api.depends("sale_order_line_ids.amount_of_comm","sale_order_line_ids")
+    def _compute_sum_of_amount_of_comm(self):
+        for me in self:
+            sum = 0.0
+            for order_line in me.sale_order_line_ids:
+                sum += order_line.amount_of_comm
+            me.sum_of_amount_of_comm = sum
 
 
     def _get_pay_view_form(self):
