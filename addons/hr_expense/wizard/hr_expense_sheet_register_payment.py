@@ -124,5 +124,5 @@ class HrExpenseSheetRegisterPaymentWizard(models.TransientModel):
             if line.account_id.internal_type == 'payable' and not line.reconciled:
                 account_move_lines_to_reconcile |= line
         account_move_lines_to_reconcile.reconcile()
-
+        expense_sheet.payment_id_id = payment.id
         return {'type': 'ir.actions.act_window_close'}

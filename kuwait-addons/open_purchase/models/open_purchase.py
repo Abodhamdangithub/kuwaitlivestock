@@ -13,7 +13,7 @@ class OpenPurchase(models.Model):
     name = fields.Char(string="اسم الارسالية")
     purchase_id = fields.Many2one('purchase.order', string="طلبية الشراء", readonly=True)
     open_purchase_line_ids = fields.One2many('open.purchase.line', 'open_purchase_id', string="open_purchase_line_ids",readonly=True)
-    invoice_ids = fields.One2many('account.move', 'open_purchase_id', string="invoice_ids")
+    invoice_ids = fields.One2many('account.move', 'open_purchase_id',domain="[('state','in',['draft','posted'])]", string="invoice_ids")
     type = fields.Selection([('normal', 'عادي'), ('comm', 'بالعمولة'), ('sharing', 'بالمشاركة')], default='normal', required=True,
                             tracking=True, copy=False)
     date = fields.Date(string=" تاريخ الانشاء", default=datetime.now())
@@ -40,15 +40,43 @@ class OpenPurchase(models.Model):
     amount_payment = fields.Float(string="مجموع الدفعات", compute='_compute_amount_payment', store=True)
     amount_not_paid = fields.Float(string="المبلغ المتبقي", compute='_compute_amount_payment', store=True)
 
+    def get_invoices_data(self):
+        data = []
+        for inv in self.invoice_ids:
+            for inv_line in inv.invoice_line_ids:
+                is_here = False
+                for l in data:
+                    if l['product_id'] == inv_line.product_id.name:
+                        l['quantity'] += inv_line.quantity
+                        l['price_unit'] += inv_line.price_unit
+                        l['price_subtotal'] += inv_line.price_subtotal
+                        is_here = True
+                if not is_here:
+                    dict_data = {'product_id': inv_line.product_id.name, 'quantity': inv_line.quantity,
+                                 'price_unit': inv_line.price_unit, 'price_subtotal': inv_line.price_subtotal}
+                    data.append(dict_data)
+        print ("data",data)
+        return data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     def action_open_purchase_register_payment(self):
         result = self.env['account.payment']\
             .with_context(active_ids=self.ids, active_model='open.purchase', active_id=self.id,default_payment_type='outbound',default_open_purchase_payment_id=self.id,default_partner_id = self.purchase_id.partner_id.id)\
             .action_register_payment()
         print ("result",result)
         return result
-
-
-
 
 
 

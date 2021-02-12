@@ -147,21 +147,21 @@
                                     </tr>
 
 
-                                    <t t-foreach="o.invoice_ids" t-as="l">
+                                    <t t-foreach="o.get_invoices_data()" t-as="l">
 
-                                        <tr t-foreach="l.invoice_line_ids" t-as="w"
+                                        <tr
                                             style="border-collapse: collapse;border: 0.5px solid black;">
                                             <td class="text-center">
-                                                <span t-field="w.product_id"/>
+                                                <span t-esc="l['product_id']"/>
                                             </td>
                                             <td class="text-center">
-                                                <p t-field="w.quantity"/>
+                                                <p t-esc="l['quantity']"/>
                                             </td>
                                             <td class="text-center">
-                                                <p t-field="w.price_unit"/>
+                                                <p t-esc="l['price_unit']"/>
                                             </td>
                                             <td class="text-center">
-                                                <p t-field="w.price_subtotal"/>
+                                                <p t-esc="l['price_subtotal']"/>
 
                                             </td>
                                         </tr>

@@ -536,6 +536,7 @@
                                 </group>
                                 <group>
                                     <field name="account_move_id" groups="account.group_account_user" attrs="{'invisible': [('state', 'not in', ['post', 'done'])]}" readonly="1"/>
+                                    <field name="payment_id_id" groups="account.group_account_user"  invisible="0"/>
                                 </group>
                             </group>
                         </page>
