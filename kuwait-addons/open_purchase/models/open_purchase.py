@@ -192,7 +192,7 @@ class OpenPurchase(models.Model):
             else:
                 shar = 1
 
-            res = line.price_all_sales - (line.price_unit_purchase * line.qty) - self.amount_outlay - comm
+            res = line.price_all_sales - (line.price_unit_purchase_orginal * line.qty_not) - self.amount_outlay - comm
             if res >= 0.0:
                 line.amount_win = res/shar
                 line.amount_not_win = 0.0
