@@ -17,14 +17,14 @@
                              style="max-height: 180px;"/>
                     </div>
                 </div>
-<!--
-                <div class="row mt32 mb32">
-                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
-                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
-                             style="max-height: 160px;"/>
-                    </div>
-                </div>
--->
+                <!--
+                                <div class="row mt32 mb32">
+                                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
+                                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
+                                             style="max-height: 160px;"/>
+                                    </div>
+                                </div>
+                -->
             </div>
 
             <div class="footer">
@@ -40,25 +40,35 @@
             <t t-call="web.external_layout">
                 <t t-set="doc" t-value="doc.with_context({'lang':zh_CN})"/>
                 <div class="page" style="font-family:Scheherazade;font-size:20px">
-                    <center><h1>أمر البيع</h1></center>
+                    <div t-if="doc.state not in ['draft']">
+                        <center >
+                            <h1>أمر البيع</h1>
+                        </center>
+                    </div>
+                    <div t-if="doc.state == 'draft'">
+                        <center >
+                            <h1>عرض سعر</h1>
+                        </center>
+                    </div>
+
                     <div class="oe_structure"/>
                     <div>
                         <table class="table table-sm" style=" table-layout:fixed;">
                             <thead>
                                 <tr>
-                                      <th class="text-center" width="30px"
+                                    <th class="text-center" width="30px"
                                         style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
                                         عنوان العميل
                                     </th>
-                                      <th class="text-center" width="30px"
+                                    <th class="text-center" width="30px"
                                         style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
                                         عنوان الفواتير والشحن
                                     </th>
-                                      <th class="text-center" width="20px"
+                                    <th class="text-center" width="20px"
                                         style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
                                         تاريخ الطلب
                                     </th>
-                                      <th class="text-center" width="20px"
+                                    <th class="text-center" width="20px"
                                         style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
                                         الطلب #
                                     </th>
@@ -66,7 +76,8 @@
                             </thead>
                             <tbody class="sale_tbody">
                                 <tr>
-                                    <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                    <td class="text-center"
+                                        style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-field="doc.partner_id"/>
                                         <t t-if="doc.partner_id.street">
                                             <t t-esc="doc.partner_id.street"/>
@@ -95,7 +106,8 @@
                                         <div t-field="doc.partner_id.vat"/>
                                     </td>
 
-                                    <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                    <td class="text-center"
+                                        style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <div t-field="doc.partner_invoice_id"/>
                                         <t t-if="doc.partner_invoice_id.street">
                                             <t t-esc="doc.partner_invoice_id.street"/>
@@ -122,10 +134,12 @@
                                         <br/>
                                         <div t-field="doc.partner_invoice_id.vat"/>
                                     </td>
-                                    <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                    <td class="text-center"
+                                        style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <span t-field="doc.date_order"/>
                                     </td>
-                                    <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                    <td class="text-center"
+                                        style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <strong>
                                             <span t-field="doc.name"/>
                                         </strong>
@@ -140,22 +154,24 @@
                         <table class="table table-sm">
                             <thead>
                                 <tr>
-                                      <th class="text-center" style="background-color:#EADBDB !important;   !important;">وصف</th>
-                                      <th class="text-center" style="background-color:#EADBDB !important;   !important;"
-                                        >كمية
+                                    <th class="text-center" style="background-color:#EADBDB !important;   !important;">
+                                        وصف
                                     </th>
-                                      <th class="text-center" style="background-color:#EADBDB !important;   !important;"
-                                        >سعر الوحدة
+                                    <th class="text-center" style="background-color:#EADBDB !important;   !important;"
+                                    >كمية
                                     </th>
-                                      <th class="text-center" style="background-color:#EADBDB !important;   !important;"
+                                    <th class="text-center" style="background-color:#EADBDB !important;   !important;"
+                                    >سعر الوحدة
+                                    </th>
+                                    <th class="text-center" style="background-color:#EADBDB !important;   !important;"
                                         t-if="display_discount"
                                         groups="sale.group_discount_per_so_line">خصم.(%)
                                     </th>
-                                      <th class="text-center" style="background-color:#EADBDB !important;   !important;"
-                                        >السعر
+                                    <th class="text-center" style="background-color:#EADBDB !important;   !important;"
+                                    >السعر
                                     </th>
-                                      <th  class="text-center" style="background-color:#EADBDB !important;   !important;"
-                                        >قيمة العمولة للدلال
+                                    <th class="text-center" style="background-color:#EADBDB !important;   !important;"
+                                    >قيمة العمولة للدلال
                                     </th>
                                 </tr>
                             </thead>
@@ -169,18 +185,18 @@
                                             <span t-field="l.product_uom_qty"/>
                                             <span groups="product.group_uom" t-field="l.product_uom"/>
                                         </td>
-                                        <td  class="text-center">
+                                        <td class="text-center">
                                             <span t-field="l.price_unit"/>
                                         </td>
                                         <td class="text-center" t-if="display_discount"
                                             groups="sale.group_discount_per_so_line">
                                             <span t-field="l.discount"/>
                                         </td>
-                                        <td class="text-center" >
+                                        <td class="text-center">
                                             <span t-field="l.price_subtotal"
                                                   t-field-options='{"widget": "monetary", "display_currency": "doc.pricelist_id.currency_id"}'/>
                                         </td>
-                                        <td class="text-center" >
+                                        <td class="text-center">
                                             <span t-field="l.amount_of_comm"
                                                   t-field-options='{"widget": "monetary", "display_currency": "doc.pricelist_id.currency_id"}'/>
                                         </td>
@@ -192,26 +208,26 @@
                     <div name="total">
                         <div class="col-xs-4 pull-right">
                             <table class="table table-condensed">
-<!--
-                                <tr class="border-black">
-                                    <td>
-                                        <strong>المجموع بدون ضرائب</strong>
-                                    </td>
-                                    <td class="text-right">
-                                        <span t-field="doc.amount_untaxed"
-                                              t-field-options='{"widget": "monetary", "display_currency": "doc.pricelist_id.currency_id"}'/>
-                                    </td>
-                                </tr>
--->
-<!--
-                                <tr>
-                                    <td>الضرائب</td>
-                                    <td class="text-right">
-                                        <span t-field="doc.amount_tax"
-                                              t-field-options='{"widget": "monetary", "display_currency": "doc.pricelist_id.currency_id"}'/>
-                                    </td>
-                                </tr>
--->
+                                <!--
+                                                                <tr class="border-black">
+                                                                    <td>
+                                                                        <strong>المجموع بدون ضرائب</strong>
+                                                                    </td>
+                                                                    <td class="text-right">
+                                                                        <span t-field="doc.amount_untaxed"
+                                                                              t-field-options='{"widget": "monetary", "display_currency": "doc.pricelist_id.currency_id"}'/>
+                                                                    </td>
+                                                                </tr>
+                                -->
+                                <!--
+                                                                <tr>
+                                                                    <td>الضرائب</td>
+                                                                    <td class="text-right">
+                                                                        <span t-field="doc.amount_tax"
+                                                                              t-field-options='{"widget": "monetary", "display_currency": "doc.pricelist_id.currency_id"}'/>
+                                                                    </td>
+                                                                </tr>
+                                -->
                                 <tr class="border-black">
                                     <td class="text-center" style="background-color:#EADBDB !important;   !important;">
                                         <strong>المجموع</strong>
