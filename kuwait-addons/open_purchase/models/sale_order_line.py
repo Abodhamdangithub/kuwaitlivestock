@@ -14,8 +14,8 @@ class SaleOrderLine(models.Model):
     qty_lock = fields.Float('Lock Quantity', copy=False, compute='_compute_qty_lock',  compute_sudo=True, store=True, digits='Product Unit of Lock', default=0.0)
 
 
-    pecr_of_comm = fields.Float('قيمة العمولة للدلال للوحدة', copy=False, digits='Product Unit of Lock', default=0.0)
-    amount_of_comm = fields.Float('قيمة العمولة للدلال', copy=False, digits='Product Unit of Lock', compute='_compute_amount_of_comm',  compute_sudo=True, store=True, default=0.0)
+    pecr_of_comm = fields.Float('قيمة العمولة للدلال للوحدة', copy=False, digits='Product Unit of Measure', default=0.0)
+    amount_of_comm = fields.Float('قيمة العمولة للدلال', copy=False, digits='Product Unit of Measure', compute='_compute_amount_of_comm',  compute_sudo=True, store=True, default=0.0)
 
     def write(self, vals):
         res = super(SaleOrderLine, self).write(vals)
