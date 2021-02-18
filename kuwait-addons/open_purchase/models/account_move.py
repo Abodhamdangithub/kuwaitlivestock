@@ -21,7 +21,7 @@ class AccountMove(models.Model):
                 raise UserError(_('يجب ادخال الارسالية التابعه للمصروف'))
         return result
     def button_cancel(self):
-        result = super(AccountMove, self).action_post()
+        result = super(AccountMove, self).button_cancel()
         for inv in self:
             if  inv.type_expenses_purchase == 'open_purchase' and inv.open_purchase_id:
                 inv.open_purchase_id = False
