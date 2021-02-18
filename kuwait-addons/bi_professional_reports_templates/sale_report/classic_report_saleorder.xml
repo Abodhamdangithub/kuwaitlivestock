@@ -41,15 +41,16 @@
                 <t t-set="doc" t-value="doc.with_context({'lang':zh_CN})"/>
                 <div class="page" style="font-family:Scheherazade;font-size:20px">
                     <div t-if="doc.state not in ['draft']">
-                        <center >
+                        <center>
                             <h1>أمر البيع</h1>
                         </center>
                     </div>
                     <div t-if="doc.state == 'draft'">
-                        <center >
+                        <center>
                             <h1>عرض سعر</h1>
                         </center>
                     </div>
+
 
                     <div class="oe_structure"/>
                     <div>
@@ -67,6 +68,10 @@
                                     <th class="text-center" width="20px"
                                         style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
                                         تاريخ الطلب
+                                    </th>
+                                    <th class="text-center" width="20px"
+                                        style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
+                                        الفواتير المرتبطة #
                                     </th>
                                     <th class="text-center" width="20px"
                                         style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
@@ -137,6 +142,14 @@
                                     <td class="text-center"
                                         style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                         <span t-field="doc.date_order"/>
+                                    </td>
+                                    <td class="text-center"
+                                        style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                        <strong>
+                                            <t t-foreach="doc.invoice_ids" t-as="inv">
+                                                <t t-esc="inv.name"/>
+                                            </t>
+                                        </strong>
                                     </td>
                                     <td class="text-center"
                                         style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
