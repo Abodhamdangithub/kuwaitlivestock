@@ -3,52 +3,52 @@
     <data>
         <template id="report_payment_receipt_new" inherit_id="account.report_payment_receipt_document">
             <xpath expr="//t[@t-name='account.report_payment_receipt_document']" position="replace">
-<!--
-            <div class="header">
-                <div class="row mt32 mb32">
-                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
-                        <img t-if="company.upload_image_header"
-                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_header)"
-                             style="max-height: 180px;"/>
-                    </div>
-                </div>
-                <div class="row mt32 mb32">
-                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
-                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
-                             style="max-height: 130px;"/>
-                    </div>
-                </div>
-            </div>
-                        <div class="footer">
-                <div class="row mt32 mb32">
-                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
-                        <img t-if="company.upload_image_footer"
-                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_footer)"
-                             style="max-height: 180px;"/>
-                    </div>
-                </div>
-            </div>
--->
+                <!--
+                            <div class="header">
+                                <div class="row mt32 mb32">
+                                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
+                                        <img t-if="company.upload_image_header"
+                                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_header)"
+                                             style="max-height: 180px;"/>
+                                    </div>
+                                </div>
+                                <div class="row mt32 mb32">
+                                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
+                                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
+                                             style="max-height: 130px;"/>
+                                    </div>
+                                </div>
+                            </div>
+                                        <div class="footer">
+                                <div class="row mt32 mb32">
+                                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
+                                        <img t-if="company.upload_image_footer"
+                                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_footer)"
+                                             style="max-height: 180px;"/>
+                                    </div>
+                                </div>
+                            </div>
+                -->
 
 
                 <t t-call="web.external_layout">
                     <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
                     <div class="page" style="font-family:Scheherazade;font-size:20px">
-                    <t t-if="o.payment_type == 'inbound'">
-                        <center>
-                            <h1>سند قبض</h1>
-                        </center>
-                    </t>
-                    <t t-if="o.payment_type == 'outbound'">
-                        <center>
-                            <h1>سند صرف</h1>
-                        </center>
-                    </t>
-                    <t t-if="o.payment_type == 'transfer'">
-                        <center>
-                            <h1>نقل داخلي</h1>
-                        </center>
-                    </t>
+                        <t t-if="o.payment_type == 'inbound'">
+                            <center>
+                                <h1>سند قبض</h1>
+                            </center>
+                        </t>
+                        <t t-if="o.payment_type == 'outbound'">
+                            <center>
+                                <h1>سند صرف</h1>
+                            </center>
+                        </t>
+                        <t t-if="o.payment_type == 'transfer'">
+                            <center>
+                                <h1>نقل داخلي</h1>
+                            </center>
+                        </t>
 
                         <div class="oe_structure"/>
                         <div>
@@ -56,7 +56,7 @@
                                 <span t-field="o.name"/>
                             </h3>
 
-                            <h3 >
+                            <h3>
                                 التاريخ:
                                 <span t-field="o.payment_date"/>
                             </h3>
@@ -64,11 +64,11 @@
                             <table class="table table-sm" style=" table-layout:fixed;">
                                 <thead>
                                     <tr>
-                                          <th class="text-center" width="30px"
+                                        <th class="text-center" width="30px"
                                             style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
                                             العميل
                                         </th>
-                                          <th class="text-center" width="30px"
+                                        <th class="text-center" width="30px"
                                             style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
                                             البيان
                                         </th>
@@ -76,7 +76,8 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                        <td class="text-center"
+                                            style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                             <div t-field="o.partner_id"/>
                                             <t t-if="o.partner_id.street">
                                                 <t t-esc="o.partner_id.street"/>
@@ -104,7 +105,8 @@
                                             <br/>
                                             <div t-field="o.partner_id.vat"/>
                                         </td>
-                                        <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                        <td class="text-center"
+                                            style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                             <div t-field="o.communication"/>
                                         </td>
                                     </tr>
@@ -114,11 +116,15 @@
                             <table class="table table-sm" style=" table-layout:fixed; padding-top=20px;">
                                 <thead>
                                     <tr>
-                                          <th class="text-center" width="30px"
+                                        <th class="text-center" width="20px"
+                                            style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
+                                            الاجمالي العام
+                                        </th>
+                                        <th class="text-center" width="30px"
                                             style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
                                             القيمة
                                         </th>
-                                          <th class="text-center" width="20px"
+                                        <th class="text-center" width="20px"
                                             style="background-color:#EADBDB !important;border: 1px !important; border-style: solid !important; border-color: #fff;    !important; ">
                                             اليومية
                                         </th>
@@ -126,10 +132,16 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                        <td class="text-center"
+                                            style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <div t-field="o.partner_id.balance_partner"/>
+                                        </td>
+                                        <td class="text-center"
+                                            style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                             <div t-field="o.amount"/>
                                         </td>
-                                        <td class="text-center" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                        <td class="text-center"
+                                            style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                             <div t-field="o.journal_id.name"/>
                                         </td>
                                     </tr>
