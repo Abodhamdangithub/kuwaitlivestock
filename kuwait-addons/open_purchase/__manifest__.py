@@ -12,7 +12,7 @@
     'license': 'LGPL-3',
     'support': 'odoomates@gmail.com',
     'website': '',
-    'depends': ['purchase','sale','account','fleet','stock','hr','hr_expense','sale_stock'],
+    'depends': ['purchase','sale','account','sales_team','fleet','stock','hr','hr_expense','sale_stock'],
     'demo': [],
     'data': [
         'security/security.xml',
@@ -37,6 +37,7 @@
         'report/moving_form.xml',
         'report/report.xml',
         'report/try_sales_report.xml',
+        'data/data.xml',
     ],
     'installable': True,
     'application': True,

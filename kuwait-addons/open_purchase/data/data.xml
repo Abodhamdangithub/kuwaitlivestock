@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="account_asset_cron" model="ir.cron">
+        <field name="name">Cancel Order (Just Order)</field>
+        <field name="model_id" ref="model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code">records.set_cancel_order()</field>
+        <field name="groups_id" eval="[(4,ref('sales_team.group_sale_manager'))]"/>
+    </record>
+
+
+
+</odoo>

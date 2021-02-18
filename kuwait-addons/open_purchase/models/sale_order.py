@@ -17,3 +17,10 @@ class SaleOrder(models.Model):
 
         super(SaleOrder, self).action_confirm()
 
+
+    def set_cancel_order(self):
+        for inv in self.invoice_ids:
+            if inv.state != "cancel":
+                raise UserError(_('يجب ان تكون جميع الفواتير حالتها ملغية'))
+        self.state = "cancel"
+
