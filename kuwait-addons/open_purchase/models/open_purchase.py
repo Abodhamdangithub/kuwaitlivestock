@@ -411,12 +411,13 @@ class OpenPurchaseLine(models.Model):
         for me in self:
             me.qty_available = me.qty - me.qty_sales
 
-    @api.depends("sale_order_line_ids.product_uom_qty","sale_order_line_ids.qty_lock")
+    @api.depends("sale_order_line_ids.product_uom_qty","sale_order_line_ids.qty_lock", "sale_order_line_ids.order_id.state")
     def _compute_qty_sales(self):
         for me in self:
             sum = 0.0
             for order_line in me.sale_order_line_ids:
-                sum += order_line.qty_lock
+                if order_line.order_id.state != 'cancel':
+                    sum += order_line.qty_lock
             me.qty_sales = sum
 
     @api.depends("sale_order_line_ids.product_uom_qty", "sale_order_line_ids.price_unit", "sale_order_line_ids.order_id.state")
