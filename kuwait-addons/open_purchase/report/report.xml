@@ -4,7 +4,13 @@
         <template id="open_purchase_report">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
-
+                    
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
                     <div class="header">
                         <div class="row mt32 mb32">
                             <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
