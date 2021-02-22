@@ -105,7 +105,7 @@
                                             المنتج
                                         </th>
                                         <th class="text-center" width="106" style="background-color: #EADBDB;">
-                                          اجمالي الكمية
+                                          الكمية الفعلية
                                         </th>
                                         <th class="text-center" width="106" style="background-color: #EADBDB;">
                                           التالف
@@ -116,7 +116,7 @@
                                             <span t-field="p.product_id"/>
                                         </td>
                                         <td class="text-center" width="106" >
-                                            <p t-field="p.qty"/>
+                                            <p t-field="p.qty_not"/>
                                         </td>
                                         <td class="text-center" width="106" >
                                             <p t-field="p.qty_talef"/>
