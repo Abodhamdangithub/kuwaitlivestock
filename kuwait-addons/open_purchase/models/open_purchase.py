@@ -242,7 +242,7 @@ class OpenPurchase(models.Model):
                     if order_line.product_id.id == open_lines.product_id.id:
                         #order_line.product_qty = open_lines.qty_sales
                         order_line.product_qty = open_lines.qty_sales + open_lines.qty_talef
-                        order_line.price_unit = ((open_lines.price_all_sales - (open_lines.price_all_sales* (self.comm/100)) - open_lines.sum_of_invoice_ids - res4*open_lines.qty_not) /open_lines.qty_sales + open_lines.qty_talef)
+                        order_line.price_unit = ((open_lines.price_all_sales - (open_lines.price_all_sales* (self.comm/100)) - open_lines.sum_of_invoice_ids - (res4*open_lines.qty_not)) /(open_lines.qty_sales + open_lines.qty_talef))
 
             return self.purchase_id.action_view_invoice()
 
