@@ -54,4 +54,5 @@ class SaleOrderLine(models.Model):
                 qty += move.product_uom._compute_quantity(move.product_uom_qty, line.product_uom,
                                                           rounding_method='HALF-UP')
 
-            line.qty_lock = line.product_uom_qty - qty
+            #line.qty_lock = line.product_uom_qty - qty
+            line.qty_lock = line.product_uom_qty
