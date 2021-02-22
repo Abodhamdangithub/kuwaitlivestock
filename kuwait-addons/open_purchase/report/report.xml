@@ -4,7 +4,7 @@
         <template id="open_purchase_report">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
-                    
+
             <t t-if="o and 'company_id' in o">
                 <t t-set="company" t-value="o.company_id"></t>
             </t>
@@ -33,7 +33,7 @@
                         <div class="page" style="font-family:Scheherazade">
                             <div class="col-xs-12">
                                 <center style="font-size:30px;font-weight:bold;left:150px;color :#a51b0b ;text-align:center;font-family:Scheherazade">
-                                    الارسالية
+                                    كشف الارسالية
                                 </center>
                             </div>
 
@@ -75,7 +75,6 @@
                             </table>
                             <center>
                                 <table t-if="o.type == 'comm'">
-
                                     <tr style="font-size:15px;border-collapse: collapse;border: 1px solid black; ">
                                         <th class="text-center" width="106" style="background-color: #EADBDB;">نوع
                                             الشراء
@@ -98,8 +97,30 @@
                                         <td class="text-center" width="106" t-if="o.type_comm == 'qty'">
                                             <p t-field="o.comm_on_qty"/>
                                         </td>
-
-
+                                    </tr>
+                                </table>
+                                <table >
+                                    <tr style="font-size:15px;border-collapse: collapse;border: 1px solid black; ">
+                                        <th class="text-center" width="106" style="background-color: #EADBDB;">نوع
+                                            المنتج
+                                        </th>
+                                        <th class="text-center" width="106" style="background-color: #EADBDB;">
+                                          اجمالي الكمية
+                                        </th>
+                                        <th class="text-center" width="106" style="background-color: #EADBDB;">
+                                          التالف
+                                        </th>
+                                    </tr>
+                                    <tr t-foreach="o.open_purchase_line_ids" t-as="p" style="font-size:15px;border-collapse: collapse;border: 0.5px solid black;">
+                                        <td class="text-center" width="106">
+                                            <span t-field="p.product_id"/>
+                                        </td>
+                                        <td class="text-center" width="106" >
+                                            <p t-field="p.qty"/>
+                                        </td>
+                                        <td class="text-center" width="106" >
+                                            <p t-field="p.qty_talef"/>
+                                        </td>
                                     </tr>
                                 </table>
 
