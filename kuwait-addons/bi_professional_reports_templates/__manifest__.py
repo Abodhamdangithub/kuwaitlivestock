@@ -14,7 +14,7 @@
     'author': 'BrowseInfo',
     'live_test_url':'https://youtu.be/_aihFWW4a5E',
     'website': 'https://www.browseinfo.in',
-    'depends': ['base', 'account', 'sale', 'purchase', 'stock', 'sale_stock', 'base_vat','sale_management','purchase_stock','open_purchase'],
+    'depends': ['base', 'account', 'sale', 'purchase', 'stock', 'sale_stock', 'base_vat','sale_management','purchase_stock'],
     'data': [
 
         "res_company.xml",
