@@ -12,7 +12,7 @@
     'license': 'LGPL-3',
     'support': 'odoomates@gmail.com',
     'website': '',
-    'depends': ['purchase','sale','account','sales_team','fleet','stock','hr','hr_expense','sale_stock'],
+    'depends': ['purchase','sale','account','bi_professional_reports_templates','sales_team','fleet','stock','hr','hr_expense','sale_stock'],
     'demo': [],
     'data': [
         'security/security.xml',
