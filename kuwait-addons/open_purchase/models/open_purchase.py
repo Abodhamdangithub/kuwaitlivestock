@@ -63,7 +63,7 @@ class OpenPurchase(models.Model):
                         is_here = True
                 if not is_here:
                     dict_data = {'product_id': inv_line.product_id.name, 'quantity': inv_line.quantity,
-                                 'price_unit': inv_line.price_unit, 'price_subtotal': inv_line.price_subtotal}
+                                 'price_unit': inv_line.price_subtotal/inv_line.quantity, 'price_subtotal': inv_line.price_subtotal}
                     data.append(dict_data)
         print ("data",data)
         return data
