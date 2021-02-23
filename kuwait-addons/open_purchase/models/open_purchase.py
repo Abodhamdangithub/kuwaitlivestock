@@ -61,13 +61,15 @@ class OpenPurchase(models.Model):
                         l['price_unit'] += inv_line.price_unit
                         l['price_subtotal'] += inv_line.price_subtotal
                         is_here = True
-                l['price_unit'] = round(l['price_subtotal']/l['quantity'],3)
 
                 if not is_here:
                     dict_data = {'product_id': inv_line.product_id.name, 'quantity': inv_line.quantity,
                                  'price_unit': inv_line.price_unit, 'price_subtotal': inv_line.price_subtotal}
                     data.append(dict_data)
         print ("data",data)
+        for d in data:
+            d['price_unit'] = round(d['price_subtotal'] / d['quantity'], 3)
+
         return data
 
 
