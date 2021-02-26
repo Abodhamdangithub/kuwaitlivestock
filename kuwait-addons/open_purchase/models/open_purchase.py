@@ -354,6 +354,14 @@ class OpenPurchaseLine(models.Model):
                 sum += order_line.amount_of_comm
             me.sum_of_amount_of_comm = sum
 
+    @api.depends('purchase_order_line.qty_received')
+    def _compute_qty_not(self):
+        for me in self:
+            me.qty_not = me.purchase_order_line.qty_received
+    @api.depends('qty_not', "qty_talef")
+    def _compute_qty(self):
+        for me in self:
+            me.qty = me.qty_not - me.qty_talef
 
     def _get_pay_view_form(self):
         self.ensure_one()
@@ -409,14 +417,14 @@ class OpenPurchaseLine(models.Model):
             outlayline += line.sum_of_invoice_ids / qty
             me.price_unit_purchase_out += line.sum_of_invoice_ids / qty
 
-    @api.depends(  'open_purchase_id.type','qty_talef', 'purchase_order_line.price_unit')
+    @api.depends('open_purchase_id.type','qty_talef', 'purchase_order_line.price_unit')
     def _compute_price_unit_purchase_talef(self):
         for me in self:
             if me.qty_available == 0.0:
                 av = 1
             else:
                 av = me.qty_available
-            me.price_unit_purchase_talef = me.price_unit_purchase_talef +  ((me.price_unit_purchase_talef ) / av)
+            me.price_unit_purchase_talef = me.price_unit_purchase_talef +  (me.price_unit_purchase_talef/ av) +
 
     @api.depends('invoice_ids','invoice_ids.invoice_line_ids','invoice_ids.invoice_line_ids.quantity','invoice_ids.invoice_line_ids.price_unit','invoice_ids.amount_total')
     def _compute_sum_of_invoice_ids(self):
@@ -426,14 +434,6 @@ class OpenPurchaseLine(models.Model):
                 sum += inv.amount_total
             me.sum_of_invoice_ids = sum
 
-    @api.depends('purchase_order_line.qty_received')
-    def _compute_qty_not(self):
-        for me in self:
-            me.qty_not = me.purchase_order_line.qty_received
-    @api.depends('qty_not', "qty_talef")
-    def _compute_qty(self):
-        for me in self:
-            me.qty = me.qty_not - me.qty_talef
 
 
     @api.depends("sale_order_line_ids.product_uom_qty","sale_order_line_ids.qty_lock", "sale_order_line_ids.order_id.state")

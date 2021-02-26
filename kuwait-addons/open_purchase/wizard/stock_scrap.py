@@ -17,6 +17,5 @@ class StockScrap(models.Model):
         if self.open_purchase_line_id:
             if self.scrap_qty > self.open_purchase_line_id.qty_available:
                 raise UserError(_('لا يمكنك اتلاف كمية اكبر من المتاحه '))
-
             self.open_purchase_line_id.qty_talef = self.open_purchase_line_id.qty_talef + self.scrap_qty
         super(StockScrap, self).action_validate()
