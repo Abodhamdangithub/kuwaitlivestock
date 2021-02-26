@@ -420,7 +420,9 @@ class OpenPurchaseLine(models.Model):
                 av = 1
             else:
                 av = me.qty_available
-            me.price_unit_purchase_talef = me.price_unit_purchase_talef +  (me.price_unit_purchase_talef/ av) 
+
+
+            me.price_unit_purchase_talef = me.price_unit_purchase_talef +  (me.price_unit_purchase_talef/ av)  + (me.price_unit_purchase_out/av)
 
     @api.depends('invoice_ids','invoice_ids.invoice_line_ids','invoice_ids.invoice_line_ids.quantity','invoice_ids.invoice_line_ids.price_unit','invoice_ids.amount_total')
     def _compute_sum_of_invoice_ids(self):
