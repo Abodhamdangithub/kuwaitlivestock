@@ -21,8 +21,12 @@ class SaleOrderLine(models.Model):
         res = super(SaleOrderLine, self).write(vals)
         if  self.open_purchas_line_id.qty - self.open_purchas_line_id.qty_sales < 0:
             raise UserError(_('لا يوجد كمية للمنتج %s في الارسالية %s  الكمية المتاحة هي %s'%(self.product_id.name,self.open_purchase_id.order_number,self.open_purchas_line_id.qty_available+self.product_uom_qty )) )
+
         return res
 
+    @api.onchange('price_unit','product_uom_qty','amount_of_comm','pecr_of_comm')
+    def change_info(self):
+        self.discount = (self.amount_of_comm / (self.price_unit * self.product_uom_qty)) * 100
 
 
     @api.depends('pecr_of_comm','product_uom_qty', 'price_unit')

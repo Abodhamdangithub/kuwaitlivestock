@@ -431,5 +431,6 @@ class OpenPurchaseLine(models.Model):
             sum = 0.0
             for order_line in me.sale_order_line_ids:
                 if order_line.order_id.state != 'cancel':
-                    sum += order_line.product_uom_qty * order_line.price_unit
+                    #sum += order_line.product_uom_qty * order_line.price_unit
+                    sum += order_line.price_subtotal + order_line.amount_of_comm
             me.price_all_sales = sum
