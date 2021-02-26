@@ -230,7 +230,7 @@ class OpenPurchase(models.Model):
                 self.amount_supplier = self.amount_sales + self.amount_lose - self.amount_outlay
         self.state = "closed"
         if self.type == "comm":
-            self.amount_win = self.amount_comm -  line.all_sum_of_amount_of_comm
+            self.amount_win = self.amount_comm -  line.sum_of_amount_of_comm
         if not self.purchase_id.invoice_ids and self.type in ['comm','sharing']:
             for order_line in self.purchase_id.order_line:
                 ex = self.amount_outlay
