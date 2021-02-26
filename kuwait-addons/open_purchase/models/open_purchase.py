@@ -476,7 +476,7 @@ class OpenPurchaseLine(models.Model):
             if me.qty_sales == 0.0:
                 me.price_unit_purchase_PursubSale = me.price_unit_purchase
             else:
-                me.price_unit_purchase_PursubSale = me.price_unit_purchase + (res*-1  / av)
+                me.price_unit_purchase_PursubSale = me.price_unit_purchase_PursubSale + (res*-1  / av)
 
 
     # @api.depends('qty_sales', 'price_unit_purchase')
