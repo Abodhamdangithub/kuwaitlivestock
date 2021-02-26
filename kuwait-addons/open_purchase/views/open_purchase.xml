@@ -82,6 +82,7 @@
                                         <field name="price_unit_purchase"/>
                                         <field name="price_unit_purchase_out" invisible="1"/>
                                         <field name="price_unit_purchase_talef" invisible="1"/>
+                                        <field name="price_unit_purchase_PursubSale" invisible="1"/>
 <!--
                                         <field name="price_unit"/>
 -->
