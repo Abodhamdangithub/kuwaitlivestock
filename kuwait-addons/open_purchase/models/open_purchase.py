@@ -384,7 +384,7 @@ class OpenPurchaseLine(models.Model):
             me.qty_available = me.qty - me.qty_sales
 
 
-    @api.depends( 'open_purchase_id.type','qty_talef', 'open_purchase_id.amount_outlay', 'purchase_order_line.price_unit')
+    @api.depends( 'open_purchase_id.type','price_unit_purchase_out','price_unit_purchase_talef','qty_talef', 'open_purchase_id.amount_outlay', 'purchase_order_line.price_unit')
     def _compute_price_unit(self):
         for me in self:
             me.price_unit_purchase = me.price_unit_purchase_out + me.price_unit_purchase_talef
