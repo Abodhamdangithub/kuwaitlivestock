@@ -431,7 +431,8 @@ class OpenPurchaseLine(models.Model):
                 sum_qty_all = 1
             outlayline = (me.open_purchase_id.amount_outlay - sum_outlay_lines) / sum_qty_all
             outlayline += line.sum_of_invoice_ids / qty
-            me.price_unit_purchase_out += line.sum_of_invoice_ids / qty
+            me.price_unit_purchase_out  = outlayline
+            #me.price_unit_purchase_out += line.sum_of_invoice_ids / qty
 
     @api.depends('open_purchase_id.type','qty_talef', 'purchase_order_line.price_unit')
     def _compute_price_unit_purchase_talef(self):
