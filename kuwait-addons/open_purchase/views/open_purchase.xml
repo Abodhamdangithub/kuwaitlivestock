@@ -80,7 +80,8 @@
                                         <field name="qty"/>
                                         <field name="price_unit_purchase_orginal" invisible="1"/>
                                         <field name="price_unit_purchase"/>
-                                        <field name="price_unit_purchase_invisible" invisible="1"/>
+                                        <field name="price_unit_purchase_out" invisible="1"/>
+                                        <field name="price_unit_purchase_talef" invisible="1"/>
 <!--
                                         <field name="price_unit"/>
 -->

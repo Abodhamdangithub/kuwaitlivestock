@@ -329,7 +329,8 @@ class OpenPurchaseLine(models.Model):
     qty = fields.Float(string="الكمية المتبقية", readonly=True, compute='_compute_qty', store=True)
     price_unit_purchase_orginal = fields.Float(string="سعر وحدة الشراء الاصلي", invisible=True)
     price_unit_purchase = fields.Float(string="سعر وحدة الشراء",  compute='_compute_price_unit',store=True)
-    price_unit_purchase_invisible = fields.Float(string="سعر وحدة الشراء المخفي", compute='_compute_price_unit',store=True)
+    price_unit_purchase_talef = fields.Float(string="سعر وحدة الشراء حسبة التالف فقط مخفي",  compute='_compute_price_unit_purchase_talef',store=True)
+    price_unit_purchase_out = fields.Float(string="حسبة المصاريف مخفي",  compute='_compute_price_unit_purchase_out',store=True)
     sale_order_line_ids = fields.One2many('sale.order.line', 'open_purchas_line_id', string="سطور طلبيات المبيعات")
     stock_scrap_ids = fields.One2many('stock.scrap', 'open_purchase_line_id', string="Stock Scrap")
     qty_sales = fields.Float(string="كمية المبيعات", readonly=True, compute='_compute_qty_sales', store=True)
@@ -383,8 +384,14 @@ class OpenPurchaseLine(models.Model):
             me.qty_available = me.qty - me.qty_sales
 
 
-    @api.depends('price_unit_purchase_invisible', 'open_purchase_id.type','qty_talef', 'open_purchase_id.amount_outlay', 'purchase_order_line.price_unit')
+    @api.depends( 'open_purchase_id.type','qty_talef', 'open_purchase_id.amount_outlay', 'purchase_order_line.price_unit')
     def _compute_price_unit(self):
+        for me in self:
+            me.price_unit_purchase = me.price_unit_purchase_out + me.price_unit_purchase_talef
+
+
+    @api.depends( 'open_purchase_id.type', 'open_purchase_id.amount_outlay')
+    def _compute_price_unit_purchase_out(self):
         for me in self:
             if me.qty > 0:
                 qty = me.qty
@@ -398,22 +405,14 @@ class OpenPurchaseLine(models.Model):
                 sum_qty_all += line.qty
             outlayline = (me.open_purchase_id.amount_outlay - sum_outlay_lines) / sum_qty_all
             outlayline += line.sum_of_invoice_ids / qty
+            me.price_unit_purchase_out += line.sum_of_invoice_ids / qty
 
-            if me.price_unit_purchase == 0.0:
-                me.price_unit_purchase_invisible = me.purchase_order_line.price_unit
-            else:
-                me.price_unit_purchase_invisible = me.price_unit_purchase
+    @api.depends(  'open_purchase_id.type','qty_talef', 'purchase_order_line.price_unit')
+    def _compute_price_unit_purchase_talef(self):
+        for me in self:
+            me.price_unit_purchase_talef = me.price_unit_purchase_talef + round( ((me.price_unit_purchase_talef ) / me.qty_available) ,3)
 
-            if me.price_unit_purchase == 0.0:
-                me.price_unit_purchase = me.purchase_order_line.price_unit
-            else:
-                me.price_unit_purchase = me.price_unit_purchase
 
-            if me.open_purchase_id.type != "comm":
-                me.price_unit_purchase = me.price_unit_purchase + round( ((me.price_unit_purchase ) / me.qty_available) + (
-                        outlayline),3)
-            else:
-                me.price_unit_purchase = 0.0
 
     @api.depends('invoice_ids','invoice_ids.invoice_line_ids','invoice_ids.invoice_line_ids.quantity','invoice_ids.invoice_line_ids.price_unit','invoice_ids.amount_total')
     def _compute_sum_of_invoice_ids(self):
