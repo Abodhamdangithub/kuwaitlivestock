@@ -410,7 +410,11 @@ class OpenPurchaseLine(models.Model):
     @api.depends(  'open_purchase_id.type','qty_talef', 'purchase_order_line.price_unit')
     def _compute_price_unit_purchase_talef(self):
         for me in self:
-            me.price_unit_purchase_talef = me.price_unit_purchase_talef + round( ((me.price_unit_purchase_talef ) / me.qty_available) ,3)
+            if me.qty_available == 0.0:
+                av = 1
+            else:
+                av = me.qty_available
+            me.price_unit_purchase_talef = me.price_unit_purchase_talef + round( ((me.price_unit_purchase_talef ) / av) ,3)
 
 
 
