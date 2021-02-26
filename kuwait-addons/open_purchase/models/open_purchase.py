@@ -399,7 +399,7 @@ class OpenPurchaseLine(models.Model):
     @api.depends('qty_sales')
     def _compute_price_unit_purchase_PursubSale(self):
         for me in self:
-            if me.qty_sales = 0.0:
+            if me.qty_sales == 0.0:
                 qts = 1
             else:
                 qts = me.qty_sales
