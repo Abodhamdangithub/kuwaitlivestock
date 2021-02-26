@@ -332,7 +332,7 @@ class OpenPurchaseLine(models.Model):
     price_unit_purchase_talef = fields.Float(string="سعر وحدة الشراء حسبة التالف فقط مخفي",  compute='_compute_price_unit_purchase_talef',store=True)
     price_unit_purchase_out = fields.Float(string="حسبة المصاريف مخفي",  compute='_compute_price_unit_purchase_out',store=True)
 
-    price_unit_purchase_PursubSale = fields.Float(string="حسبة PurWithOut - Sales",  compute='_compute_price_all_sales',store=True)
+    price_unit_purchase_PursubSale = fields.Float(string="التكلفة ",  compute='_compute_price_all_sales',store=True)
 
     sale_order_line_ids = fields.One2many('sale.order.line', 'open_purchas_line_id', string="سطور طلبيات المبيعات")
     stock_scrap_ids = fields.One2many('stock.scrap', 'open_purchase_line_id', string="Stock Scrap")
