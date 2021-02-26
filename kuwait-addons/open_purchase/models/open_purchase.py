@@ -410,7 +410,7 @@ class OpenPurchaseLine(models.Model):
                 me.price_unit_purchase = me.price_unit_purchase
 
             if me.open_purchase_id.type != "comm":
-                me.price_unit_purchase = round( ((me.price_unit_purchase * me.qty_not) / me.qty_available) + (
+                me.price_unit_purchase = round( ((me.price_unit_purchase ) / me.qty_available) + (
                         outlayline),3)
             else:
                 me.price_unit_purchase = 0.0
