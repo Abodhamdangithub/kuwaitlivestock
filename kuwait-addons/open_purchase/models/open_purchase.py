@@ -400,7 +400,11 @@ class OpenPurchaseLine(models.Model):
     def _compute_price_unit_purchase_PursubSale(self):
         for me in self:
             res = (me.price_all_sales / me.qty_sales) - ((me.price_unit_purchase_out + me.price_unit_purchase_talef))
-            me.price_unit_purchase_PursubSale = me.price_unit_purchase + (res / me.qty_available)
+            if me.qty_available == 0.0:
+                av = 1
+            else:
+                av = me.qty_available
+            me.price_unit_purchase_PursubSale = me.price_unit_purchase + (res / av)
 
 
     @api.depends( 'open_purchase_id.type', 'open_purchase_id.amount_outlay')
