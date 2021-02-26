@@ -332,7 +332,7 @@ class OpenPurchaseLine(models.Model):
     price_unit_purchase_talef = fields.Float(string="سعر وحدة الشراء حسبة التالف فقط مخفي",  compute='_compute_price_unit_purchase_talef',store=True)
     price_unit_purchase_out = fields.Float(string="حسبة المصاريف مخفي",  compute='_compute_price_unit_purchase_out',store=True)
 
-    price_unit_purchase_PursubSale = fields.Float(string="حسبة PurWithOut - Sales",  compute='_compute_price_unit_purchase_PursubSale',store=True)
+    price_unit_purchase_PursubSale = fields.Float(string="حسبة PurWithOut - Sales",  compute='_compute_price_all_sales',store=True)
 
     sale_order_line_ids = fields.One2many('sale.order.line', 'open_purchas_line_id', string="سطور طلبيات المبيعات")
     stock_scrap_ids = fields.One2many('stock.scrap', 'open_purchase_line_id', string="Stock Scrap")
@@ -464,9 +464,6 @@ class OpenPurchaseLine(models.Model):
             me.price_all_sales = sum
 
 
-    @api.depends('qty_sales', 'price_unit_purchase')
-    def _compute_price_unit_purchase_PursubSale(self):
-        for me in self:
             if me.qty_sales == 0.0:
                 qts = 1
             else:
@@ -480,3 +477,21 @@ class OpenPurchaseLine(models.Model):
                 me.price_unit_purchase_PursubSale = me.price_unit_purchase
             else:
                 me.price_unit_purchase_PursubSale = me.price_unit_purchase + (res*-1  / av)
+
+
+    # @api.depends('qty_sales', 'price_unit_purchase')
+    # def _compute_price_unit_purchase_PursubSale(self):
+    #     for me in self:
+    #         if me.qty_sales == 0.0:
+    #             qts = 1
+    #         else:
+    #             qts = me.qty_sales
+    #         res = (me.price_all_sales / qts) - ((me.price_unit_purchase_out + me.price_unit_purchase_talef))
+    #         if me.qty_available == 0.0:
+    #             av = 1
+    #         else:
+    #             av = me.qty_available
+    #         if me.qty_sales == 0.0:
+    #             me.price_unit_purchase_PursubSale = me.price_unit_purchase
+    #         else:
+    #             me.price_unit_purchase_PursubSale = me.price_unit_purchase + (res*-1  / av)
