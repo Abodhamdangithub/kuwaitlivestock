@@ -453,7 +453,7 @@ class OpenPurchaseLine(models.Model):
                     sum += order_line.qty_lock
             me.qty_sales = sum
 
-    @api.depends("sale_order_line_ids.product_uom_qty", "sale_order_line_ids.price_unit", "sale_order_line_ids.order_id.state")
+    @api.depends("price_unit_purchase","sale_order_line_ids.product_uom_qty", "sale_order_line_ids.price_unit", "sale_order_line_ids.order_id.state")
     def _compute_price_all_sales(self):
         for me in self:
             sum = 0.0
