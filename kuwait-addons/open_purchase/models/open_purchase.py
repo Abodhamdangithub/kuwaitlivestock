@@ -468,7 +468,7 @@ class OpenPurchaseLine(models.Model):
                 qts = 1
             else:
                 qts = me.qty_sales
-            res = ((me.price_unit_purchase_out + me.price_unit_purchase_talef) * qts) - (me.price_all_sales / qts)
+            res = ((me.price_unit_purchase_out + me.price_unit_purchase_talef) * qts) - (me.price_all_sales )
             if me.qty_available == 0.0:
                 av = 1
             else:
