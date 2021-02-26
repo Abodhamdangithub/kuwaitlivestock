@@ -396,22 +396,6 @@ class OpenPurchaseLine(models.Model):
         for me in self:
             me.price_unit_purchase = me.price_unit_purchase_out + me.price_unit_purchase_talef
 
-    @api.depends('qty_sales', 'price_unit_purchase')
-    def _compute_price_unit_purchase_PursubSale(self):
-        for me in self:
-            if me.qty_sales == 0.0:
-                qts = 1
-            else:
-                qts = me.qty_sales
-            res = (me.price_all_sales / qts) - ((me.price_unit_purchase_out + me.price_unit_purchase_talef))
-            if me.qty_available == 0.0:
-                av = 1
-            else:
-                av = me.qty_available
-            if me.qty_sales == 0.0:
-                me.price_unit_purchase_PursubSale = me.price_unit_purchase
-            else:
-                me.price_unit_purchase_PursubSale = me.price_unit_purchase + (res*-1  / av)
 
 
     @api.depends( 'open_purchase_id.type', 'open_purchase_id.amount_outlay')
@@ -478,3 +462,21 @@ class OpenPurchaseLine(models.Model):
                     #sum += order_line.product_uom_qty * order_line.price_unit
                     sum += order_line.price_subtotal + order_line.amount_of_comm
             me.price_all_sales = sum
+
+
+    @api.depends('qty_sales', 'price_unit_purchase')
+    def _compute_price_unit_purchase_PursubSale(self):
+        for me in self:
+            if me.qty_sales == 0.0:
+                qts = 1
+            else:
+                qts = me.qty_sales
+            res = (me.price_all_sales / qts) - ((me.price_unit_purchase_out + me.price_unit_purchase_talef))
+            if me.qty_available == 0.0:
+                av = 1
+            else:
+                av = me.qty_available
+            if me.qty_sales == 0.0:
+                me.price_unit_purchase_PursubSale = me.price_unit_purchase
+            else:
+                me.price_unit_purchase_PursubSale = me.price_unit_purchase + (res*-1  / av)
