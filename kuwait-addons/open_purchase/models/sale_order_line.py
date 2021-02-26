@@ -26,7 +26,8 @@ class SaleOrderLine(models.Model):
 
     @api.onchange('price_unit','product_uom_qty','amount_of_comm','pecr_of_comm')
     def change_info(self):
-        self.discount = (self.amount_of_comm / (self.price_unit * self.product_uom_qty)) * 100
+        if (self.price_unit * self.product_uom_qty) > 0:
+            self.discount = (self.amount_of_comm / (self.price_unit * self.product_uom_qty)) * 100
 
 
     @api.depends('pecr_of_comm','product_uom_qty', 'price_unit')
