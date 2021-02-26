@@ -396,7 +396,7 @@ class OpenPurchaseLine(models.Model):
         for me in self:
             me.price_unit_purchase = me.price_unit_purchase_out + me.price_unit_purchase_talef
 
-    @api.depends('qty_sales')
+    @api.depends('qty_sales', 'price_unit_purchase')
     def _compute_price_unit_purchase_PursubSale(self):
         for me in self:
             if me.qty_sales == 0.0:
@@ -408,7 +408,10 @@ class OpenPurchaseLine(models.Model):
                 av = 1
             else:
                 av = me.qty_available
-            me.price_unit_purchase_PursubSale = me.price_unit_purchase + (res / av)
+            if me.qty_sales == 0.0:
+                me.price_unit_purchase_PursubSale = me.price_unit_purchase
+            else:
+                me.price_unit_purchase_PursubSale = me.price_unit_purchase + (res  / av)
 
 
     @api.depends( 'open_purchase_id.type', 'open_purchase_id.amount_outlay')
