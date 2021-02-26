@@ -208,7 +208,7 @@ class OpenPurchase(models.Model):
 
             res = line.price_all_sales - (line.price_unit_purchase_orginal * line.qty_not) - self.amount_outlay - comm
             if res >= 0.0:
-                line.amount_win = (res/shar) -  line.all_sum_of_amount_of_comm
+                line.amount_win = (res/shar) -  line.sum_of_amount_of_comm
                 line.amount_not_win = 0.0
             else:
                 line.amount_win = 0.0
