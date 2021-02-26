@@ -208,7 +208,7 @@ class OpenPurchase(models.Model):
 
             res = line.price_all_sales - (line.price_unit_purchase_orginal * line.qty_not) - self.amount_outlay - comm
             if res >= 0.0:
-                line.amount_win = res/shar
+                line.amount_win = (res/shar) -  line.all_sum_of_amount_of_comm
                 line.amount_not_win = 0.0
             else:
                 line.amount_win = 0.0
@@ -230,7 +230,7 @@ class OpenPurchase(models.Model):
                 self.amount_supplier = self.amount_sales + self.amount_lose - self.amount_outlay
         self.state = "closed"
         if self.type == "comm":
-            self.amount_win = self.amount_comm
+            self.amount_win = self.amount_comm -  line.all_sum_of_amount_of_comm
         if not self.purchase_id.invoice_ids and self.type in ['comm','sharing']:
             for order_line in self.purchase_id.order_line:
                 ex = self.amount_outlay
