@@ -400,7 +400,7 @@ class OpenPurchaseLine(models.Model):
                     outlayline ), 3)
 
             if me.open_purchase_id.type != "comm":
-                me.price_unit_purchase = round( ((me.purchase_order_line.price_unit * me.qty_not) / qty) + (
+                me.price_unit_purchase = round( ((me.price_unit_purchase * me.qty_not) / qty) + (
                         outlayline ),3)
             else:
                 me.price_unit_purchase = 0.0
