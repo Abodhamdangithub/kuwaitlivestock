@@ -399,7 +399,11 @@ class OpenPurchaseLine(models.Model):
     @api.depends('qty_sales')
     def _compute_price_unit_purchase_PursubSale(self):
         for me in self:
-            res = (me.price_all_sales / me.qty_sales) - ((me.price_unit_purchase_out + me.price_unit_purchase_talef))
+            if me.qty_sales = 0.0:
+                qts = 1
+            else:
+                qts = me.qty_sales
+            res = (me.price_all_sales / qts) - ((me.price_unit_purchase_out + me.price_unit_purchase_talef))
             if me.qty_available == 0.0:
                 av = 1
             else:
