@@ -377,6 +377,10 @@ class OpenPurchaseLine(models.Model):
         }
 
 
+    @api.depends('qty', "qty_sales")
+    def _compute_qty_available(self):
+        for me in self:
+            me.qty_available = me.qty - me.qty_sales
 
 
     @api.depends('price_unit_purchase_invisible', 'open_purchase_id.type','qty_talef', 'open_purchase_id.amount_outlay', 'purchase_order_line.price_unit')
@@ -400,9 +404,14 @@ class OpenPurchaseLine(models.Model):
             else:
                 me.price_unit_purchase_invisible = me.price_unit_purchase
 
+            if me.price_unit_purchase == 0.0:
+                me.price_unit_purchase = me.purchase_order_line.price_unit
+            else:
+                me.price_unit_purchase = me.price_unit_purchase
+
             if me.open_purchase_id.type != "comm":
-                me.price_unit_purchase = round( ((me.price_unit_purchase_invisible * me.qty_not) / qty) + (
-                        outlayline ),3)
+                me.price_unit_purchase = round( ((me.price_unit_purchase * me.qty_not) / me.qty_available) + (
+                        outlayline),3)
             else:
                 me.price_unit_purchase = 0.0
 
@@ -422,10 +431,6 @@ class OpenPurchaseLine(models.Model):
         for me in self:
             me.qty = me.qty_not - me.qty_talef
 
-    @api.depends('qty', "qty_sales")
-    def _compute_qty_available(self):
-        for me in self:
-            me.qty_available = me.qty - me.qty_sales
 
     @api.depends("sale_order_line_ids.product_uom_qty","sale_order_line_ids.qty_lock", "sale_order_line_ids.order_id.state")
     def _compute_qty_sales(self):
