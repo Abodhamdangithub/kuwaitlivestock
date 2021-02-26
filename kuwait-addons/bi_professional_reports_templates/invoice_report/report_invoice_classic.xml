@@ -46,7 +46,7 @@
                     </t>
                     <t t-if="o.type == 'in_refund'">
                         <center>
-                            <h1>مردود شراء</h1>
+                            <h1>مرتجع شراء</h1>
                         </center>
                     </t>
                     <t t-if="o.type == 'out_invoice'">
@@ -56,7 +56,7 @@
                     </t>
                     <t t-if="o.type == 'out_refund'">
                         <center>
-                            <h1>مردود مبيعات</h1>
+                            <h1>مرتجع مبيعات</h1>
                         </center>
                     </t>
 
