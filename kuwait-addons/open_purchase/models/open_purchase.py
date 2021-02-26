@@ -403,6 +403,8 @@ class OpenPurchaseLine(models.Model):
             for line in me.open_purchase_id.open_purchase_line_ids:
                 sum_outlay_lines += line.sum_of_invoice_ids
                 sum_qty_all += line.qty
+            if sum_qty_all == 0.0:
+                sum_qty_all = 1
             outlayline = (me.open_purchase_id.amount_outlay - sum_outlay_lines) / sum_qty_all
             outlayline += line.sum_of_invoice_ids / qty
             me.price_unit_purchase_out += line.sum_of_invoice_ids / qty
