@@ -468,7 +468,7 @@ class OpenPurchaseLine(models.Model):
                 qts = 1
             else:
                 qts = me.qty_sales
-            res = ((me.price_unit_purchase_out + me.price_unit_purchase_talef) * qts) - (me.price_all_sales )
+            res = (me.price_all_sales ) - ((me.price_unit_purchase_out + me.price_unit_purchase_talef) * qts)
             if me.qty_available == 0.0:
                 av = 1
             else:
@@ -478,7 +478,7 @@ class OpenPurchaseLine(models.Model):
             if me.qty_sales == 0.0:
                 me.price_unit_purchase_PursubSale = me.price_unit_purchase
             else:
-                me.price_unit_purchase_PursubSale = me.price_unit_purchase_PursubSale + (res*-1  / av)
+                me.price_unit_purchase_PursubSale = me.price_unit_purchase + (res * -1 / av)
 
 
     # @api.depends('qty_sales', 'price_unit_purchase')
