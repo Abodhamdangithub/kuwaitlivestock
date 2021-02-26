@@ -394,12 +394,14 @@ class OpenPurchaseLine(models.Model):
                 sum_qty_all += line.qty
             outlayline = (me.open_purchase_id.amount_outlay - sum_outlay_lines) / sum_qty_all
 
+            outlayline += line.sum_of_invoice_ids / qty
+
             me.price_unit_purchase_invisible = round(((me.purchase_order_line.price_unit * me.qty_not) / qty) + (
-                    outlayline / qty), 3)
+                    outlayline ), 3)
 
             if me.open_purchase_id.type != "comm":
                 me.price_unit_purchase = round( ((me.purchase_order_line.price_unit * me.qty_not) / qty) + (
-                        outlayline / qty),3)
+                        outlayline ),3)
             else:
                 me.price_unit_purchase = 0.0
 
