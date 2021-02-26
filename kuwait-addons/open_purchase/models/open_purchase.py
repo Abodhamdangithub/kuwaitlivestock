@@ -208,7 +208,7 @@ class OpenPurchase(models.Model):
 
             res = line.price_all_sales - (line.price_unit_purchase_orginal * line.qty_not) - self.amount_outlay - comm
             if res >= 0.0:
-                line.amount_win = (res/shar) 
+                line.amount_win = (res/shar)
                 line.amount_not_win = 0.0
             else:
                 line.amount_win = 0.0
@@ -386,12 +386,18 @@ class OpenPurchaseLine(models.Model):
                 qty = me.qty
             elif me.qty == 0:
                 qty = 1
+
+            sum_outlay_lines = 0.0
+            for line in me.open_purchase_id.open_purchase_line_ids:
+                sum_outlay_lines += line.sum_of_invoice_ids
+            outlayline = (me.open_purchase_id.amount_outlay - sum_outlay_lines) / len(me.open_purchase_id.open_purchase_line_ids)
+
             me.price_unit_purchase_invisible = round(((me.purchase_order_line.price_unit * me.qty_not) / qty) + (
-                    me.open_purchase_id.amount_outlay / qty), 3)
+                    outlayline / qty), 3)
 
             if me.open_purchase_id.type != "comm":
                 me.price_unit_purchase = round( ((me.purchase_order_line.price_unit * me.qty_not) / qty) + (
-                        me.open_purchase_id.amount_outlay / qty),3)
+                        outlayline / qty),3)
             else:
                 me.price_unit_purchase = 0.0
 
