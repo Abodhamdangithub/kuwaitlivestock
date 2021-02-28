@@ -155,14 +155,14 @@
                                             <span t-field="p.product_id"/>
                                         </td>
                                         <td class="text-center">
-                                            <p t-field="p.qty"/>
+                                            <p t-field="p.purchase_order_line.product_qty"/>
                                         </td>
                                         <td class="text-center">
-                                            <p t-field="p.price_unit_purchase"
+                                            <p t-field="p.purchase_order_line.price_unit"
                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                         <td class="text-center">
-                                            <t t-set="subtotal" t-value="p.qty * p.price_unit_purchase"/>
+                                            <t t-set="subtotal" t-value="p.purchase_order_line.product_qty * p.purchase_order_line.price_unit"/>
                                             <t t-esc="subtotal"
                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
 
