@@ -375,7 +375,7 @@ class OpenPurchaseLine(models.Model):
     price_all_sales = fields.Float(string="قيمة المبيعات", readonly=True, compute='_compute_price_all_sales',
                                    store=True)
     qty_available = fields.Float(string="الكمية المتاحة", readonly=True, compute='_compute_qty_available', store=True)
-    amount_win = fields.Float(string="قيمة الربح", readonly=True)
+    amount_win = fields.Float(string="الربح المؤقت", compute='_compute_amount_win', store=True, readonly=True)
     amount_not_win = fields.Float(string="قيمة الخسارة", readonly=True)
     state = fields.Selection([('draft', 'فتح'), ('closed', 'مغلق')], default='draft', required=True, tracking=True,
                              copy=False)
@@ -396,6 +396,12 @@ class OpenPurchaseLine(models.Model):
     def _compute_qty(self):
         for me in self:
             me.qty = me.qty_not - me.qty_talef
+
+
+    @api.depends('qty_sales','price_all_sales','price_unit_purchase_orginal')
+    def _compute_amount_win(self):
+        for me in self:
+            me.amount_win = me.price_all_sales - (me.qty_sales * me.price_unit_purchase_orginal)
 
     def _get_pay_view_form(self):
         self.ensure_one()

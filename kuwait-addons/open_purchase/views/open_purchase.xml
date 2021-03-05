@@ -94,7 +94,7 @@
                                         <field name="sum_of_invoice_ids"/>
                                         <field name="sum_of_amount_of_comm"/>
                                         <field name="state" invisible="1"/>
-                                        <field name="amount_win" invisible="1"/>
+                                        <field name="amount_win" invisible="0" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                                         <field name="amount_not_win" invisible="1"/>
                                     </tree>
                                 </field>
