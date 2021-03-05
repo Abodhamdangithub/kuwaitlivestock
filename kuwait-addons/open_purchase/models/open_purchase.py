@@ -222,7 +222,7 @@ class OpenPurchase(models.Model):
 
         self.date_close = datetime.now()
         if self.type == "comm":
-            self.amount_supplier = self.amount_sales - self.amount_comm - self.amount_outlay
+            self.amount_supplier = self.amount_sales - self.amount_comm - self.amount_outlay - self.all_sum_of_amount_of_comm
         elif self.type == "sharing":
             if self.amount_win > 0.0:
                 self.amount_supplier = self.amount_sales - self.amount_win - self.amount_outlay
