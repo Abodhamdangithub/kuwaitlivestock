@@ -11,7 +11,7 @@
             <xpath expr="//header/button[@name='action_rfq_send']" position="after">
                 <button name="create_open_purchase" string="انشاء الارسالية" class="oe_highlight" type="object"
                         attrs="{'invisible': [ '|',('open_purchase_ids', '!=', False),('state', '=', 'draft')]}"/>
-                <button name="cancel_purchase_only" confirm="يجب عليك التأكد من انك قمت بالغاء جميع الفواتير وارجاع جميع الكميات في التحويلات " string="Cancel Purchase Only" class="oe_highlight" type="object"
+                <button name="cancel_purchase_only" confirm="يجب عليك التأكد من انك قمت بالغاء جميع الفواتير وارجاع جميع الكميات في التحويلات " string="الغاء 2" class="oe_highlight" type="object"
                         attrs="{'invisible': [ ('state', '=', 'cancel')]}"/>
             </xpath>
             <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
