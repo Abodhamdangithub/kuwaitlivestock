@@ -265,12 +265,14 @@ class OpenPurchase(models.Model):
                         inv.button_draft()
                     for inv_line in inv.invoice_line_ids:
                         if order_line.product_id.id == inv_line.product_id.id:
-                            self._cr.execute(
-                                """update account_move_line set quantity = %s ,price_unit = %s where id = %s """,
-                                [order_line.product_qty,order_line.price_unit,inv_line.id])
+                            # self._cr.execute(
+                            #     """update account_move_line set quantity = %s ,price_unit = %s where id = %s """,
+                            #     [order_line.product_qty,order_line.price_unit,inv_line.id])
 
-                            #inv_line.quantity = order_line.product_qty
-                            #inv_line.price_unit = order_line.price_unit
+                            inv_line.quantity = 0
+                            inv_line.price_unit = 0
+                            inv_line.quantity = order_line.product_qty
+                            inv_line.price_unit = order_line.price_unit
 
     @api.depends("type", "type_comm", "comm", "comm_on_qty", "open_purchase_line_ids.qty_sales", "open_purchase_line_ids", "open_purchase_line_ids.price_all_sales", "all_sum_of_amount_of_comm")
     def _compute_amount_comm(self):
