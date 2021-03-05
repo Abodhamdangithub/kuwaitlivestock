@@ -91,11 +91,9 @@ class PurchaseOrder(models.Model):
 
     def button_cancel(self):
         for order in self:
-
-            #Edited By ABdelrhaeem To CAncel Order
-            # for move in order.order_line.mapped('move_ids'):
-            #     if move.state == 'done':
-            #         raise UserError(_('Unable to cancel purchase order %s as some receptions have already been done.') % (order.name))
+            for move in order.order_line.mapped('move_ids'):
+                if move.state == 'done':
+                    raise UserError(_('Unable to cancel purchase order %s as some receptions have already been done.') % (order.name))
             # If the product is MTO, change the procure_method of the the closest move to purchase to MTS.
             # The purpose is to link the po that the user will manually generate to the existing moves's chain.
             if order.state in ('draft', 'sent', 'to approve', 'purchase'):
@@ -109,7 +107,7 @@ class PurchaseOrder(models.Model):
                             move_dest_ids.write({'procure_method': 'make_to_stock'})
                             move_dest_ids._recompute_state()
 
-            for pick in order.picking_ids.filtered(lambda r: r.state not in  ['cancel','done']):
+            for pick in order.picking_ids.filtered(lambda r: r.state != 'cancel'):
                 pick.action_cancel()
 
             order.order_line.write({'move_dest_ids':[(5,0,0)]})
