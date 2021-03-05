@@ -191,6 +191,7 @@
                                         </tr>
                                     </t>
                                     <t t-set="total" t-value="o.amount_outlay"/>
+                                    <t t-set="omuleh" t-value="o.amount_comm + o.all_sum_of_amount_of_comm"/>
                                     <tr style=" border-collapse: collapse;border: 0.5px solid black;"
                                         t-if="o.type == 'comm'">
                                         <td class="text-center">
@@ -203,27 +204,12 @@
                                             -
                                         </td>
                                         <td class="text-center">
-                                            <p t-field="o.amount_comm"
+                                            <t t-esc="omuleh"
                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                         <t t-set="total" t-value="o.amount_outlay + o.amount_comm + o.all_sum_of_amount_of_comm"/>
                                     </tr>
-                                    <tr style=" border-collapse: collapse;border: 0.5px solid black;"
-                                        t-if="o.type == 'comm'">
-                                        <td class="text-center">
-                                            عمولة الدلال
-                                        </td>
-                                        <td class="text-center">
-                                            -
-                                        </td>
-                                        <td class="text-center">
-                                            -
-                                        </td>
-                                        <td class="text-center">
-                                            <p t-field="o.all_sum_of_amount_of_comm"
-                                               t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
-                                        </td>
-                                    </tr>
+
                                     <tr style="font-weight:bold; border-collapse: collapse;border: 0.5px solid black;">
                                         <td class="text-center">
 
