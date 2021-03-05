@@ -24,8 +24,8 @@ class OpenPurchase(models.Model):
     amount_comm = fields.Float(string="قيمة العمولة", compute='_compute_amount_comm', store=True)
     amount_sales = fields.Float(string="مجموع المبيعات", compute='_compute_amount_sales', store=True)
     amount_outlay = fields.Float(string="مجموع المصاريف", compute='_compute_amount_outlay', store=True)
-    amount_win = fields.Float(string="مجموع الربح", compute='_compute_amount_win', store=True)
-    amount_lose = fields.Float(string="مجموع الخسارة", compute='_compute_amount_lose', store=True)
+    amount_win = fields.Float(string="مجموع الربح", compute='_compute_amount_win_or_lose', store=True)
+    amount_lose = fields.Float(string="مجموع الخسارة", compute='_compute_amount_win_or_lose', store=True)
     state = fields.Selection([('draft', 'فتح'), ('closed', 'مغلق')], default='draft', required=True, tracking=True,
                              copy=False)
     account_move_id = fields.Many2one('account.move',string="القيد",readonly=True)
@@ -197,29 +197,29 @@ class OpenPurchase(models.Model):
 
     def close_this(self):
         for line in self.open_purchase_line_ids:
-            if self.type == "comm":
-                comm = self.amount_comm
-            else:
-                comm = 0.0
-            if self.type == "sharing":
-                shar = 2
-            else:
-                shar = 1
-
-            res = line.price_all_sales - (line.price_unit_purchase_orginal * line.qty_not) - self.amount_outlay - comm
-            if res >= 0.0:
-                line.amount_win = (res/shar)
-                line.amount_not_win = 0.0
-            else:
-                line.amount_win = 0.0
-                line.amount_not_win = (res * -1)/shar
+            # if self.type == "comm":
+            #     comm = self.amount_comm
+            # else:
+            #     comm = 0.0
+            # if self.type == "sharing":
+            #     shar = 2
+            # else:
+            #     shar = 1
+            #
+            # res = line.price_all_sales - (line.price_unit_purchase_orginal * line.qty_not) - self.amount_outlay - comm
+            # if res >= 0.0:
+            #     line.amount_win = (res/shar)
+            #     line.amount_not_win = 0.0
+            # else:
+            #     line.amount_win = 0.0
+            #     line.amount_not_win = (res * -1)/shar
             if line.qty_available != 0:
                 raise UserError(_('لا يمكنك اغلاق الارسالية الا عندما تصبح الكميات المتاحة 0 '))
             if self.type == "comm":
                 self.amount_win = 0.0
                 self.amount_lose = 0.0
-
             line.state = 'closed'
+
         self.date_close = datetime.now()
         if self.type == "comm":
             self.amount_supplier = self.amount_sales - self.amount_comm - self.amount_outlay
@@ -228,6 +228,14 @@ class OpenPurchase(models.Model):
                 self.amount_supplier = self.amount_sales - self.amount_win - self.amount_outlay
             elif self.amount_lose > 0.0:
                 self.amount_supplier = self.amount_sales + self.amount_lose - self.amount_outlay
+        else:
+            result = self.amount_sales - (self.purchase_id.amount_total + self.amount_outlay)
+            if result > 0 :
+                self.amount_win = result
+                self.amount_lose = 0.0
+            else:
+                self.amount_lose = result * -1
+                self.amount_win = 0.0
         self.state = "closed"
         if self.type == "comm":
             self.amount_win = self.amount_comm
@@ -266,21 +274,21 @@ class OpenPurchase(models.Model):
                 me.amount_comm = sum - me.all_sum_of_amount_of_comm
 
 
-    @api.depends("open_purchase_line_ids", "open_purchase_line_ids.amount_win")
-    def _compute_amount_win(self):
-        for me in self:
-            sum = 0.0
-            for line in me.open_purchase_line_ids:
-                sum += line.amount_win
-            me.amount_win = sum
-
-    @api.depends("open_purchase_line_ids", "open_purchase_line_ids.amount_win")
-    def _compute_amount_lose(self):
-        for me in self:
-            sum = 0.0
-            for line in me.open_purchase_line_ids:
-                sum += line.amount_not_win
-            me.amount_lose = sum
+    # @api.depends("open_purchase_line_ids", "open_purchase_line_ids.amount_win")
+    # def _compute_amount_win(self):
+    #     for me in self:
+    #         sum = 0.0
+    #         for line in me.open_purchase_line_ids:
+    #             sum += line.amount_win
+    #         me.amount_win = sum
+    #
+    # @api.depends("open_purchase_line_ids", "open_purchase_line_ids.amount_win")
+    # def _compute_amount_lose(self):
+    #     for me in self:
+    #         sum = 0.0
+    #         for line in me.open_purchase_line_ids:
+    #             sum += line.amount_not_win
+    #         me.amount_lose = sum
 
 
     @api.depends("open_purchase_line_ids", "open_purchase_line_ids.price_all_sales")
