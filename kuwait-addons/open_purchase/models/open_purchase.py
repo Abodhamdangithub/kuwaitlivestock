@@ -258,21 +258,33 @@ class OpenPurchase(models.Model):
 
         if not self.purchase_id.invoice_ids and self.type in ['comm', 'sharing']:
             return self.purchase_id.action_view_invoice()
-        elif self.purchase_id.invoice_ids and self.type in ['comm', 'sharing']:
-            for order_line in self.purchase_id.order_line:
-                for inv in self.purchase_id.invoice_ids:
-                    if inv.state == "posted":
-                        inv.button_draft()
-                    for inv_line in inv.invoice_line_ids:
-                        if order_line.product_id.id == inv_line.product_id.id:
-                            # self._cr.execute(
-                            #     """update account_move_line set quantity = %s ,price_unit = %s where id = %s """,
-                            #     [order_line.product_qty,order_line.price_unit,inv_line.id])
-
-                            inv_line.quantity = 0
-                            inv_line.price_unit = 0
-                            inv_line.quantity = order_line.product_qty
-                            inv_line.price_unit = order_line.price_unit
+        # elif self.purchase_id.invoice_ids and self.type in ['comm', 'sharing']:
+        #
+        #     add_lines = []
+        #     for order_line in self.purchase_id.order_line:
+        #         add_lines.append({"account_id": 4,"product_id": order_line.product_id.id, "quantity": order_line.product_qty,
+        #                           "price_unit": order_line.price_unit})
+        #     for inv in self.purchase_id.invoice_ids:
+        #         if inv.state == "posted":
+        #             inv.button_draft()
+        #         for add in add_lines:
+        #             add['move_id'] = inv.id
+        #         for add in add_lines:
+        #             self.env['account.move.line'].create(add)
+        #
+        #     # for order_line in self.purchase_id.order_line:
+        #     #     for inv in self.purchase_id.invoice_ids:
+        #     #         if inv.state == "posted":
+        #     #             inv.button_draft()
+        #     #         for inv_line in inv.invoice_line_ids:
+        #     #
+        #     #             # if order_line.product_id.id == inv_line.product_id.id:
+        #     #             #     # self._cr.execute(
+        #     #             #     #     """update account_move_line set quantity = %s ,price_unit = %s where id = %s """,
+        #     #             #     #     [order_line.product_qty,order_line.price_unit,inv_line.id])
+        #     #             #
+        #     #             #     inv_line.quantity = order_line.product_qty
+        #     #             #     inv_line.price_unit = order_line.price_unit
 
     @api.depends("type", "type_comm", "comm", "comm_on_qty", "open_purchase_line_ids.qty_sales", "open_purchase_line_ids", "open_purchase_line_ids.price_all_sales", "all_sum_of_amount_of_comm")
     def _compute_amount_comm(self):
