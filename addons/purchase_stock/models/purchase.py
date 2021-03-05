@@ -109,7 +109,7 @@ class PurchaseOrder(models.Model):
                             move_dest_ids.write({'procure_method': 'make_to_stock'})
                             move_dest_ids._recompute_state()
 
-            for pick in order.picking_ids.filtered(lambda r: r.state != 'cancel'):
+            for pick in order.picking_ids.filtered(lambda r: r.state not in  ['cancel','done']):
                 pick.action_cancel()
 
             order.order_line.write({'move_dest_ids':[(5,0,0)]})
