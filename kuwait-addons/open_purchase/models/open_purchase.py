@@ -239,7 +239,7 @@ class OpenPurchase(models.Model):
         self.state = "closed"
         if self.type == "comm":
             self.amount_win = self.amount_comm
-        if not self.purchase_id.invoice_ids and self.type in ['comm','sharing']:
+        if self.type in ['comm','sharing']:
             for order_line in self.purchase_id.order_line:
                 ex = self.amount_outlay
                 qty_all = 0.0
@@ -256,8 +256,17 @@ class OpenPurchase(models.Model):
                         order_line.product_qty = open_lines.qty_sales + open_lines.qty_talef
                         order_line.price_unit = ((open_lines.price_all_sales - (open_lines.price_all_sales* (self.comm/100)) - open_lines.sum_of_invoice_ids - (res4*open_lines.qty_not)) /(open_lines.qty_sales + open_lines.qty_talef))
 
+        if not self.purchase_id.invoice_ids and self.type in ['comm', 'sharing']:
             return self.purchase_id.action_view_invoice()
-
+        elif self.purchase_id.invoice_ids and self.type in ['comm', 'sharing']:
+            for order_line in self.purchase_id.order_line:
+                for inv in self.purchase_id.invoice_ids:
+                    if inv.state == "posted":
+                        inv.button_draft()
+                    for inv_live in inv.invoice_line_ids:
+                        if order_line.product_id.id == inv_live.product_id.id:
+                            inv_live.quantity = order_line.product_qty
+                            inv_live.price_unit = order_line.price_unit
 
     @api.depends("type", "type_comm", "comm", "comm_on_qty", "open_purchase_line_ids.qty_sales", "open_purchase_line_ids", "open_purchase_line_ids.price_all_sales", "all_sum_of_amount_of_comm")
     def _compute_amount_comm(self):

@@ -290,6 +290,8 @@
                                         <th style="background-color: #EADBDB;" class="text-center">رقم الدفعة</th>
                                         <th style="background-color: #EADBDB;" class="text-center">دفتر اليومية</th>
                                         <th style="background-color: #EADBDB;" class="text-center">المبلغ</th>
+                                        <th style="background-color: #EADBDB;" class="text-center">الربح</th>
+                                        <th style="background-color: #EADBDB;" class="text-center">الخسارة</th>
                                         <th style="background-color: #EADBDB;" class="text-center">البيان</th>
                                     </tr>
                                     <t t-foreach="o.payment_ids" t-as="l">
@@ -307,6 +309,16 @@
                                             </td>
                                             <td class="text-center">
                                                 <p t-field="l.amount"
+                                                   t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                />
+                                            </td>
+                                            <td class="text-center">
+                                                <p t-field="l.amount_win"
+                                                   t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                />
+                                            </td>
+                                            <td class="text-center">
+                                                <p t-field="l.amount_lose"
                                                    t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
                                                 />
                                             </td>
