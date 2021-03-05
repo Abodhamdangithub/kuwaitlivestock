@@ -11,6 +11,9 @@ class PurchaseOrder(models.Model):
 
 
 
+    def cancel_purchase_only(self):
+        self.state = 'cancel'
+
     def create_open_purchase(self):
         create_open_purcahse = self.env["open.purchase"].create({"purchase_id": self.id})
         for line in self.order_line:
