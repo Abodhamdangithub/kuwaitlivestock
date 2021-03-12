@@ -179,7 +179,7 @@
                                 <table class="table table-condensed table table-striped"
                                        style="font-size:15px;font-family:Scheherazade;border: 1px solid black;">
                                     <tr style="border-collapse: collapse;border: 0.5px solid black; ">
-                                        <th class="text-center" style="background-color:  #EADBDB ;">العميل</th>
+                                        <th class="text-center" style="background-color:  #EADBDB ;">المورد</th>
                                         <th class="text-center" style="background-color:  #EADBDB ;">الرصيد</th>
                                     </tr>
                                     <t t-foreach="o.get_supplier_balance_data()" t-as="l">
