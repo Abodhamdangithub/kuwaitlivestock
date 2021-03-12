@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="reports_kuwait_view_form" model="ir.ui.view">
+            <field name="name">reports.kuwait.wizard</field>
+            <field name="model">reports.kuwait</field>
+            <field name="arch" type="xml">
+                <form string="reports kuwait">
+                    <sheet>
+                        <group>
+                            <group>
+                            <field name="type"/>
+                            </group>
+                            <group attrs="{'invisible': [('type', '!=', 'sales')]}">
+                                <field name="by" attrs="{'required': [('type', '=', 'sales')]}"/>
+                                <field name="from_date" attrs="{'required': [('type', '=', 'sales')]}"/>
+                                <field name="to_date" attrs="{'required': [('type', '=', 'sales')]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="%(open_purchase.kuwait_report_full)d" type="action" string="طباعة"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="reports_kuwait_action" model="ir.actions.act_window">
+            <field name="name">reports kuwait</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">reports.kuwait</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="reports_kuwait_menu" action="reports_kuwait_action" name="تقارير الشركة الكويتية"
+                  parent="account.menu_finance_reports"/>
+
+    </data>
+
+</odoo>

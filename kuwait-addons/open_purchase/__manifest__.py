@@ -37,6 +37,8 @@
         'report/moving_form.xml',
         'report/report.xml',
         'report/try_sales_report.xml',
+        'reports_kuwait/full_report.xml',
+        'reports_kuwait/reports_kuwait.xml',
         'data/data.xml',
     ],
     'installable': True,

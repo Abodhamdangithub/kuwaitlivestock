@@ -13,3 +13,8 @@ group_try_vehicle_user2,group_try_vehicle_user22,model_try_vehicle,fleet.fleet_g
 
 
 pay_more_product1,pay_more_product22,model_pay_more_product,group_open_purchase_user,1,1,1,1
+
+
+
+
+reports_kuwait1,reports_kuwait2,model_reports_kuwait,hr_expense.group_hr_expense_manager,1,1,1,1

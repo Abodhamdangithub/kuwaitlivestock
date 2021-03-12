@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="kuwait_report_full"
+                model="reports.kuwait"
+                string="طباعة "
+                report_type="qweb-pdf"
+                name="open_purchase.kuwait_report_full_template"
+                file="open_purchase.kuwait_report_full_template"
+        />
+
+        <template id="kuwait_report_full_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="header">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="watermark"
+                                         style="opacity:20;size:auto;font-size:3em;height:100%;width:100%;right:350px;border:0;">
+                                        <img src='company.logo'
+                                             style="margin-right:-20px;margin-bottom: 2450px; margin-top: 350px;max-height: 1000px;max-width: 1000px;width: 20000px;height: 20000px;"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <img src='company.logo'
+                                         style="width: 100%;height: auto;"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page" style="font-family:Scheherazade">
+                            <div class="col-xs-12" t-if="o.type == 'stock'">
+                                <center style="font-size:30px;font-weight:bold;left:150px;color :#a51b0b ;text-align:center;font-family:Scheherazade">
+                                    تقرير المخزون
+                                </center>
+                                <br/>
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+
+
+                                <br/>
+                                <br/>
+                                <table class="table table-condensed table table-striped"
+                                       style="font-size:15px;font-family:Scheherazade;border: 1px solid black;">
+                                    <tr style="border-collapse: collapse;border: 0.5px solid black; ">
+                                        <th class="text-center" style="background-color:  #EADBDB ;">المنتج</th>
+                                        <th class="text-center" style="background-color:  #EADBDB ;">المستودع</th>
+                                        <th class="text-center" style="background-color:  #EADBDB ;">الكمية</th>
+                                    </tr>
+                                    <t t-foreach="o.get_stock_quant_data()" t-as="l">
+                                        <tr style="font-size:15px;border-collapse: collapse;border: 0.5px solid black;">
+                                            <td class="text-center">
+                                                <span t-esc="l[0]"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="l[1]"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="l[2]"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                                <br/>
+                                <br/>
+                            </div>
+                            <div class="col-xs-12" t-if="o.type == 'sales'">
+                                <center style="font-size:30px;font-weight:bold;left:150px;color :#a51b0b ;text-align:center;font-family:Scheherazade">
+                                    تقرير المبيعات
+                                </center>
+                                <br/>
+                                من تاريخ
+                                <span t-field="o.from_date"/>
+                                <br/>
+                                الى تاريخ
+                                <span t-field="o.to_date"/>
+
+
+                                <br/>
+                                <br/>
+                                <table class="table table-condensed table table-striped" t-if="o.by == 'product'"
+                                       style="font-size:15px;font-family:Scheherazade;border: 1px solid black;">
+                                    <tr style="border-collapse: collapse;border: 0.5px solid black; ">
+                                        <th class="text-center" style="background-color:  #EADBDB ;">المنتج</th>
+                                        <th class="text-center" style="background-color:  #EADBDB ;">الكمية</th>
+                                        <th class="text-center" style="background-color:  #EADBDB ;">الاجمالي</th>
+                                    </tr>
+                                    <t t-foreach="o.get_sales_by_product_data()" t-as="l">
+                                        <tr style="font-size:15px;border-collapse: collapse;border: 0.5px solid black;">
+                                            <td class="text-center">
+                                                <span t-esc="l[0]"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="l[1]"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="l[2]"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+
+                                <table class="table table-condensed table table-striped" t-if="o.by == 'lines'"
+                                       style="font-size:15px;font-family:Scheherazade;border: 1px solid black;">
+                                    <tr style="border-collapse: collapse;border: 0.5px solid black; ">
+                                        <th class="text-center" style="background-color:  #EADBDB ;">المنتج</th>
+                                        <th class="text-center" style="background-color:  #EADBDB ;">الطلبية</th>
+                                        <th class="text-center" style="background-color:  #EADBDB ;">الكمية</th>
+                                        <th class="text-center" style="background-color:  #EADBDB ;">سعر الوحدة</th>
+                                        <th class="text-center" style="background-color:  #EADBDB ;">الاجمالي</th>
+                                    </tr>
+                                    <t t-foreach="o.get_sales_by_lines_data()" t-as="l">
+                                        <tr style="font-size:15px;border-collapse: collapse;border: 0.5px solid black;">
+                                            <td class="text-center">
+                                                <span t-esc="l[0]"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="l[1]"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="l[2]"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="l[3]"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="l[4]"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+
+
+
+                            <div class="col-xs-12" t-if="o.type == 'partner_balance'">
+                                <center style="font-size:30px;font-weight:bold;left:150px;color :#a51b0b ;text-align:center;font-family:Scheherazade">
+                                    تقرير ذمم العملاء
+                                </center>
+                                <br/>
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+
+
+                                <br/>
+                                <br/>
+                                <table class="table table-condensed table table-striped"
+                                       style="font-size:15px;font-family:Scheherazade;border: 1px solid black;">
+                                    <tr style="border-collapse: collapse;border: 0.5px solid black; ">
+                                        <th class="text-center" style="background-color:  #EADBDB ;">العميل</th>
+                                        <th class="text-center" style="background-color:  #EADBDB ;">الرصيد</th>
+                                    </tr>
+                                    <t t-foreach="o.get_partner_balance_data()" t-as="l">
+                                        <tr style="font-size:15px;border-collapse: collapse;border: 0.5px solid black;">
+                                            <td class="text-center">
+                                                <span t-esc="l[0]"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="l[1]"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                                <br/>
+                                <br/>
+
+
+                            </div>
+
+                            <div class="col-xs-12" t-if="o.type == 'supplier_balance'">
+                                <center style="font-size:30px;font-weight:bold;left:150px;color :#a51b0b ;text-align:center;font-family:Scheherazade">
+                                    تقرير ذمم الموردين
+                                </center>
+                                <br/>
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+
+
+                                <br/>
+                                <br/>
+                                <table class="table table-condensed table table-striped"
+                                       style="font-size:15px;font-family:Scheherazade;border: 1px solid black;">
+                                    <tr style="border-collapse: collapse;border: 0.5px solid black; ">
+                                        <th class="text-center" style="background-color:  #EADBDB ;">العميل</th>
+                                        <th class="text-center" style="background-color:  #EADBDB ;">الرصيد</th>
+                                    </tr>
+                                    <t t-foreach="o.get_supplier_balance_data()" t-as="l">
+                                        <tr style="font-size:15px;border-collapse: collapse;border: 0.5px solid black;">
+                                            <td class="text-center">
+                                                <span t-esc="l[0]"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="l[1]"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                                <br/>
+                                <br/>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
