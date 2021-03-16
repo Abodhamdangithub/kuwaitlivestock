@@ -46,7 +46,6 @@ class OpenPurchase(models.Model):
 
 
 
-    must_win = fields.Float(string="الربح اليدوي")
 
 
     @api.depends("open_purchase_line_ids.sum_of_amount_of_comm","open_purchase_line_ids")
@@ -390,6 +389,7 @@ class OpenPurchaseLine(models.Model):
     invoice_ids = fields.One2many('account.move', 'open_purchase_line_id', string="invoice_ids")
     sum_of_invoice_ids = fields.Float(string="مجموع الصاريف", compute='_compute_sum_of_invoice_ids',store=True)
 
+    must_win = fields.Float(string="الربح اليدوي")
 
     sum_of_amount_of_comm = fields.Float(string="مجموع عمولات الدلال", compute='_compute_sum_of_amount_of_comm',store=True)
     @api.depends("sale_order_line_ids.amount_of_comm","sale_order_line_ids")
@@ -531,11 +531,11 @@ class OpenPurchaseLine(models.Model):
                 me.price_unit_purchase_PursubSale = (me.purchase_order_line.price_subtotal + (me.price_unit_purchase_out*me.qty) - me.price_all_sales )/me.qty_available
             else:
                 me.price_unit_purchase_PursubSale = 0.0
-    @api.depends("purchase_order_line.price_subtotal","qty","price_unit_purchase_out","price_all_sales","qty_available","open_purchase_id.must_win")
+    @api.depends("purchase_order_line.price_subtotal","qty","price_unit_purchase_out","price_all_sales","qty_available","must_win")
     def _compute_price_unit_purchase_PursubSale_must_win(self):
         for me in self:
             if me.qty_available > 0.0:
-                me.price_unit_purchase_PursubSale_must_win = ((me.purchase_order_line.price_subtotal + (me.price_unit_purchase_out*me.qty) + me.open_purchase_id.must_win - me.price_all_sales )/me.qty_available)
+                me.price_unit_purchase_PursubSale_must_win = ((me.purchase_order_line.price_subtotal + (me.price_unit_purchase_out*me.qty) + me.must_win - me.price_all_sales )/me.qty_available)
             else:
                 me.price_unit_purchase_PursubSale_must_win = 0.0
     # @api.depends('qty_sales', 'price_unit_purchase')
