@@ -367,7 +367,7 @@ class OpenPurchaseLine(models.Model):
     price_unit_purchase_talef = fields.Float(string="سعر وحدة الشراء حسبة التالف فقط مخفي",  compute='_compute_price_unit_purchase_talef',store=True)
     price_unit_purchase_out = fields.Float(string="حسبة المصاريف مخفي",  compute='_compute_price_unit_purchase_out',store=True)
 
-    price_unit_purchase_PursubSale = fields.Float(string="التكلفة ",  compute='_compute_price_all_sales',store=True)
+    price_unit_purchase_PursubSale = fields.Float(string="التكلفة ",  compute='_compute_price_unit_purchase_PursubSale',store=True)
 
     sale_order_line_ids = fields.One2many('sale.order.line', 'open_purchas_line_id', string="سطور طلبيات المبيعات")
     stock_scrap_ids = fields.One2many('stock.scrap', 'open_purchase_line_id', string="Stock Scrap")
@@ -500,7 +500,6 @@ class OpenPurchaseLine(models.Model):
             sum = 0.0
             for order_line in me.sale_order_line_ids:
                 if order_line.order_id.state != 'cancel':
-                    #sum += order_line.product_uom_qty * order_line.price_unit
                     sum += order_line.price_subtotal + order_line.amount_of_comm
             me.price_all_sales = sum
 
@@ -516,10 +515,10 @@ class OpenPurchaseLine(models.Model):
                 av = me.qty_available
 
 
-            if me.qty_sales == 0.0:
-                me.price_unit_purchase_PursubSale = me.price_unit_purchase
-            else:
-                me.price_unit_purchase_PursubSale = me.price_unit_purchase + (res * -1 / av)
+    @api.depends("purchase_order_line.price_subtotal","qty","price_unit_purchase_out","price_all_sales","qty_available")
+    def _compute_price_unit_purchase_PursubSale(self):
+        for me in self:
+            me.price_unit_purchase_PursubSale = (me.purchase_order_line.price_subtotal + (me.price_unit_purchase_out*me.qty) - me.price_all_sales )/me.qty_available
 
 
     # @api.depends('qty_sales', 'price_unit_purchase')
