@@ -13,6 +13,7 @@
         <template id="kuwait_report_full_template">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
                         <t t-if="o and 'company_id' in o">
                             <t t-set="company" t-value="o.company_id"></t>
                         </t>
@@ -211,6 +212,7 @@
 
                         </div>
 
+                    </t>
                 </t>
             </t>
         </template>
