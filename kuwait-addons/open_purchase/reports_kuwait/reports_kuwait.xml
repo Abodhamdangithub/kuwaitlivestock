@@ -16,6 +16,7 @@
                                 <field name="by" attrs="{'required': [('type', '=', 'sales')]}"/>
                                 <field name="from_date" attrs="{'required': [('type', '=', 'sales')]}"/>
                                 <field name="to_date" attrs="{'required': [('type', '=', 'sales')]}"/>
+                                <field name="product_ids" />
                             </group>
                         </group>
                     </sheet>

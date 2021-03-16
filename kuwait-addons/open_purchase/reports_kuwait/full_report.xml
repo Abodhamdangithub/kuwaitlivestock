@@ -149,6 +149,7 @@
                                         <th class="text-center" style="background-color:  #EADBDB ;">العميل</th>
                                         <th class="text-center" style="background-color:  #EADBDB ;">الرصيد</th>
                                     </tr>
+
                                     <t t-foreach="o.get_partner_balance_data()" t-as="l">
                                         <tr style="font-size:15px;border-collapse: collapse;border: 0.5px solid black;">
                                             <td class="text-center">
