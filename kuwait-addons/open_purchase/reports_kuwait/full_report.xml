@@ -14,21 +14,24 @@
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.external_layout">
-                        <div class="header">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="watermark"
-                                         style="opacity:20;size:auto;font-size:3em;height:100%;width:100%;right:350px;border:0;">
-                                        <img src='company.logo'
-                                             style="margin-right:-20px;margin-bottom: 2450px; margin-top: 350px;max-height: 1000px;max-width: 1000px;width: 20000px;height: 20000px;"/>
-                                    </div>
-                                </div>
-                                <div>
-                                    <img src='company.logo'
-                                         style="width: 100%;height: auto;"/>
-                                </div>
-                            </div>
-                        </div>
+            <div class="header">
+                <div class="row mt32 mb32">
+                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
+                        <img t-if="company.upload_image_header"
+                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_header)"
+                             style="max-height: 180px;"/>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="row mt32 mb32">
+                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
+                        <img t-if="company.upload_image_footer"
+                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_footer)"
+                             style="max-height: 180px;"/>
+                    </div>
+                </div>
+            </div>
                         <div class="page" style="font-family:Scheherazade">
                             <div class="col-xs-12" t-if="o.type == 'stock'">
                                 <center style="font-size:30px;font-weight:bold;left:150px;color :#a51b0b ;text-align:center;font-family:Scheherazade">
