@@ -526,14 +526,18 @@ class OpenPurchaseLine(models.Model):
     @api.depends("purchase_order_line.price_subtotal","qty","price_unit_purchase_out","price_all_sales","qty_available")
     def _compute_price_unit_purchase_PursubSale(self):
         for me in self:
-            me.price_unit_purchase_PursubSale = (me.purchase_order_line.price_subtotal + (me.price_unit_purchase_out*me.qty) - me.price_all_sales )/me.qty_available
+            if me.qty_available > 0.0:
 
+                me.price_unit_purchase_PursubSale = (me.purchase_order_line.price_subtotal + (me.price_unit_purchase_out*me.qty) - me.price_all_sales )/me.qty_available
+            else:
+                me.price_unit_purchase_PursubSale = 0.0
     @api.depends("purchase_order_line.price_subtotal","qty","price_unit_purchase_out","price_all_sales","qty_available","open_purchase_id.must_win")
     def _compute_price_unit_purchase_PursubSale_must_win(self):
         for me in self:
-            me.price_unit_purchase_PursubSale_must_win = ((me.purchase_order_line.price_subtotal + (me.price_unit_purchase_out*me.qty) + me.open_purchase_id.must_win - me.price_all_sales )/me.qty_available)
-
-
+            if me.qty_available > 0.0:
+                me.price_unit_purchase_PursubSale_must_win = ((me.purchase_order_line.price_subtotal + (me.price_unit_purchase_out*me.qty) + me.open_purchase_id.must_win - me.price_all_sales )/me.qty_available)
+            else:
+                me.price_unit_purchase_PursubSale_must_win = 0.0
     # @api.depends('qty_sales', 'price_unit_purchase')
     # def _compute_price_unit_purchase_PursubSale(self):
     #     for me in self:
