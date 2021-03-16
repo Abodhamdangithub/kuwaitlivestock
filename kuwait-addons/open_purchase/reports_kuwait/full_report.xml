@@ -14,24 +14,31 @@
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.external_layout">
-            <div class="header">
-                <div class="row mt32 mb32">
-                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
-                        <img t-if="company.upload_image_header"
-                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_header)"
-                             style="max-height: 180px;"/>
-                    </div>
-                </div>
-            </div>
-            <div class="footer">
-                <div class="row mt32 mb32">
-                    <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
-                        <img t-if="company.upload_image_footer"
-                             t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_footer)"
-                             style="max-height: 180px;"/>
-                    </div>
-                </div>
-            </div>
+                        <t t-if="o and 'company_id' in o">
+                            <t t-set="company" t-value="o.company_id"></t>
+                        </t>
+                        <t t-if="not o or not 'company_id' in o">
+                            <t t-set="company" t-value="res_company"></t>
+                        </t>
+
+                        <div class="header">
+                            <div class="row mt32 mb32">
+                                <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
+                                    <img t-if="company.upload_image_header"
+                                         t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_header)"
+                                         style="max-height: 180px;"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <div class="row mt32 mb32">
+                                <div class="col-12 text-right" style="font:12px lucida-console,sans-serif !important;">
+                                    <img t-if="company.upload_image_footer"
+                                         t-att-src="'data:image/png;base64,%s' % to_text(company.upload_image_footer)"
+                                         style="max-height: 180px;"/>
+                                </div>
+                            </div>
+                        </div>
                         <div class="page" style="font-family:Scheherazade">
                             <div class="col-xs-12" t-if="o.type == 'stock'">
                                 <center style="font-size:30px;font-weight:bold;left:150px;color :#a51b0b ;text-align:center;font-family:Scheherazade">
@@ -133,7 +140,6 @@
                                     </t>
                                 </table>
                             </div>
-
 
 
                             <div class="col-xs-12" t-if="o.type == 'partner_balance'">
