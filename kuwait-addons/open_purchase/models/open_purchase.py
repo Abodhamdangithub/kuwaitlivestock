@@ -42,6 +42,13 @@ class OpenPurchase(models.Model):
 
 
     all_sum_of_amount_of_comm = fields.Float(string="مجموع عمولات الدلال كاملا", compute='_compute_all_sum_of_amount_of_comm',store=True)
+
+
+
+
+    must_win = fields.Float(string="الربح اليدوي")
+
+
     @api.depends("open_purchase_line_ids.sum_of_amount_of_comm","open_purchase_line_ids")
     def _compute_all_sum_of_amount_of_comm(self):
         for me in self:
@@ -368,6 +375,7 @@ class OpenPurchaseLine(models.Model):
     price_unit_purchase_out = fields.Float(string="حسبة المصاريف مخفي",  compute='_compute_price_unit_purchase_out',store=True)
 
     price_unit_purchase_PursubSale = fields.Float(string="التكلفة ",  compute='_compute_price_unit_purchase_PursubSale',store=True)
+    price_unit_purchase_PursubSale_must_win = fields.Float(string="التكلفة + الربح ",  compute='_compute_price_unit_purchase_PursubSale_must_win',store=True)
 
     sale_order_line_ids = fields.One2many('sale.order.line', 'open_purchas_line_id', string="سطور طلبيات المبيعات")
     stock_scrap_ids = fields.One2many('stock.scrap', 'open_purchase_line_id', string="Stock Scrap")
@@ -519,6 +527,11 @@ class OpenPurchaseLine(models.Model):
     def _compute_price_unit_purchase_PursubSale(self):
         for me in self:
             me.price_unit_purchase_PursubSale = (me.purchase_order_line.price_subtotal + (me.price_unit_purchase_out*me.qty) - me.price_all_sales )/me.qty_available
+
+    @api.depends("purchase_order_line.price_subtotal","qty","price_unit_purchase_out","price_all_sales","qty_available","open_purchase_id.must_win")
+    def _compute_price_unit_purchase_PursubSale_must_win(self):
+        for me in self:
+            me.price_unit_purchase_PursubSale_must_win = ((me.purchase_order_line.price_subtotal + (me.price_unit_purchase_out*me.qty) + me.open_purchase_id.must_win - me.price_all_sales )/me.qty_available)
 
 
     # @api.depends('qty_sales', 'price_unit_purchase')

@@ -37,6 +37,7 @@
                                 <field name="name" attrs="{'readonly': [('state', '=', 'closed')]}" style="width: 33%"/>
                                 <field name="purchase_id" readonly="1"/>
                                 <field name="type" attrs="{'readonly': [('state', '=', 'closed')]}" style="width: 33%"/>
+                                <field name="must_win"  style="width: 33%"/>
                                 <field name="journal_id" domain="[('type','in',['cash','bank'])]" attrs="{'readonly': [('state', '!=', 'closed'),('have_moved', '=', False)],'required': [('state', '=', 'closed'),('have_moved', '=', False),('type', '!=', 'normal')],'invisible': ['|',('state', '=', 'draft'),('type', '=', 'normal')]}" style="width: 33%"/>
                                 <field name="account_id"  attrs="{'readonly': [('state', '!=', 'closed'),('have_moved', '=', False)],'required': [('state', '=', 'closed'),('have_moved', '=', False),('type', '=', 'sharing')],'invisible': ['|',('state', '=', 'draft'),('type', '!=', 'sharing')]}" style="width: 33%"/>
                                 <field name="have_moved" readonly="1" invisible="1"/>
@@ -83,6 +84,7 @@
                                         <field name="price_unit_purchase_out" invisible="1"/>
                                         <field name="price_unit_purchase_talef" invisible="1"/>
                                         <field name="price_unit_purchase_PursubSale" invisible="0"/>
+                                        <field name="price_unit_purchase_PursubSale_must_win" invisible="0"/>
 <!--
                                         <field name="price_unit"/>
 -->
